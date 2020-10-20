@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-10-20T12:18:59.963Z" agent="5.0 (Windows)" etag="mxUssv5NE107J6M0JTrh" version="13.8.0" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-20T12:21:10.100Z" agent="5.0 (Windows)" etag="y3MGp2h8rZrNCDmW6itl" version="13.8.0" type="github">
   <diagram id="2fuOVgWDkTbaCIATIxK5" name="Page-1">
     <mxGraphModel dx="1038" dy="587" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -34,7 +34,7 @@
         <mxCell id="VYabxZhqNwMQ_FFbQ9Al-12" value="&lt;h1&gt;Ankieta o długości snu&lt;br&gt;&lt;/h1&gt;&lt;p&gt;opis ankiety&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="150" y="640" width="340" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="VYabxZhqNwMQ_FFbQ9Al-13" value="" style="endArrow=none;dashed=1;html=1;exitX=-0.004;exitY=0.403;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.958;entryY=0.42;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="VYabxZhqNwMQ_FFbQ9Al-10" target="VYabxZhqNwMQ_FFbQ9Al-10">
+        <mxCell id="VYabxZhqNwMQ_FFbQ9Al-13" value="" style="endArrow=none;dashed=1;html=1;exitX=-0.004;exitY=0.403;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.002;entryY=0.417;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="VYabxZhqNwMQ_FFbQ9Al-10" target="VYabxZhqNwMQ_FFbQ9Al-10">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="127" y="638" as="sourcePoint" />
             <mxPoint x="470" y="540" as="targetPoint" />
