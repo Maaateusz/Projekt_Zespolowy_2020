@@ -17,9 +17,22 @@
         <div id="content">
             <div id="page_content">
                 <br /><br /><br /><h1>Utwórz ankietę</h1>
-                <form>
-                    <p>Nazwa ankiety: <input type="text" name="nazwa" /><br /></p>
-                    <input type="hidden" name="data_zak" />
+                <form action="http://localhost:8080/createAnkieta" method="post">
+                    <p>Nazwa ankiety: <input type="text" id="nazwa" name="nazwa" /><br /></p>
+                    <input type="hidden" id="data" name="data_zak" />
+                    <script>
+                        var dzis = new Date();
+                        var data_zak = new Date();
+                        data_zak.setDate(dzis.getDate() + 10);
+                        document.getElementById('data').value = data_zak.getFullYear()+'-'+(data_zak.getMonth()+1)+'-'+data_zak.getDate();
+                    </script>
+                    <input type="hidden" id="json" name="json" />
+                    <script>
+                        /* var json = {};
+                        json.name = document.getElementById("nazwa").value;
+                        json.data_zak = document.getElementById("data").value;
+                        document.getElementById("json").value = json; to do poprawy */
+                    </script>
                     <p style="text-align: center"><input type="submit" value="Stwórz ankietę" /></p></form>
                 </form>
             </div>
