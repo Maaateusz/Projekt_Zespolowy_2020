@@ -7,14 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Projekt_Zespolowy_2020" />
+        <module name="AnkietBud" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="AnkietBud" target="11" />
       <module name="Projekt_Zespolowy_2020" target="15" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="AnkietBud" options="-parameters" />
       <module name="Projekt_Zespolowy_2020" options="-parameters" />
     </option>
   </component>
