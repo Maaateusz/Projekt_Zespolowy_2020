@@ -4,6 +4,8 @@ import com.PZ.AnkietBud.MainClasses.Survey;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -42,6 +44,25 @@ public class SurveyController {
         survey.setId(Integer.parseInt(id));
 
         return survey;
+    }
+
+    @GetMapping(value = "/{URL}", produces = "application/json")
+    public Survey getSurveyURL(@PathVariable("URL") String URL)
+    {
+        Survey survey = new Survey();
+        survey.setDescription(URL);
+        return survey;
+    }
+
+//    Return id's of {number} surveys
+    @GetMapping("/get/{number}")
+    public List<Integer> getSurveys(@PathVariable("number") String number)
+    {
+        List<Integer> id = new ArrayList<>();
+        for(int i=0; i < Integer.parseInt(number); i++){
+            id.add(i);
+        }
+        return id;
     }
 
 }
