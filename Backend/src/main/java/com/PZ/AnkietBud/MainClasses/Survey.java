@@ -1,22 +1,36 @@
 package com.PZ.AnkietBud.MainClasses;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 public class Survey {
 
     private Integer id;
     private String name;
     private String description;
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime creation_date;
-//    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime end_date;
+    private User creator_user;
+    private List<Question> questions;
+
+    public User getCreator_user() {
+        return creator_user;
+    }
+
+    public void setCreator_user(User creator_user) {
+        this.creator_user = creator_user;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 
     public Survey() {}
 
@@ -38,6 +52,10 @@ public class Survey {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -72,8 +90,7 @@ public class Survey {
         this.end_date = end_date;
     }
 
-    @Override
-    public String toString()
+    public String toJSON()
     {
         return String.format("[id=%d, name='%s', description='%s', creation_date='%s', end_date='%s']", id, name, description, creation_date.toString(), end_date.toString());
     }
