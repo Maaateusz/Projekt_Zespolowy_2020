@@ -1,4 +1,4 @@
-package com.PZ.AnkietBud.MainClasses;
+package com.PZ.AnkietBud.mainClasses;
 
 public class User {
 

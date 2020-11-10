@@ -1,6 +1,6 @@
-package com.PZ.AnkietBud.MainControllers;
+package com.PZ.AnkietBud.mainControllers;
 
-import com.PZ.AnkietBud.MainClasses.Survey;
+import com.PZ.AnkietBud.mainClasses.Survey;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;

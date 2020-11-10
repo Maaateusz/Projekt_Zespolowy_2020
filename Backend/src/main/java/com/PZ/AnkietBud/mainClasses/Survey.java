@@ -1,4 +1,4 @@
-package com.PZ.AnkietBud.MainClasses;
+package com.PZ.AnkietBud.mainClasses;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
