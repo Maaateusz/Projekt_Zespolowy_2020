@@ -1,5 +1,6 @@
 package com.PZ.AnkietBud.mainControllers;
 
+import com.PZ.AnkietBud.mainClasses.Enum;
 import com.PZ.AnkietBud.mainClasses.Survey;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +21,13 @@ public class SurveyController {
         Survey survey = new Survey(
                 object.get("name"),
                 object.get("description"),
+                Enum.Status.open,
+                LocalDateTime.now(),
                 LocalDateTime.parse(object.get("end_date")));
 
         survey.setCreation_date(LocalDateTime.now());
-        Random rnd = new Random();
-        survey.setId(rnd.nextInt(9999));
+//        Random rnd = new Random();
+//        survey.setId(rnd.nextInt(9999));
         return survey;
     }
 

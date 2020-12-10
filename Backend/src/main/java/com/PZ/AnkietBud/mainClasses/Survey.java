@@ -1,54 +1,28 @@
 package com.PZ.AnkietBud.mainClasses;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
 public class Survey {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String name;
     private String description;
+    @Enumerated(EnumType.STRING)
+    private Enum.Status status;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime creation_date;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime end_date;
-    private User creator_user;
-    private List<Question> questions;
 
-    public User getCreator_user() {
-        return creator_user;
-    }
-
-    public void setCreator_user(User creator_user) {
-        this.creator_user = creator_user;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    public Survey() {}
-
-    public Survey(Integer id, String name, String description, LocalDateTime creation_date, LocalDateTime end_date) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.creation_date = creation_date;
-        this.end_date = end_date;
-    }
-
-    public Survey(String name, String description, LocalDateTime end_date) {
-        this.id = null;
-        this.name = name;
-        this.description = description;
-        this.creation_date = null;
-        this.end_date = end_date;
-    }
+//    private Guest creator_guest;
+//    private List<Question> questions;
 
     public Integer getId() {
         return id;
@@ -56,6 +30,26 @@ public class Survey {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Survey() {
+    }
+
+    public Survey(String name, String description, Enum.Status status, LocalDateTime creation_date, LocalDateTime end_date) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.creation_date = creation_date;
+        this.end_date = end_date;
+    }
+
+    public Survey(Integer id, String name, String description, Enum.Status status, LocalDateTime creation_date, LocalDateTime end_date) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.creation_date = creation_date;
+        this.end_date = end_date;
     }
 
     public String getName() {
@@ -72,6 +66,14 @@ public class Survey {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Enum.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Enum.Status status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreation_date() {

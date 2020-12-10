@@ -1,39 +1,19 @@
 package com.PZ.AnkietBud.mainClasses;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+@Entity
+@Inheritance(strategy= InheritanceType.JOINED)
+@DiscriminatorColumn(name="Discriminator", discriminatorType= DiscriminatorType.STRING)
+public abstract class Question {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    private String type;
     private String content;
-    private List<Answer> answers;
+    private ArrayList<Integer> votes;
+    private Integer sum;
 
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }
