@@ -1,6 +1,21 @@
 package com.PZ.AnkietBud.database;
 
 import com.PZ.AnkietBud.AnkietBudApplication;
+import com.PZ.AnkietBud.TMP.Customer2;
+import com.PZ.AnkietBud.TMP.Customer2Repository;
+import com.PZ.AnkietBud.classes.Guest;
+import com.PZ.AnkietBud.classes.Survey;
+import com.PZ.AnkietBud.classes.subQuestion.Choice;
+import com.PZ.AnkietBud.classes.subQuestion.Rating;
+import com.PZ.AnkietBud.classes.subQuestion.Scale;
+import com.PZ.AnkietBud.classes.subQuestion.Slider;
+import com.PZ.AnkietBud.repositories.GuestRepository;
+import com.PZ.AnkietBud.repositories.QuestionRepository;
+import com.PZ.AnkietBud.repositories.SurveyRepository;
+import com.PZ.AnkietBud.repositories.subQuestion.ChoiceRepository;
+import com.PZ.AnkietBud.repositories.subQuestion.RatingRepository;
+import com.PZ.AnkietBud.repositories.subQuestion.ScaleRepository;
+import com.PZ.AnkietBud.repositories.subQuestion.SliderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +31,9 @@ import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static java.sql.DriverManager.getConnection;
@@ -34,7 +51,26 @@ public class DatabaseConfig {
         log.info("logger");
     }
 
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
+//    @Value("${spring.datasource.url}")
+//    private String dbUrl;
+
+    @Autowired
+    SurveyRepository surveyRepository;
+    GuestRepository guestRepository;
+//    QuestionRepository questionRepository;
+    ChoiceRepository choiceRepository;
+    RatingRepository ratingRepository;
+    ScaleRepository scaleRepository;
+    SliderRepository sliderRepository;
+
+    private void setDB(){
+        surveyRepository.save(new Survey("Ankieta_1", "Opis_1", Survey.Status.open, LocalDateTime.now(), LocalDateTime.now()));
+        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32;"));
+//        questionRepository.save(new Question());
+        choiceRepository.save(new Choice("Opis_1", [100, 20, 3], 123, new ArrayList<String>("pytanie_1", "pytanie_2", "pytanie_3"), Choice.Type.single));
+        ratingRepository.save(new Rating("Opis_1", new ArrayList<>(), 123, 1, 6, Rating.Type.stars));
+        scaleRepository.save(new Scale("Opis_1", new ArrayList<>(), 123, "left", "right", "center", 1, 10));
+        sliderRepository.save(new Slider("Opis_1", new ArrayList<>(), 123, 10, 100, 10));
+    }
 
 }
