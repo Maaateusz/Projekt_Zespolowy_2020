@@ -8,18 +8,21 @@ import java.util.ArrayList;
 @DiscriminatorColumn(name = "Discriminator", discriminatorType = DiscriminatorType.STRING)
 public abstract class Question {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String content;
+    private ArrayList<Integer> votes;
+
+    public Question() {
+    }
+
     public Question(Integer id, String content, ArrayList<Integer> votes, Integer sum) {
         this.id = id;
         this.content = content;
         this.votes = votes;
         this.sum = sum;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String content;
-    private ArrayList<Integer> votes;
 
     public Question(String content, ArrayList<Integer> votes, Integer sum) {
         this.content = content;
@@ -61,4 +64,13 @@ public abstract class Question {
 
     private Integer sum;
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", votes=" + votes +
+                ", sum=" + sum +
+                '}';
+    }
 }

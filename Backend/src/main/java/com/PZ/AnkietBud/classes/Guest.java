@@ -11,8 +11,11 @@ public class Guest {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="identifier", nullable=false, length=200)
-    @NotNull
+    public Guest() {
+    }
+
+    //    @Column(name="identifier", nullable=false, length=200)
+//    @NotNull
     private String identifier;
 
     public Integer getId() {
@@ -39,9 +42,12 @@ public class Guest {
         this.id = id;
         this.identifier = identifier;
     }
-//
-//    @Override
-//    public String toString() {
-//        return "User [id=" + id + ", identifier=" + identifier + "]";
-//    }
+
+    @Override
+    public String toString() {
+        return "Guest{" +
+                "id=" + id +
+                ", identifier='" + identifier + '\'' +
+                '}';
+    }
 }

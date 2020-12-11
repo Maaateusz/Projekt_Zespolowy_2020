@@ -20,6 +20,9 @@ public class Scale extends Question {
         this.value_max = value_max;
     }
 
+    public Scale() {
+    }
+
     private String anchor_left;
     private String anchor_right;
 
@@ -77,4 +80,14 @@ public class Scale extends Question {
     private Integer value_min;
     private Integer value_max;
 
+    @Override
+    public String toString() {
+        return "Scale{" +
+                "anchor_left='" + anchor_left + '\'' +
+                ", anchor_right='" + anchor_right + '\'' +
+                ", anchor_central='" + anchor_central + '\'' +
+                ", value_min=" + value_min +
+                ", value_max=" + value_max +
+                '}';
+    }
 }

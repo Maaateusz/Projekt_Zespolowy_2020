@@ -9,6 +9,18 @@ import java.util.ArrayList;
 @DiscriminatorValue("Choice")
 @PrimaryKeyJoinColumn(name = "id")
 public class Choice extends Question {
+    public Choice(ArrayList<String> answers, Type type) {
+        this.answers = answers;
+        this.type = type;
+    }
+
+    private ArrayList<String> answers;
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
+    public Choice() {
+    }
+
     public ArrayList<String> getAnswers() {
         return answers;
     }
@@ -37,13 +49,17 @@ public class Choice extends Question {
         this.type = type;
     }
 
-    private ArrayList<String> answers;
-    @Enumerated(EnumType.STRING)
-    private Type type;
-
     public enum Type{
         multiple,
         single;
+    }
+
+    @Override
+    public String toString() {
+        return "Choice{" +
+                "answers=" + answers +
+                ", type=" + type +
+                '}';
     }
 }
 

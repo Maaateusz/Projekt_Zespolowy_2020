@@ -1,9 +1,11 @@
 package com.PZ.AnkietBud.database;
 
 import com.PZ.AnkietBud.AnkietBudApplication;
+import com.PZ.AnkietBud.TMP.Customer;
 import com.PZ.AnkietBud.TMP.Customer2;
 import com.PZ.AnkietBud.TMP.Customer2Repository;
 import com.PZ.AnkietBud.classes.Guest;
+import com.PZ.AnkietBud.classes.Question;
 import com.PZ.AnkietBud.classes.Survey;
 import com.PZ.AnkietBud.classes.subQuestion.Choice;
 import com.PZ.AnkietBud.classes.subQuestion.Rating;
@@ -35,6 +37,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static java.sql.DriverManager.getConnection;
 
@@ -47,30 +50,64 @@ public class DatabaseConfig {
 //    triggered after bean creation, but before the server starts
     @EventListener(ContextRefreshedEvent.class)
     public void onStart() throws Exception {
-        System.out.println("hello world, I have just started up");
-        log.info("logger");
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println("Hello world, server have just started up");
+//        log.info("Hello world, server have just started up");
+        setDB();
     }
 
 //    @Value("${spring.datasource.url}")
 //    private String dbUrl;
 
     @Autowired
-    SurveyRepository surveyRepository;
-    GuestRepository guestRepository;
-//    QuestionRepository questionRepository;
-    ChoiceRepository choiceRepository;
-    RatingRepository ratingRepository;
-    ScaleRepository scaleRepository;
-    SliderRepository sliderRepository;
+    private SurveyRepository surveyRepository;
+    @Autowired
+    private GuestRepository guestRepository;
+//    @Autowired
+//    private QuestionRepository questionRepository;
+    @Autowired
+    private ChoiceRepository choiceRepository;
+    @Autowired
+    private RatingRepository ratingRepository;
+    @Autowired
+    private ScaleRepository scaleRepository;
+    @Autowired
+    private SliderRepository sliderRepository;
 
     private void setDB(){
         surveyRepository.save(new Survey("Ankieta_1", "Opis_1", Survey.Status.open, LocalDateTime.now(), LocalDateTime.now()));
-        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32;"));
+        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32"));
+        choiceRepository.save(new Choice("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, new ArrayList<>(List.of("pytanie_1", "pytanie_2", "pytanie_3")), Choice.Type.single));
+        ratingRepository.save(new Rating("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 1, 6, Rating.Type.stars));
+        scaleRepository.save(new Scale("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, "left", "right", "center", 1, 10));
+        sliderRepository.save(new Slider("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 10, 100, 10));
 //        questionRepository.save(new Question());
-        choiceRepository.save(new Choice("Opis_1", [100, 20, 3], 123, new ArrayList<String>("pytanie_1", "pytanie_2", "pytanie_3"), Choice.Type.single));
-        ratingRepository.save(new Rating("Opis_1", new ArrayList<>(), 123, 1, 6, Rating.Type.stars));
-        scaleRepository.save(new Scale("Opis_1", new ArrayList<>(), 123, "left", "right", "center", 1, 10));
-        sliderRepository.save(new Slider("Opis_1", new ArrayList<>(), 123, 10, 100, 10));
+
+        List<Survey> surveys = surveyRepository.findAll();
+        for (Survey item : surveys) {
+            System.out.println(item);
+        }
+
+        List<Guest> guests = guestRepository.findAll();
+        for (Guest item : guests) {
+            System.out.println(item);
+        }
+
+        List<Question> choices = choiceRepository.findAll();
+        for (Question item : choices) {
+            System.out.println(item);
+        }
+
+        List<Question> ratings = ratingRepository.findAll();
+        for (Question item : ratings) {
+            System.out.println(item);
+        }
+
+//        Iterable<Question> questions = questionRepository.findAll();
+//        for (Question item : questions) {
+//            System.out.println(item);
+//        }
+
     }
 
 }

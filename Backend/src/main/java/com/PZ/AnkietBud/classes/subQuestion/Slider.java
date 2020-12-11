@@ -11,11 +11,15 @@ import java.util.ArrayList;
 @DiscriminatorValue("Slider")
 @PrimaryKeyJoinColumn(name = "id")
 public class Slider extends Question {
+
     public Slider(String content, ArrayList<Integer> votes, Integer sum, Integer value_min, Integer value_max, Integer interval) {
         super(content, votes, sum);
         this.value_min = value_min;
         this.value_max = value_max;
         this.interval = interval;
+    }
+
+    public Slider() {
     }
 
     public Integer getValue_min() {
@@ -52,4 +56,13 @@ public class Slider extends Question {
     private Integer value_min;
     private Integer value_max;
     private Integer interval;
+
+    @Override
+    public String toString() {
+        return "Slider{" +
+                "value_min=" + value_min +
+                ", value_max=" + value_max +
+                ", interval=" + interval +
+                '}';
+    }
 }

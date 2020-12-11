@@ -17,7 +17,7 @@ public class Customer2Controller {
         customer2Repository.save(new Customer2("Adam", "Mickiewicz"));
         customer2Repository.save(new Customer2("123", "321"));
         customer2Repository.save(new Customer2("qweqw", "ewqeqw"));
-        Customer2 c = new Customer2("Kupa", "Dupa");
+        Customer2 c = new Customer2("@#2231", "ASDASD");
         customer2Repository.save(c);
 //        Customer2 c2 =
 //        customer2Repository.delete(c);

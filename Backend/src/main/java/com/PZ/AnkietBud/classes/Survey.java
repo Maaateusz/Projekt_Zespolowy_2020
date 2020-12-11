@@ -6,7 +6,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "survey")
 public class Survey {
+
+    public Survey() {
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -15,6 +19,10 @@ public class Survey {
     private String description;
     @Enumerated(EnumType.STRING)
     private Status status;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime creation_date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime end_date;
 
     public Integer getId() {
         return id;
@@ -81,18 +89,22 @@ public class Survey {
         this.end_date = end_date;
     }
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime creation_date;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime end_date;
+    @Override
+    public String toString() {
+        return "Survey{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", creation_date=" + creation_date +
+                ", end_date=" + end_date +
+                '}';
+    }
+
 
     public enum Status{
         open,
         close;
     }
 
-//    public String toJSON()
-//    {
-//        return String.format("[id=%d, name='%s', description='%s', creation_date='%s', end_date='%s']", id, name, description, creation_date.toString(), end_date.toString());
-//    }
 }
