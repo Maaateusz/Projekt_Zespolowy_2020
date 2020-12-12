@@ -53,8 +53,9 @@ public class DatabaseConfig {
 //    triggered after bean creation, but before the server starts
     @EventListener(ContextRefreshedEvent.class)
     public void onStart() throws Exception {
-        System.out.println("-------------------------------------------------------------------------------------");
-        System.out.println("Hello world, server have just started up");
+        System.out.println("| | /------------------------------------------------------------------------------------");
+        System.out.println("|_|/");
+//        System.out.println("Hello world, server have just started up");
 //        log.info("Hello world, server have just started up");
         setDB();
     }
@@ -62,7 +63,7 @@ public class DatabaseConfig {
 //    @Value("${spring.datasource.url}")
 //    private String dbUrl;
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private SurveyRepository surveyRepository;
@@ -91,16 +92,31 @@ public class DatabaseConfig {
 
         List<Survey> surveys = surveyRepository.findAll();
         for (Survey item : surveys) {
-            System.out.println(item);
+            System.out.println(objectMapper.writeValueAsString(item));
         }
 
         List<Guest> guests = guestRepository.findAll();
         for (Guest item : guests) {
-            System.out.println(item);
+            System.out.println(objectMapper.writeValueAsString(item));
         }
 
         Iterable<Choice> choices = choiceRepository.findAll();
         for (Choice item : choices) {
+            System.out.println(objectMapper.writeValueAsString(item));
+        }
+
+        Iterable<Rating> ratings = ratingRepository.findAll();
+        for (Rating item : ratings) {
+            System.out.println(objectMapper.writeValueAsString(item));
+        }
+
+        Iterable<Scale> scales = scaleRepository.findAll();
+        for (Scale item : scales) {
+            System.out.println(objectMapper.writeValueAsString(item));
+        }
+
+        Iterable<Slider> sliders = sliderRepository.findAll();
+        for (Slider item : sliders) {
             System.out.println(objectMapper.writeValueAsString(item));
         }
 
