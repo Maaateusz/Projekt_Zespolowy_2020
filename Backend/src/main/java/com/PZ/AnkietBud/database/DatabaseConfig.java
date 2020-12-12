@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -63,8 +64,6 @@ public class DatabaseConfig {
     private SurveyRepository surveyRepository;
     @Autowired
     private GuestRepository guestRepository;
-//    @Autowired
-//    private QuestionRepository questionRepository;
     @Autowired
     private ChoiceRepository choiceRepository;
     @Autowired
@@ -74,14 +73,17 @@ public class DatabaseConfig {
     @Autowired
     private SliderRepository sliderRepository;
 
+//    @Autowired
+//    private QuestionRepository questionRepository;
+
     private void setDB(){
-        surveyRepository.save(new Survey("Ankieta_1", "Opis_1", Survey.Status.open, LocalDateTime.now(), LocalDateTime.now()));
-        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32"));
-        choiceRepository.save(new Choice("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, new ArrayList<>(List.of("pytanie_1", "pytanie_2", "pytanie_3")), Choice.Type.single));
-        ratingRepository.save(new Rating("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 1, 6, Rating.Type.stars));
-        scaleRepository.save(new Scale("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, "left", "right", "center", 1, 10));
-        sliderRepository.save(new Slider("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 10, 100, 10));
-//        questionRepository.save(new Question());
+//        surveyRepository.save(new Survey("Ankieta_1", "Opis_1", Survey.Status.open, LocalDateTime.now(), LocalDateTime.now()));
+//        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32"));
+//        choiceRepository.save(new Choice("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, new ArrayList<>(List.of("pytanie_1", "pytanie_2", "pytanie_3")), Choice.Type.single));
+//        ratingRepository.save(new Rating("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 1, 6, Rating.Type.stars));
+//        scaleRepository.save(new Scale("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, "left", "right", "center", 1, 10));
+//        sliderRepository.save(new Slider("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 10, 100, 10));
+//        questionRepository.save(new Choice("Choice content", new ArrayList<>(List.of(1, 2, 3)), 6, new ArrayList<>(List.of("3v21", "54v3", "c12c3")), Choice.Type.multiple));
 
         List<Survey> surveys = surveyRepository.findAll();
         for (Survey item : surveys) {
@@ -93,15 +95,18 @@ public class DatabaseConfig {
             System.out.println(item);
         }
 
-        List<Question> choices = choiceRepository.findAll();
-        for (Question item : choices) {
-            System.out.println(item);
-        }
+//        List<Choice> choices = choiceRepository.findAll();
+//        for (Choice item : choices) {
+//            System.out.println(item);
+//        }
 
-        List<Question> ratings = ratingRepository.findAll();
-        for (Question item : ratings) {
-            System.out.println(item);
-        }
+        Choice c = choiceRepository.findById(3);
+        System.out.println(c);
+
+//        List<Question> ratings = ratingRepository.findAll();
+//        for (Question item : ratings) {
+//            System.out.println(item);
+//        }
 
 //        Iterable<Question> questions = questionRepository.findAll();
 //        for (Question item : questions) {
