@@ -5,6 +5,8 @@ import com.PZ.AnkietBud.classes.Survey;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-@NoRepositoryBean
-public interface QuestionRepository extends CrudRepository<Question, Long> {
+import javax.transaction.Transactional;
+
+@Transactional
+public interface QuestionRepository extends QuestionBaseRepository<Question> {
 }

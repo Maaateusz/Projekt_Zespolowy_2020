@@ -18,6 +18,8 @@ import com.PZ.AnkietBud.repositories.subQuestion.ChoiceRepository;
 import com.PZ.AnkietBud.repositories.subQuestion.RatingRepository;
 import com.PZ.AnkietBud.repositories.subQuestion.ScaleRepository;
 import com.PZ.AnkietBud.repositories.subQuestion.SliderRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,8 @@ public class DatabaseConfig {
 //    @Value("${spring.datasource.url}")
 //    private String dbUrl;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+
     @Autowired
     private SurveyRepository surveyRepository;
     @Autowired
@@ -73,10 +77,10 @@ public class DatabaseConfig {
     @Autowired
     private SliderRepository sliderRepository;
 
-//    @Autowired
-//    private QuestionRepository questionRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
-    private void setDB(){
+    private void setDB() throws JsonProcessingException {
 //        surveyRepository.save(new Survey("Ankieta_1", "Opis_1", Survey.Status.open, LocalDateTime.now(), LocalDateTime.now()));
 //        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32"));
 //        choiceRepository.save(new Choice("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, new ArrayList<>(List.of("pytanie_1", "pytanie_2", "pytanie_3")), Choice.Type.single));
@@ -95,13 +99,16 @@ public class DatabaseConfig {
             System.out.println(item);
         }
 
-//        List<Choice> choices = choiceRepository.findAll();
-//        for (Choice item : choices) {
-//            System.out.println(item);
-//        }
+        Iterable<Choice> choices = choiceRepository.findAll();
+        for (Choice item : choices) {
+            System.out.println(objectMapper.writeValueAsString(item));
+        }
 
         Choice c = choiceRepository.findById(3);
-        System.out.println(c);
+        System.out.println(objectMapper.writeValueAsString(c));
+
+//        Question q = questionRepository.findById(3);
+//        System.out.println(objectMapper.writeValueAsString(q));
 
 //        List<Question> ratings = ratingRepository.findAll();
 //        for (Question item : ratings) {
