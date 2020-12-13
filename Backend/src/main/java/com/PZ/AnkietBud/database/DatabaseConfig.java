@@ -63,7 +63,7 @@ public class DatabaseConfig {
 //    @Value("${spring.datasource.url}")
 //    private String dbUrl;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
 
     @Autowired
     private SurveyRepository surveyRepository;
@@ -92,36 +92,36 @@ public class DatabaseConfig {
 
         List<Survey> surveys = surveyRepository.findAll();
         for (Survey item : surveys) {
-            System.out.println(objectMapper.writeValueAsString(item));
+            System.out.println(shortDateObjectMapper.writeValueAsString(item));
         }
 
         List<Guest> guests = guestRepository.findAll();
         for (Guest item : guests) {
-            System.out.println(objectMapper.writeValueAsString(item));
+            System.out.println(shortDateObjectMapper.writeValueAsString(item));
         }
 
         Iterable<Choice> choices = choiceRepository.findAll();
         for (Choice item : choices) {
-            System.out.println(objectMapper.writeValueAsString(item));
+            System.out.println(shortDateObjectMapper.writeValueAsString(item));
         }
 
         Iterable<Rating> ratings = ratingRepository.findAll();
         for (Rating item : ratings) {
-            System.out.println(objectMapper.writeValueAsString(item));
+            System.out.println(shortDateObjectMapper.writeValueAsString(item));
         }
 
         Iterable<Scale> scales = scaleRepository.findAll();
         for (Scale item : scales) {
-            System.out.println(objectMapper.writeValueAsString(item));
+            System.out.println(shortDateObjectMapper.writeValueAsString(item));
         }
 
         Iterable<Slider> sliders = sliderRepository.findAll();
         for (Slider item : sliders) {
-            System.out.println(objectMapper.writeValueAsString(item));
+            System.out.println(shortDateObjectMapper.writeValueAsString(item));
         }
 
         Choice c = choiceRepository.findById(3);
-        System.out.println(objectMapper.writeValueAsString(c));
+        System.out.println(shortDateObjectMapper.writeValueAsString(c));
 
 //        Question q = questionRepository.findById(3);
 //        System.out.println(objectMapper.writeValueAsString(q));
