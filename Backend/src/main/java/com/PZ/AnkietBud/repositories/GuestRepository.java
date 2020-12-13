@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface GuestRepository extends CrudRepository<Guest, Long> {
     List<Guest> findAll();
-    Guest findById(long id);
+    Guest findById(Integer id);
 }

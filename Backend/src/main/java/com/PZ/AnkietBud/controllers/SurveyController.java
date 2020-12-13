@@ -1,20 +1,13 @@
 package com.PZ.AnkietBud.controllers;
 
 import com.PZ.AnkietBud.classes.Survey;
-import com.PZ.AnkietBud.classes.subQuestion.Choice;
-import com.PZ.AnkietBud.database.ShortDateObjectMapper;
+import com.PZ.AnkietBud.configuration.ShortDateObjectMapper;
 import com.PZ.AnkietBud.repositories.SurveyRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/survey")
