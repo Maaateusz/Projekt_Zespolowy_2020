@@ -1,0 +1,25 @@
+2020-12-13 19:50:43.427  INFO 3312 --- [main] com.pz.ankietBud.AnkietBudApplication    : Starting AnkietBudApplication on DESKTOP-BUJI81K with PID 3312 (G:\Projects\Projekt_Zespolowy_2020\Backend\target\classes started by Mateusz-PC in G:\Projects\Projekt_Zespolowy_2020)
+2020-12-13 19:50:43.430  INFO 3312 --- [main] com.pz.ankietBud.AnkietBudApplication    : No active profile set, falling back to default profiles: default
+2020-12-13 19:50:44.323  INFO 3312 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-13 19:50:44.417  INFO 3312 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87ms. Found 8 JPA repository interfaces.
+2020-12-13 19:50:45.139  INFO 3312 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-12-13 19:50:45.152  INFO 3312 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-13 19:50:45.152  INFO 3312 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-12-13 19:50:45.242  INFO 3312 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-13 19:50:45.242  INFO 3312 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1751 ms
+2020-12-13 19:50:45.333  INFO 3312 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-13 19:50:45.516  INFO 3312 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-13 19:50:45.600  INFO 3312 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-13 19:50:45.666  INFO 3312 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-13 19:50:45.730  WARN 3312 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-13 19:50:45.748  INFO 3312 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.22.Final
+2020-12-13 19:50:45.962  INFO 3312 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-13 19:50:46.132  INFO 3312 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2020-12-13 19:50:46.175  INFO 3312 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-12-13 19:50:46.176  INFO 3312 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-13 19:50:46.550  WARN 3312 --- [task-1] org.hibernate.cfg.AnnotationBinder       : HHH000457: Joined inheritance hierarchy [com.pz.ankietBud.TMP.Customer] defined explicit @DiscriminatorColumn.  Legacy Hibernate behavior was to ignore the @DiscriminatorColumn.  However, as part of issue HHH-6911 we now apply the explicit @DiscriminatorColumn.  If you would prefer the legacy behavior, enable the `hibernate.discriminator.ignore_explicit_for_joined` setting (hibernate.discriminator.ignore_explicit_for_joined=true)
+2020-12-13 19:50:46.585  WARN 3312 --- [task-1] org.hibernate.cfg.AnnotationBinder       : HHH000457: Joined inheritance hierarchy [com.pz.ankietBud.classes.Question] defined explicit @DiscriminatorColumn.  Legacy Hibernate behavior was to ignore the @DiscriminatorColumn.  However, as part of issue HHH-6911 we now apply the explicit @DiscriminatorColumn.  If you would prefer the legacy behavior, enable the `hibernate.discriminator.ignore_explicit_for_joined` setting (hibernate.discriminator.ignore_explicit_for_joined=true)
+2020-12-13 19:50:47.075  INFO 3312 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-13 19:50:47.082  INFO 3312 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 19:50:47.408  INFO 3312 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-13 19:50:47.414  INFO 3312 --- [main] com.pz.ankietBud.AnkietBudApplication    : Started AnkietBudApplication in 4.511 seconds (JVM running for 5.013)
