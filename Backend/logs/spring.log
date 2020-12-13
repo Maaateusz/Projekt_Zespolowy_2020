@@ -23,3 +23,67 @@
 2020-12-13 19:50:47.082  INFO 3312 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
 2020-12-13 19:50:47.408  INFO 3312 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
 2020-12-13 19:50:47.414  INFO 3312 --- [main] com.pz.ankietBud.AnkietBudApplication    : Started AnkietBudApplication in 4.511 seconds (JVM running for 5.013)
+2020-12-13 21:26:36.742  INFO 9020 --- [main] com.pz.ankietBud.AnkietBudApplication    : Starting AnkietBudApplication on DESKTOP-BUJI81K with PID 9020 (G:\Projects\Projekt_Zespolowy_2020\Backend\target\classes started by Mateusz-PC in G:\Projects\Projekt_Zespolowy_2020)
+2020-12-13 21:26:36.763  INFO 9020 --- [main] com.pz.ankietBud.AnkietBudApplication    : No active profile set, falling back to default profiles: default
+2020-12-13 21:26:37.683  INFO 9020 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-13 21:26:37.761  INFO 9020 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 72ms. Found 7 JPA repository interfaces.
+2020-12-13 21:26:38.490  INFO 9020 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-12-13 21:26:38.499  INFO 9020 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-13 21:26:38.499  INFO 9020 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-12-13 21:26:38.590  INFO 9020 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-13 21:26:38.590  INFO 9020 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1772 ms
+2020-12-13 21:26:38.685  INFO 9020 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-13 21:26:38.870  INFO 9020 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-13 21:26:38.963  INFO 9020 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-13 21:26:39.058  INFO 9020 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-13 21:26:39.071  WARN 9020 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-13 21:26:39.113  INFO 9020 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.22.Final
+2020-12-13 21:26:39.324  INFO 9020 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-13 21:26:39.504  INFO 9020 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2020-12-13 21:26:39.567  INFO 9020 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-12-13 21:26:39.570  INFO 9020 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-13 21:26:39.921  WARN 9020 --- [task-1] org.hibernate.cfg.AnnotationBinder       : HHH000457: Joined inheritance hierarchy [com.pz.ankietBud.classes.Question] defined explicit @DiscriminatorColumn.  Legacy Hibernate behavior was to ignore the @DiscriminatorColumn.  However, as part of issue HHH-6911 we now apply the explicit @DiscriminatorColumn.  If you would prefer the legacy behavior, enable the `hibernate.discriminator.ignore_explicit_for_joined` setting (hibernate.discriminator.ignore_explicit_for_joined=true)
+2020-12-13 21:26:40.367  INFO 9020 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-13 21:26:40.374  INFO 9020 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 21:26:40.689  INFO 9020 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-13 21:26:40.689  INFO 9020 --- [main] com.pz.ankietBud.configuration.OnStart   : Server has started
+2020-12-13 21:26:40.696  INFO 9020 --- [main] com.pz.ankietBud.AnkietBudApplication    : Started AnkietBudApplication in 4.451 seconds (JVM running for 4.903)
+2020-12-13 21:26:50.450  INFO 9020 --- [http-nio-8080-exec-10] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-13 21:26:50.451  INFO 9020 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-12-13 21:26:50.458  INFO 9020 --- [http-nio-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-12-13 21:26:50.582  INFO 9020 --- [http-nio-8080-exec-10] c.p.a.controllers.SurveyController       : +---{"id":null,"name":"Ankieta_Xd","description":"Opis_1","status":"open","creation_date":"2019-01-01T11:22:33","end_date":"2019-01-01T00:01:00"}
+2020-12-13 21:30:41.666  INFO 11076 --- [main] com.pz.ankietBud.AnkietBudApplication    : Starting AnkietBudApplication on DESKTOP-BUJI81K with PID 11076 (G:\Projects\Projekt_Zespolowy_2020\Backend\target\classes started by Mateusz-PC in G:\Projects\Projekt_Zespolowy_2020)
+2020-12-13 21:30:41.670  INFO 11076 --- [main] com.pz.ankietBud.AnkietBudApplication    : No active profile set, falling back to default profiles: default
+2020-12-13 21:30:42.693  INFO 11076 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-13 21:30:42.769  INFO 11076 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68ms. Found 7 JPA repository interfaces.
+2020-12-13 21:30:44.024  INFO 11076 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-12-13 21:30:44.034  INFO 11076 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-13 21:30:44.034  INFO 11076 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-12-13 21:30:44.125  INFO 11076 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-13 21:30:44.126  INFO 11076 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2332 ms
+2020-12-13 21:30:44.217  INFO 11076 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-13 21:30:44.399  INFO 11076 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-13 21:30:44.547  INFO 11076 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-13 21:30:44.657  WARN 11076 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-13 21:30:44.684  INFO 11076 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-13 21:30:44.757  INFO 11076 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.22.Final
+2020-12-13 21:30:45.170  INFO 11076 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-13 21:30:45.469  INFO 11076 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2020-12-13 21:30:45.496  INFO 11076 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-12-13 21:30:45.501  INFO 11076 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-13 21:30:46.087  WARN 11076 --- [task-1] org.hibernate.cfg.AnnotationBinder       : HHH000457: Joined inheritance hierarchy [com.pz.ankietBud.classes.Question] defined explicit @DiscriminatorColumn.  Legacy Hibernate behavior was to ignore the @DiscriminatorColumn.  However, as part of issue HHH-6911 we now apply the explicit @DiscriminatorColumn.  If you would prefer the legacy behavior, enable the `hibernate.discriminator.ignore_explicit_for_joined` setting (hibernate.discriminator.ignore_explicit_for_joined=true)
+2020-12-13 21:30:46.574  INFO 11076 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-13 21:30:46.581  INFO 11076 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 21:30:46.958  INFO 11076 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-13 21:30:46.959  INFO 11076 --- [main] com.pz.ankietBud.configuration.OnStart   : Server has started
+2020-12-13 21:30:46.967  INFO 11076 --- [main] com.pz.ankietBud.AnkietBudApplication    : Started AnkietBudApplication in 5.954 seconds (JVM running for 6.447)
+2020-12-13 21:30:49.254  INFO 11076 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-13 21:30:49.254  INFO 11076 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-12-13 21:30:49.258  INFO 11076 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2020-12-13 21:30:49.356  INFO 11076 --- [http-nio-8080-exec-2] c.p.a.controllers.SurveyController       : + ---{"id":null,"name":"Ankieta_Xd","description":"Opis_1","status":"open","creation_date":"2019-01-01T11:22:33","end_date":"2019-01-01T00:01:00"}
+2020-12-13 21:30:57.570  INFO 11076 --- [http-nio-8080-exec-9] c.p.a.controllers.SurveyController       : A --- get all Surveys
+2020-12-13 21:46:53.346  INFO 11076 --- [http-nio-8080-exec-5] c.p.a.controllers.SurveyController       : I --- get one null
+2020-12-13 21:46:56.267  INFO 11076 --- [http-nio-8080-exec-3] c.p.a.controllers.SurveyController       : I --- get one null
+2020-12-13 21:46:58.716  INFO 11076 --- [http-nio-8080-exec-10] c.p.a.controllers.SurveyController       : I --- get one null
+2020-12-13 21:47:01.277  INFO 11076 --- [http-nio-8080-exec-1] c.p.a.controllers.SurveyController       : I --- get one {"id":7,"name":"Ankieta_1","description":"Opis_1","status":"open","creation_date":"2020-12-12T16:48:48.151732","end_date":"2020-12-12T16:48:48.151732"}
+2020-12-13 21:47:07.129  INFO 11076 --- [http-nio-8080-exec-2] c.p.a.controllers.SurveyController       : I --- get one null

@@ -1,4 +1,4 @@
-package com.pz.ankietBud.classes;
+package com.pz.ankietBud.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

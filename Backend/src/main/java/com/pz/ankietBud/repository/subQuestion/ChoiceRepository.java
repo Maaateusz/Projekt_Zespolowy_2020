@@ -1,7 +1,7 @@
-package com.pz.ankietBud.repositories.subQuestion;
+package com.pz.ankietBud.repository.subQuestion;
 
-import com.pz.ankietBud.classes.subQuestion.Choice;
-import com.pz.ankietBud.repositories.QuestionBaseRepository;
+import com.pz.ankietBud.model.subQuestion.Choice;
+import com.pz.ankietBud.repository.QuestionBaseRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;

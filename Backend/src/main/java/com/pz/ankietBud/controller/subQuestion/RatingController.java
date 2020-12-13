@@ -1,9 +1,9 @@
-package com.pz.ankietBud.controllers.subQuestion;
+package com.pz.ankietBud.controller.subQuestion;
 
 
-import com.pz.ankietBud.classes.subQuestion.Rating;
+import com.pz.ankietBud.model.subQuestion.Rating;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
-import com.pz.ankietBud.repositories.subQuestion.RatingRepository;
+import com.pz.ankietBud.repository.subQuestion.RatingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

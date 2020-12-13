@@ -1,6 +1,6 @@
-package com.pz.ankietBud.classes.subQuestion;
+package com.pz.ankietBud.model.subQuestion;
 
-import com.pz.ankietBud.classes.Question;
+import com.pz.ankietBud.model.Question;
 
 import javax.persistence.*;
 import java.util.ArrayList;

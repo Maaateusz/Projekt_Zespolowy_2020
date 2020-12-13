@@ -1,6 +1,6 @@
-package com.pz.ankietBud.repositories;
+package com.pz.ankietBud.repository;
 
-import com.pz.ankietBud.classes.Question;
+import com.pz.ankietBud.model.Question;
 
 import javax.transaction.Transactional;
 

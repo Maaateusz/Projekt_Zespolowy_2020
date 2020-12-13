@@ -1,4 +1,4 @@
-package com.pz.ankietBud.classes;
+package com.pz.ankietBud.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

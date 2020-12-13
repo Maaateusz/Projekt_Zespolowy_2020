@@ -1,13 +1,12 @@
 package com.pz.ankietBud.configuration;
 
-import com.pz.ankietBud.AnkietBudApplication;
-import com.pz.ankietBud.repositories.GuestRepository;
-import com.pz.ankietBud.repositories.QuestionRepository;
-import com.pz.ankietBud.repositories.SurveyRepository;
-import com.pz.ankietBud.repositories.subQuestion.ChoiceRepository;
-import com.pz.ankietBud.repositories.subQuestion.RatingRepository;
-import com.pz.ankietBud.repositories.subQuestion.ScaleRepository;
-import com.pz.ankietBud.repositories.subQuestion.SliderRepository;
+import com.pz.ankietBud.repository.GuestRepository;
+import com.pz.ankietBud.repository.QuestionRepository;
+import com.pz.ankietBud.repository.SurveyRepository;
+import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
+import com.pz.ankietBud.repository.subQuestion.RatingRepository;
+import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
+import com.pz.ankietBud.repository.subQuestion.SliderRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OnStart {
 
-    private static final Logger log = LoggerFactory.getLogger(AnkietBudApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(OnStart.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
 
 //    @Value("${spring.datasource.url}")
@@ -43,10 +42,12 @@ public class OnStart {
     //    triggered after bean creation, but before the server starts
     @EventListener(ContextRefreshedEvent.class)
     public void onStart() throws Exception {
-        System.out.println("| | /------------------------------------------------------------------------------------");
-        System.out.println("|_|/");
-//        System.out.println("Hello world, server have just started up");
-//        log.info("Hello world, server have just started up");
+        System.out.println("|   /------------------------------------------------------------------------------------");
+        System.out.println("|  /");
+        System.out.println("| /");
+        System.out.println("|/");
+        log.info("Server has started");
+
         setDB();
     }
 

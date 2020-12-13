@@ -1,6 +1,6 @@
-package com.pz.ankietBud.repositories;
+package com.pz.ankietBud.repository;
 
-import com.pz.ankietBud.classes.Survey;
+import com.pz.ankietBud.model.Survey;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
