@@ -2130,3 +2130,28 @@ org.hibernate.TypeMismatchException: Provided id of the wrong type for class com
 2020-12-13 18:53:27.922  INFO 6136 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-12-13 18:53:27.923  INFO 6136 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2020-12-13 18:53:27.930  INFO 6136 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-12-13 19:01:25.805  INFO 3720 --- [main] com.PZ.AnkietBud.AnkietBudApplication    : Starting AnkietBudApplication on DESKTOP-BUJI81K with PID 3720 (G:\Projects\Projekt_Zespolowy_2020\Backend\target\classes started by Mateusz-PC in G:\Projects\Projekt_Zespolowy_2020)
+2020-12-13 19:01:25.809  INFO 3720 --- [main] com.PZ.AnkietBud.AnkietBudApplication    : No active profile set, falling back to default profiles: default
+2020-12-13 19:01:26.966  INFO 3720 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2020-12-13 19:01:27.078  INFO 3720 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 91ms. Found 8 JPA repository interfaces.
+2020-12-13 19:01:27.712  INFO 3720 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-12-13 19:01:27.722  INFO 3720 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-13 19:01:27.722  INFO 3720 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-12-13 19:01:27.822  INFO 3720 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-13 19:01:27.822  INFO 3720 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1851 ms
+2020-12-13 19:01:27.949  INFO 3720 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-13 19:01:28.122  INFO 3720 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-13 19:01:28.217  INFO 3720 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-13 19:01:28.296  INFO 3720 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-13 19:01:28.336  WARN 3720 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-13 19:01:28.394  INFO 3720 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.22.Final
+2020-12-13 19:01:28.578  INFO 3720 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-13 19:01:28.754  INFO 3720 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2020-12-13 19:01:28.871  INFO 3720 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-12-13 19:01:28.874  INFO 3720 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2020-12-13 19:01:29.158  WARN 3720 --- [task-1] org.hibernate.cfg.AnnotationBinder       : HHH000457: Joined inheritance hierarchy [com.PZ.AnkietBud.TMP.Customer] defined explicit @DiscriminatorColumn.  Legacy Hibernate behavior was to ignore the @DiscriminatorColumn.  However, as part of issue HHH-6911 we now apply the explicit @DiscriminatorColumn.  If you would prefer the legacy behavior, enable the `hibernate.discriminator.ignore_explicit_for_joined` setting (hibernate.discriminator.ignore_explicit_for_joined=true)
+2020-12-13 19:01:29.194  WARN 3720 --- [task-1] org.hibernate.cfg.AnnotationBinder       : HHH000457: Joined inheritance hierarchy [com.PZ.AnkietBud.classes.Question] defined explicit @DiscriminatorColumn.  Legacy Hibernate behavior was to ignore the @DiscriminatorColumn.  However, as part of issue HHH-6911 we now apply the explicit @DiscriminatorColumn.  If you would prefer the legacy behavior, enable the `hibernate.discriminator.ignore_explicit_for_joined` setting (hibernate.discriminator.ignore_explicit_for_joined=true)
+2020-12-13 19:01:29.630  INFO 3720 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-13 19:01:29.637  INFO 3720 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-13 19:01:30.035  INFO 3720 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2020-12-13 19:01:30.045  INFO 3720 --- [main] com.PZ.AnkietBud.AnkietBudApplication    : Started AnkietBudApplication in 4.941 seconds (JVM running for 5.433)

@@ -1,4 +1,4 @@
-package com.PZ.AnkietBud.controllers;
+package com.PZ.AnkietBud.controllers.subQuestion;
 
 import com.PZ.AnkietBud.classes.subQuestion.Choice;
 import com.PZ.AnkietBud.configuration.ShortDateObjectMapper;
