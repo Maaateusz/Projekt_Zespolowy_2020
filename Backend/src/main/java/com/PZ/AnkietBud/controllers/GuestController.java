@@ -14,7 +14,6 @@ import java.util.List;
 @CrossOrigin
 public class GuestController {
 
-
     @Autowired
     private GuestRepository guestRepository;
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();

@@ -13,6 +13,6 @@ import java.util.List;
 
 @Repository
 public interface RatingRepository extends QuestionBaseRepository<Rating> {
-    Iterable<Rating> findAll();
+    List<Rating> findAll();
     Rating findById(Integer id);
 }

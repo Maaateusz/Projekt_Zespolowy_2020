@@ -13,6 +13,6 @@ import java.util.List;
 
 @Repository
 public interface SliderRepository extends QuestionBaseRepository<Slider> {
-    Iterable<Slider> findAll();
+    List<Slider> findAll();
     Slider findById(Integer id);
 }

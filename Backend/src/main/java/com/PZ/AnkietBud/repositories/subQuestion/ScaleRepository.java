@@ -13,6 +13,6 @@ import java.util.List;
 
 @Repository
 public interface ScaleRepository extends QuestionBaseRepository<Scale> {
-    Iterable<Scale> findAll();
+    List<Scale> findAll();
     Scale findById(Integer id);
 }

@@ -7,10 +7,11 @@ import com.PZ.AnkietBud.repositories.QuestionRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 public interface ChoiceRepository extends QuestionBaseRepository<Choice> {
-    Iterable<Choice> findAll();
+    List<Choice> findAll();
 //    List<Choice> findAll();
     Choice findById(Integer id);
 //    Question findById(Integer id);
