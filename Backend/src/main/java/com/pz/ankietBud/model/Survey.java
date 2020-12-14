@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "survey")
+//@NamedQuery(name = "Survey.findX",
+//        query = "select * from survey order by creation_date desc limit 2")
+//fetch first 10 rows only
 public class Survey {
 
     @Id
@@ -18,27 +21,28 @@ public class Survey {
     private Status status;
     //    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime creation_date;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
     //    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime end_date;
     public Survey() {
     }
 
-    public Survey(Integer id, String name, String description, Status status, LocalDateTime creation_date, LocalDateTime end_date) {
+    public Survey(Integer id, String name, String description, Status status, LocalDateTime creationDate, LocalDateTime end_date) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
-        this.creation_date = creation_date;
+        this.creationDate = creationDate;
         this.end_date = end_date;
     }
 
-    public Survey(String name, String description, Status status, LocalDateTime creation_date, LocalDateTime end_date) {
+    public Survey(String name, String description, Status status, LocalDateTime creationDate, LocalDateTime end_date) {
         this.name = name;
         this.description = description;
         this.status = status;
-        this.creation_date = creation_date;
+        this.creationDate = creationDate;
         this.end_date = end_date;
     }
 
@@ -74,12 +78,12 @@ public class Survey {
         this.status = status;
     }
 
-    public LocalDateTime getCreation_date() {
-        return creation_date;
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(LocalDateTime creation_date) {
-        this.creation_date = creation_date;
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     public LocalDateTime getEnd_date() {
@@ -97,7 +101,7 @@ public class Survey {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
-                ", creation_date=" + creation_date +
+                ", creation_date=" + creationDate +
                 ", end_date=" + end_date +
                 '}';
     }

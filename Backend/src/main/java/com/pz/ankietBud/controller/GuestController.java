@@ -21,7 +21,7 @@ public class GuestController {
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Guest addGuest(@RequestBody Guest guest) throws JsonProcessingException {
         Guest guestNew = guest;
-//        guestRepository.save(guestNew);
+        guestRepository.save(guestNew);
         System.out.println(shortDateObjectMapper.writeValueAsString(guestNew));
         return guestNew;
     }
@@ -45,7 +45,7 @@ public class GuestController {
     @GetMapping("/delete/{id}")
     public String deleteGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
         Guest guest = guestRepository.findById(id);
-//        guestRepository.delete(guest);
+        guestRepository.delete(guest);
         System.out.println(shortDateObjectMapper.writeValueAsString(guest));
         return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(guest);
     }
@@ -53,7 +53,7 @@ public class GuestController {
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Guest updateGuest(@RequestBody Guest guest) throws JsonProcessingException {
         Guest guestUpdated = guest;
-//        guestRepository.save(guestUpdated);
+        guestRepository.save(guestUpdated);
         System.out.println(shortDateObjectMapper.writeValueAsString(guestUpdated));
         return guestUpdated;
     }

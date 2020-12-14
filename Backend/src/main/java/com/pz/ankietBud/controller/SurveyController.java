@@ -24,7 +24,7 @@ public class SurveyController {
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Survey addSurvey(@RequestBody Survey survey) throws JsonProcessingException {
         Survey surveyNew = survey;
-//        surveyRepository.save(surveyNew);
+        surveyRepository.save(surveyNew);
         System.out.println(shortDateObjectMapper.writeValueAsString(surveyNew));
         log.info("+ ---" + shortDateObjectMapper.writeValueAsString(surveyNew));
         return surveyNew;
@@ -40,6 +40,17 @@ public class SurveyController {
         return surveys;
     }
 
+    @GetMapping(value = "/getSorted/{count}", produces = "application/json")
+    public List<Survey> getXSortedDesc(@PathVariable("count") Integer count) throws JsonProcessingException {
+//        List<Survey> surveys = surveyRepository.findByOrderByCreationDateDesc();
+        List<Survey> surveys = surveyRepository.findXSortedDesc(count);
+        for (Survey item : surveys) {
+            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+        }
+        log.info("A --- get X Surveys");
+        return surveys;
+    }
+
     @GetMapping("/get/{id}")
     public Survey getSurvey(@PathVariable("id") Integer id) throws JsonProcessingException {
         Survey survey = surveyRepository.findById(id);
@@ -51,7 +62,7 @@ public class SurveyController {
     @GetMapping("/delete/{id}")
     public String deleteSurvey(@PathVariable("id") Integer id) throws JsonProcessingException {
         Survey survey = surveyRepository.findById(id);
-//        surveyRepository.delete(survey);
+        surveyRepository.delete(survey);
         System.out.println(shortDateObjectMapper.writeValueAsString(survey));
         log.info("x ---" + shortDateObjectMapper.writeValueAsString(survey));
         return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(survey);
@@ -60,7 +71,7 @@ public class SurveyController {
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Survey updateSurvey(@RequestBody Survey survey) throws JsonProcessingException {
         Survey surveyUpdated = survey;
-//        surveyRepository.save(surveyUpdated);
+        surveyRepository.save(surveyUpdated);
         System.out.println(shortDateObjectMapper.writeValueAsString(surveyUpdated));
         log.info("= ---" + shortDateObjectMapper.writeValueAsString(surveyUpdated));
         return surveyUpdated;
