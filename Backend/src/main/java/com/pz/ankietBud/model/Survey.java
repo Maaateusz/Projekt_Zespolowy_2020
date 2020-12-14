@@ -7,14 +7,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "survey")
-//@NamedQuery(name = "Survey.findX",
-//        query = "select * from survey order by creation_date desc limit 2")
-//fetch first 10 rows only
 public class Survey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     @Enumerated(EnumType.STRING)
@@ -25,32 +22,34 @@ public class Survey {
     private LocalDateTime creationDate;
     //    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime end_date;
+    @Column(name = "end_date")
+    private LocalDateTime endDate;
+
     public Survey() {
     }
 
-    public Survey(Integer id, String name, String description, Status status, LocalDateTime creationDate, LocalDateTime end_date) {
+    public Survey(Long id, String name, String description, Status status, LocalDateTime creationDate, LocalDateTime endDate) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
         this.creationDate = creationDate;
-        this.end_date = end_date;
+        this.endDate = endDate;
     }
 
-    public Survey(String name, String description, Status status, LocalDateTime creationDate, LocalDateTime end_date) {
+    public Survey(String name, String description, Status status, LocalDateTime creationDate, LocalDateTime endDate) {
         this.name = name;
         this.description = description;
         this.status = status;
         this.creationDate = creationDate;
-        this.end_date = end_date;
+        this.endDate = endDate;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,12 +85,12 @@ public class Survey {
         this.creationDate = creationDate;
     }
 
-    public LocalDateTime getEnd_date() {
-        return end_date;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(LocalDateTime end_date) {
-        this.end_date = end_date;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     @Override
@@ -102,7 +101,7 @@ public class Survey {
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
                 ", creation_date=" + creationDate +
-                ", end_date=" + end_date +
+                ", end_date=" + endDate +
                 '}';
     }
 

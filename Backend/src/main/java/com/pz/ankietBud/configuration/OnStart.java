@@ -1,5 +1,11 @@
 package com.pz.ankietBud.configuration;
 
+import com.pz.ankietBud.model.Guest;
+import com.pz.ankietBud.model.Survey;
+import com.pz.ankietBud.model.subQuestion.Choice;
+import com.pz.ankietBud.model.subQuestion.Rating;
+import com.pz.ankietBud.model.subQuestion.Scale;
+import com.pz.ankietBud.model.subQuestion.Slider;
 import com.pz.ankietBud.repository.GuestRepository;
 import com.pz.ankietBud.repository.QuestionRepository;
 import com.pz.ankietBud.repository.SurveyRepository;
@@ -14,6 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 //set database before the server starts
 @Component
@@ -52,13 +62,13 @@ public class OnStart {
     }
 
     private void setDB() throws JsonProcessingException {
-//        surveyRepository.save(new Survey("Ankieta_1", "Opis_1", Survey.Status.open, LocalDateTime.now(), LocalDateTime.now()));
-//        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32"));
-//        choiceRepository.save(new Choice("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, new ArrayList<>(List.of("pytanie_1", "pytanie_2", "pytanie_3")), Choice.Type.single));
-//        ratingRepository.save(new Rating("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 1, 6, Rating.Type.stars));
-//        scaleRepository.save(new Scale("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, "left", "right", "center", 1, 10));
-//        sliderRepository.save(new Slider("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 10, 100, 10));
-//        questionRepository.save(new Choice("Choice content", new ArrayList<>(List.of(1, 2, 3)), 6, new ArrayList<>(List.of("3v21", "54v3", "c12c3")), Choice.Type.multiple));
+        surveyRepository.save(new Survey("Ankieta_1", "Opis_1", Survey.Status.open, LocalDateTime.now(), LocalDateTime.now()));
+        guestRepository.save(new Guest("ID93dp81j9o238jd29p8jdp32"));
+        choiceRepository.save(new Choice("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, new ArrayList<>(List.of("pytanie_1", "pytanie_2", "pytanie_3")), Choice.Type.single));
+        ratingRepository.save(new Rating("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 1, 6, Rating.Type.stars));
+        scaleRepository.save(new Scale("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, "left", "right", "center", 1, 10));
+        sliderRepository.save(new Slider("Opis_1", new ArrayList<>(List.of(100, 20, 3)), 123, 10, 100, 10));
+//        questionRepository.save(new Choice("Opis_1", new ArrayList<>(List.of(1, 2, 3)), 6, new ArrayList<>(List.of("3v21", "54v3", "c12c3")), Choice.Type.multiple));
 
 //        List<Survey> surveys = surveyRepository.findAll();
 //        for (Survey item : surveys) {

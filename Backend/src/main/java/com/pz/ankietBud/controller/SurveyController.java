@@ -1,5 +1,6 @@
 package com.pz.ankietBud.controller;
 
+import com.pz.ankietBud.MyResourceNotFoundException;
 import com.pz.ankietBud.model.Survey;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.SurveyRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/survey")
@@ -40,10 +42,9 @@ public class SurveyController {
         return surveys;
     }
 
-    @GetMapping(value = "/getSorted/{count}", produces = "application/json")
-    public List<Survey> getXSortedDesc(@PathVariable("count") Integer count) throws JsonProcessingException {
-//        List<Survey> surveys = surveyRepository.findByOrderByCreationDateDesc();
-        List<Survey> surveys = surveyRepository.findXSortedDesc(count);
+    @GetMapping(value = "/getSorted/{number}", produces = "application/json")
+    public List<Survey> getXSortedDesc(@PathVariable("number") Integer number) throws JsonProcessingException {
+        List<Survey> surveys = surveyRepository.findXSortedDesc(number);
         for (Survey item : surveys) {
             System.out.println(shortDateObjectMapper.writeValueAsString(item));
         }
@@ -52,20 +53,32 @@ public class SurveyController {
     }
 
     @GetMapping("/get/{id}")
-    public Survey getSurvey(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Survey survey = surveyRepository.findById(id);
+    public Optional<Survey> getSurvey(@PathVariable("id") Long id) throws JsonProcessingException {
+        Optional<Survey> survey = surveyRepository.findById(id);
         System.out.println(shortDateObjectMapper.writeValueAsString(survey));
         log.info("I --- get one " + shortDateObjectMapper.writeValueAsString(survey));
         return survey;
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteSurvey(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Survey survey = surveyRepository.findById(id);
-        surveyRepository.delete(survey);
-        System.out.println(shortDateObjectMapper.writeValueAsString(survey));
-        log.info("x ---" + shortDateObjectMapper.writeValueAsString(survey));
-        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(survey);
+    public String deleteSurvey(@PathVariable("id") Long id) throws JsonProcessingException {
+//        Optional<Survey> survey = surveyRepository.findById(id);
+//        if(!survey.isPresent()) return "null";
+//        surveyRepository.delete(survey);
+//        System.out.println(shortDateObjectMapper.writeValueAsString(survey));
+//        log.info("x ---" + shortDateObjectMapper.writeValueAsString(survey));
+//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(survey);
+
+        surveyRepository.findById(id).map(survey -> {
+            surveyRepository.delete(survey);
+            try {
+                return shortDateObjectMapper.writeValueAsString(survey);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            return "survey";
+        }).orElseThrow(() -> new MyResourceNotFoundException("Question not found!"));
+        return "survey???";
     }
 
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
