@@ -17,8 +17,10 @@ public interface SurveyRepository extends CrudRepository<Survey, Long> {
 
     //fetch first 10 rows only
     @Query(value = "SELECT * FROM survey ORDER BY creation_date DESC LIMIT ?1", nativeQuery = true)
-    List<Survey> findXSortedDesc(Integer number);
+    List<Survey> findXSortedByCreateionDateDesc(Integer number);
 
+    @Query(value = "SELECT * FROM survey ORDER BY end_date DESC LIMIT ?1", nativeQuery = true)
+    List<Survey> findXSortedByEndDateDesc(Integer number);
 
 //    List<Survey> findByStatus(Survey.Status status);
 //    List<Survey> surveys = surveyRepository.findByStatus(Survey.Status.open);

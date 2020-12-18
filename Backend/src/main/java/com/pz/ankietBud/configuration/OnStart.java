@@ -58,7 +58,7 @@ public class OnStart {
         System.out.println("|/");
         log.info("Server has started");
 
-        setDB();
+//        setDB();
     }
 
     private void setDB() throws JsonProcessingException {
