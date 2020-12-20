@@ -7,9 +7,17 @@ import com.pz.ankietBud.model.Question;
 import com.pz.ankietBud.model.Survey;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.model.SurveyService;
+import com.pz.ankietBud.model.subQuestion.Choice;
+import com.pz.ankietBud.model.subQuestion.Rating;
+import com.pz.ankietBud.model.subQuestion.Scale;
 import com.pz.ankietBud.model.subQuestion.Slider;
+import com.pz.ankietBud.repository.GuestRepository;
 import com.pz.ankietBud.repository.SurveyRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
+import com.pz.ankietBud.repository.subQuestion.RatingRepository;
+import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
+import com.pz.ankietBud.repository.subQuestion.SliderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +34,16 @@ public class SurveyController {
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
     @Autowired
     private SurveyRepository surveyRepository;
+    @Autowired
+    private GuestRepository guestRepository;
+    @Autowired
+    private ChoiceRepository choiceRepository;
+    @Autowired
+    private RatingRepository ratingRepository;
+    @Autowired
+    private ScaleRepository scaleRepository;
+    @Autowired
+    private SliderRepository sliderRepository;
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Survey addSurvey(@RequestBody Survey survey) throws JsonProcessingException {
@@ -39,8 +57,8 @@ public class SurveyController {
     @GetMapping(value = "/getAll", produces = "application/json")
     public List<Survey> getAllSurvey() throws JsonProcessingException {
         List<Survey> surveys = surveyRepository.findAll();
-        for (Survey item : surveys) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+        for (Survey element : surveys) {
+            System.out.println(shortDateObjectMapper.writeValueAsString(element));
         }
         log.info("A --- get all Surveys");
         return surveys;
@@ -49,8 +67,8 @@ public class SurveyController {
     @GetMapping(value = "/getLastByCreation/{number}", produces = "application/json")
     public List<Survey> getXSortedByCreateionDateDesc(@PathVariable("number") Integer number) throws JsonProcessingException {
         List<Survey> surveys = surveyRepository.findXSortedByCreateionDateDesc(number);
-        for (Survey item : surveys) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+        for (Survey element : surveys) {
+            System.out.println(shortDateObjectMapper.writeValueAsString(element));
         }
         log.info("A --- get X Surveys");
         return surveys;
@@ -59,8 +77,8 @@ public class SurveyController {
     @GetMapping(value = "/getLastByEnd/{number}", produces = "application/json")
     public List<Survey> getXSortedByEndDateDesc(@PathVariable("number") Integer number) throws JsonProcessingException {
         List<Survey> surveys = surveyRepository.findXSortedByEndDateDesc(number);
-        for (Survey item : surveys) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+        for (Survey element : surveys) {
+            System.out.println(shortDateObjectMapper.writeValueAsString(element));
         }
         log.info("A --- get X Surveys");
         return surveys;
@@ -104,55 +122,43 @@ public class SurveyController {
         System.out.println(shortDateObjectMapper.writeValueAsString(surveyService));
 
         Survey surveyNew = surveyService.getSurvey();
-//        surveyRepository.save(surveyNew);
+        surveyRepository.save(surveyNew);
         System.out.println(shortDateObjectMapper.writeValueAsString(surveyNew));
         System.out.println(surveyNew.getClass());
 
         Guest guestNew = surveyService.getGuest();
-//        guestRepository.save(guestNew);
+        guestRepository.save(guestNew);
         System.out.println(shortDateObjectMapper.writeValueAsString(guestNew));
         System.out.println(guestNew.getClass());
 
-        List<Object> slidersNew = surveyService.getQuestions();
-        System.out.println(slidersNew.getClass());
-        for (Object question : slidersNew) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(question));
-            System.out.println(question.getClass());
-//            Question q = ((Slider) question);
+        List<Choice> choices = surveyService.getChoices();
+        for (Choice element : choices) {
+            choiceRepository.save(element);
+            System.out.println("-Choice: " + shortDateObjectMapper.writeValueAsString(element));
         }
 
-        List<Object> objects = surveyService.getQuestions();
-        for (Object question : objects) {
-
-//            surveyService.q.add((Question) question);
-//            Slider s = castTo(Slider.class, question);
-//            Question q = (Question) question;
-//            System.out.println(shortDateObjectMapper.writeValueAsString(s));
-//            System.out.println(s.getClass());
-            String type = checkType(question);
-            System.out.println(type);
-//            ObjectMapper mapper = new ObjectMapper();
-//            Map<String,Object> map = mapper.readValue(question, Map.class);
+        List<Rating> ratings = surveyService.getRatings();
+        for (Rating element : ratings) {
+            ratingRepository.save(element);
+            System.out.println("-Rating: " + shortDateObjectMapper.writeValueAsString(element));
         }
-//        surveyService.add();
-        System.out.println(shortDateObjectMapper.writeValueAsString(surveyService.q));
+
+        List<Scale> scales = surveyService.getScales();
+        for (Scale element : scales) {
+            scaleRepository.save(element);
+            System.out.println("-Scale: " + shortDateObjectMapper.writeValueAsString(element));
+        }
+
+        List<Slider> sliders = surveyService.getSliders();
+        for (Slider element : sliders) {
+            sliderRepository.save(element);
+            System.out.println("-Slider: " + shortDateObjectMapper.writeValueAsString(element));
+        }
+
+        surveyService.setQuestions();
+        System.out.println(shortDateObjectMapper.writeValueAsString(surveyService.getQuestions()));
 
         return shortDateObjectMapper.writeValueAsString(surveyService);
     }
 
-    private String checkType(Object object) throws JsonProcessingException {
-        HashMap result = new ObjectMapper().readValue(shortDateObjectMapper.writeValueAsString(object), HashMap.class);
-        if(result.containsKey("value_min")){
-            return "Slider";
-        }
-        else if(result.containsKey("anchor_left") ){
-            return "Scale";
-        }
-        else return "null";
-    }
-
-    private <T> T castTo(Class<T> cls, Object o) {
-//        Object o = cls;
-        return cls.cast(o);
-    }
 }
