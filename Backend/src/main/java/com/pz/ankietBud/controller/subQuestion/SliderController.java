@@ -1,9 +1,12 @@
 package com.pz.ankietBud.controller.subQuestion;
 
+import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Slider;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.SliderRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,7 @@ import java.util.List;
 @CrossOrigin
 public class SliderController {
 
+    private static final Logger log = LoggerFactory.getLogger(SliderController.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
     @Autowired
     private SliderRepository sliderRepository;
@@ -22,7 +26,7 @@ public class SliderController {
     public Slider addSlider(@RequestBody Slider slider) throws JsonProcessingException {
         Slider sliderNew = slider;
         sliderRepository.save(sliderNew);
-        System.out.println(shortDateObjectMapper.writeValueAsString(sliderNew));
+        log.info(shortDateObjectMapper.writeValueAsString(sliderNew));
         return sliderNew;
     }
 
@@ -30,7 +34,7 @@ public class SliderController {
     public List<Slider> getAllSlider() throws JsonProcessingException {
         List<Slider> sliders = sliderRepository.findAll();
         for (Slider item : sliders) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+            log.info(shortDateObjectMapper.writeValueAsString(item));
         }
         return sliders;
     }
@@ -38,7 +42,7 @@ public class SliderController {
     @GetMapping("/get/{id}")
     public Slider getSlider(@PathVariable("id") Integer id) throws JsonProcessingException {
         Slider slider = sliderRepository.findById(id);
-        System.out.println(shortDateObjectMapper.writeValueAsString(slider));
+        log.info(shortDateObjectMapper.writeValueAsString(slider));
         return slider;
     }
 
@@ -46,7 +50,7 @@ public class SliderController {
     public String deleteSlider(@PathVariable("id") Integer id) throws JsonProcessingException {
         Slider slider = sliderRepository.findById(id);
         sliderRepository.delete(slider);
-        System.out.println(shortDateObjectMapper.writeValueAsString(slider));
+        log.info(shortDateObjectMapper.writeValueAsString(slider));
         return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(slider);
     }
 
@@ -54,7 +58,7 @@ public class SliderController {
     public Slider updateSlider(@RequestBody Slider slider) throws JsonProcessingException {
         Slider sliderUpdated = slider;
         sliderRepository.save(sliderUpdated);
-        System.out.println(shortDateObjectMapper.writeValueAsString(sliderUpdated));
+        log.info(shortDateObjectMapper.writeValueAsString(sliderUpdated));
         return sliderUpdated;
     }
 }

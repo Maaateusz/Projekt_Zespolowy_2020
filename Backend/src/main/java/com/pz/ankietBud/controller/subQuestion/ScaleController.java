@@ -1,10 +1,13 @@
 package com.pz.ankietBud.controller.subQuestion;
 
 
+import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Scale;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,7 @@ import java.util.List;
 @CrossOrigin
 public class ScaleController {
 
+    private static final Logger log = LoggerFactory.getLogger(ScaleController.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
     @Autowired
     private ScaleRepository scaleRepository;
@@ -23,7 +27,7 @@ public class ScaleController {
     public Scale addScale(@RequestBody Scale scale) throws JsonProcessingException {
         Scale scaleNew = scale;
         scaleRepository.save(scaleNew);
-        System.out.println(shortDateObjectMapper.writeValueAsString(scaleNew));
+        log.info(shortDateObjectMapper.writeValueAsString(scaleNew));
         return scaleNew;
     }
 
@@ -31,7 +35,7 @@ public class ScaleController {
     public List<Scale> getAllScale() throws JsonProcessingException {
         List<Scale> scales = scaleRepository.findAll();
         for (Scale item : scales) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+            log.info(shortDateObjectMapper.writeValueAsString(item));
         }
         return scales;
     }
@@ -39,7 +43,7 @@ public class ScaleController {
     @GetMapping("/get/{id}")
     public Scale getScale(@PathVariable("id") Integer id) throws JsonProcessingException {
         Scale scale = scaleRepository.findById(id);
-        System.out.println(shortDateObjectMapper.writeValueAsString(scale));
+        log.info(shortDateObjectMapper.writeValueAsString(scale));
         return scale;
     }
 
@@ -47,7 +51,7 @@ public class ScaleController {
     public String deleteScale(@PathVariable("id") Integer id) throws JsonProcessingException {
         Scale scale = scaleRepository.findById(id);
         scaleRepository.delete(scale);
-        System.out.println(shortDateObjectMapper.writeValueAsString(scale));
+        log.info(shortDateObjectMapper.writeValueAsString(scale));
         return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(scale);
     }
 
@@ -55,7 +59,7 @@ public class ScaleController {
     public Scale updateScale(@RequestBody Scale scale) throws JsonProcessingException {
         Scale scaleUpdated = scale;
         scaleRepository.save(scaleUpdated);
-        System.out.println(shortDateObjectMapper.writeValueAsString(scaleUpdated));
+        log.info(shortDateObjectMapper.writeValueAsString(scaleUpdated));
         return scaleUpdated;
     }
 }

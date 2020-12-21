@@ -4,6 +4,8 @@ import com.pz.ankietBud.model.Guest;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.GuestRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @CrossOrigin
 public class GuestController {
 
+    private static final Logger log = LoggerFactory.getLogger(GuestController.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
     @Autowired
     private GuestRepository guestRepository;
@@ -22,7 +25,7 @@ public class GuestController {
     public Guest addGuest(@RequestBody Guest guest) throws JsonProcessingException {
         Guest guestNew = guest;
         guestRepository.save(guestNew);
-        System.out.println(shortDateObjectMapper.writeValueAsString(guestNew));
+        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
         return guestNew;
     }
 
@@ -30,7 +33,7 @@ public class GuestController {
     public List<Guest> getAllGuest() throws JsonProcessingException {
         List<Guest> guests = guestRepository.findAll();
         for (Guest item : guests) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+            log.info(shortDateObjectMapper.writeValueAsString(item));
         }
         return guests;
     }
@@ -38,7 +41,7 @@ public class GuestController {
     @GetMapping("/get/{id}")
     public Guest getGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
         Guest guest = guestRepository.findById(id);
-        System.out.println(shortDateObjectMapper.writeValueAsString(guest));
+        log.info(shortDateObjectMapper.writeValueAsString(guest));
         return guest;
     }
 
@@ -46,7 +49,7 @@ public class GuestController {
     public String deleteGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
         Guest guest = guestRepository.findById(id);
         guestRepository.delete(guest);
-        System.out.println(shortDateObjectMapper.writeValueAsString(guest));
+        log.info(shortDateObjectMapper.writeValueAsString(guest));
         return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(guest);
     }
 
@@ -54,7 +57,7 @@ public class GuestController {
     public Guest updateGuest(@RequestBody Guest guest) throws JsonProcessingException {
         Guest guestUpdated = guest;
         guestRepository.save(guestUpdated);
-        System.out.println(shortDateObjectMapper.writeValueAsString(guestUpdated));
+        log.info(shortDateObjectMapper.writeValueAsString(guestUpdated));
         return guestUpdated;
     }
 }

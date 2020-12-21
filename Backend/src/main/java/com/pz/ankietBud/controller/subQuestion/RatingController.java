@@ -1,10 +1,13 @@
 package com.pz.ankietBud.controller.subQuestion;
 
 
+import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Rating;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.RatingRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,7 @@ import java.util.List;
 @CrossOrigin
 public class RatingController {
 
+    private static final Logger log = LoggerFactory.getLogger(RatingController.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
     @Autowired
     private RatingRepository ratingRepository;
@@ -23,7 +27,7 @@ public class RatingController {
     public Rating addRating(@RequestBody Rating rating) throws JsonProcessingException {
         Rating ratingNew = rating;
         ratingRepository.save(ratingNew);
-        System.out.println(shortDateObjectMapper.writeValueAsString(ratingNew));
+        log.info(shortDateObjectMapper.writeValueAsString(ratingNew));
         return ratingNew;
     }
 
@@ -31,7 +35,7 @@ public class RatingController {
     public List<Rating> getAllRating() throws JsonProcessingException {
         List<Rating> ratings = ratingRepository.findAll();
         for (Rating item : ratings) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+            log.info(shortDateObjectMapper.writeValueAsString(item));
         }
         return ratings;
     }
@@ -39,7 +43,7 @@ public class RatingController {
     @GetMapping("/get/{id}")
     public Rating getRating(@PathVariable("id") Integer id) throws JsonProcessingException {
         Rating rating = ratingRepository.findById(id);
-        System.out.println(shortDateObjectMapper.writeValueAsString(rating));
+        log.info(shortDateObjectMapper.writeValueAsString(rating));
         return rating;
     }
 
@@ -47,7 +51,7 @@ public class RatingController {
     public String deleteRating(@PathVariable("id") Integer id) throws JsonProcessingException {
         Rating rating = ratingRepository.findById(id);
         ratingRepository.delete(rating);
-        System.out.println(shortDateObjectMapper.writeValueAsString(rating));
+        log.info(shortDateObjectMapper.writeValueAsString(rating));
         return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(rating);
     }
 
@@ -55,7 +59,7 @@ public class RatingController {
     public Rating updateRating(@RequestBody Rating rating) throws JsonProcessingException {
         Rating ratingUpdated = rating;
         ratingRepository.save(ratingUpdated);
-        System.out.println(shortDateObjectMapper.writeValueAsString(ratingUpdated));
+        log.info(shortDateObjectMapper.writeValueAsString(ratingUpdated));
         return ratingUpdated;
     }
 }

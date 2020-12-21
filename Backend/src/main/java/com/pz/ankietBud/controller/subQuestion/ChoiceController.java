@@ -1,9 +1,12 @@
 package com.pz.ankietBud.controller.subQuestion;
 
+import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Choice;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,7 @@ import java.util.List;
 @CrossOrigin
 public class ChoiceController {
 
+    private static final Logger log = LoggerFactory.getLogger(ChoiceController.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
     @Autowired
     private ChoiceRepository choiceRepository;
@@ -22,7 +26,7 @@ public class ChoiceController {
     public Choice addChoice(@RequestBody Choice choice) throws JsonProcessingException {
         Choice choiceNew = choice;
         choiceRepository.save(choiceNew);
-        System.out.println(shortDateObjectMapper.writeValueAsString(choiceNew));
+        log.info(shortDateObjectMapper.writeValueAsString(choiceNew));
         return choiceNew;
     }
 
@@ -30,7 +34,7 @@ public class ChoiceController {
     public List<Choice> getAllChoice() throws JsonProcessingException {
         List<Choice> choices = choiceRepository.findAll();
         for (Choice item : choices) {
-            System.out.println(shortDateObjectMapper.writeValueAsString(item));
+            log.info(shortDateObjectMapper.writeValueAsString(item));
         }
         return choices;
     }
@@ -38,7 +42,7 @@ public class ChoiceController {
     @GetMapping("/get/{id}")
     public Choice getChoice(@PathVariable("id") Integer id) throws JsonProcessingException {
         Choice choice = choiceRepository.findById(id);
-        System.out.println(shortDateObjectMapper.writeValueAsString(choice));
+        log.info(shortDateObjectMapper.writeValueAsString(choice));
         return choice;
     }
 
@@ -46,7 +50,7 @@ public class ChoiceController {
     public String deleteChoice(@PathVariable("id") Integer id) throws JsonProcessingException {
         Choice choice = choiceRepository.findById(id);
         choiceRepository.delete(choice);
-        System.out.println(shortDateObjectMapper.writeValueAsString(choice));
+        log.info(shortDateObjectMapper.writeValueAsString(choice));
         return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(choice);
     }
 
@@ -54,7 +58,7 @@ public class ChoiceController {
     public Choice updateChoice(@RequestBody Choice choice) throws JsonProcessingException {
         Choice choiceUpdated = choice;
         choiceRepository.save(choiceUpdated);
-        System.out.println(shortDateObjectMapper.writeValueAsString(choiceUpdated));
+        log.info(shortDateObjectMapper.writeValueAsString(choiceUpdated));
         return choiceUpdated;
     }
 }
