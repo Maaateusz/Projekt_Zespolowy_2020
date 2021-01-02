@@ -34,16 +34,6 @@ public class SurveyController {
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
     @Autowired
     private SurveyRepository surveyRepository;
-    @Autowired
-    private GuestRepository guestRepository;
-    @Autowired
-    private ChoiceRepository choiceRepository;
-    @Autowired
-    private RatingRepository ratingRepository;
-    @Autowired
-    private ScaleRepository scaleRepository;
-    @Autowired
-    private SliderRepository sliderRepository;
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Survey addSurvey(@RequestBody Survey survey) throws JsonProcessingException {
@@ -114,50 +104,6 @@ public class SurveyController {
         log.info(shortDateObjectMapper.writeValueAsString(surveyUpdated));
         log.info("= ---" + shortDateObjectMapper.writeValueAsString(surveyUpdated));
         return surveyUpdated;
-    }
-
-    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public SurveyService createSurvey(@RequestBody SurveyService surveyService) throws JsonProcessingException {
-
-        log.info(shortDateObjectMapper.writeValueAsString(surveyService));
-
-        Survey surveyNew = surveyService.getSurvey();
-        surveyRepository.save(surveyNew);
-        log.info(shortDateObjectMapper.writeValueAsString(surveyNew));
-
-        Guest guestNew = surveyService.getGuest();
-        guestRepository.save(guestNew);
-        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
-
-        List<Choice> choices = surveyService.getChoices();
-        for (Choice element : choices) {
-            choiceRepository.save(element);
-            log.info("-Choice: " + shortDateObjectMapper.writeValueAsString(element));
-        }
-
-        List<Rating> ratings = surveyService.getRatings();
-        for (Rating element : ratings) {
-            ratingRepository.save(element);
-            log.info("-Rating: " + shortDateObjectMapper.writeValueAsString(element));
-        }
-
-        List<Scale> scales = surveyService.getScales();
-        for (Scale element : scales) {
-            scaleRepository.save(element);
-            log.info("-Scale: " + shortDateObjectMapper.writeValueAsString(element));
-        }
-
-        List<Slider> sliders = surveyService.getSliders();
-        for (Slider element : sliders) {
-            sliderRepository.save(element);
-            log.info("-Slider: " + shortDateObjectMapper.writeValueAsString(element));
-        }
-
-        surveyService.setQuestions();
-        log.info(shortDateObjectMapper.writeValueAsString(surveyService.getQuestions()));
-
-//        return shortDateObjectMapper.writeValueAsString(surveyService);
-        return surveyService;
     }
 
 }
