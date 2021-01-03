@@ -5,13 +5,14 @@ import com.pz.ankietBud.repository.QuestionBaseRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public interface ChoiceRepository extends QuestionBaseRepository<Choice> {
     List<Choice> findAll();
 
     //    List<Choice> findAll();
-    Choice findById(Integer id);
+    Optional<Choice> findById(Integer id);
 //    Question findById(Integer id);
 
 //    @Override

@@ -1,6 +1,5 @@
 package com.pz.ankietBud.controller.subQuestion;
 
-import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Choice;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("question/choice")
@@ -40,18 +40,18 @@ public class ChoiceController {
     }
 
     @GetMapping("/get/{id}")
-    public Choice getChoice(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Choice choice = choiceRepository.findById(id);
+    public Optional<Choice> getChoice(@PathVariable("id") Integer id) throws JsonProcessingException {
+        Optional<Choice> choice = choiceRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(choice));
         return choice;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteChoice(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Choice choice = choiceRepository.findById(id);
-        choiceRepository.delete(choice);
-        log.info(shortDateObjectMapper.writeValueAsString(choice));
-        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(choice);
+        choiceRepository.findById(id).ifPresent(x -> choiceRepository.delete(x));
+//        log.info(shortDateObjectMapper.writeValueAsString(choice));
+//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(choice);
+        return "x--- Deleted Choice";
     }
 
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")

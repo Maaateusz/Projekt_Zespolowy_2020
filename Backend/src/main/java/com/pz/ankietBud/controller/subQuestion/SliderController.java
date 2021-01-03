@@ -1,6 +1,5 @@
 package com.pz.ankietBud.controller.subQuestion;
 
-import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Slider;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.SliderRepository;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("question/slider")
@@ -40,18 +40,18 @@ public class SliderController {
     }
 
     @GetMapping("/get/{id}")
-    public Slider getSlider(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Slider slider = sliderRepository.findById(id);
+    public Optional<Slider> getSlider(@PathVariable("id") Integer id) throws JsonProcessingException {
+        Optional<Slider> slider = sliderRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(slider));
         return slider;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteSlider(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Slider slider = sliderRepository.findById(id);
-        sliderRepository.delete(slider);
-        log.info(shortDateObjectMapper.writeValueAsString(slider));
-        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(slider);
+        sliderRepository.findById(id).ifPresent(x -> sliderRepository.delete(x));
+//        log.info(shortDateObjectMapper.writeValueAsString(slider));
+//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(slider);
+        return "x--- Deleted Slider ";
     }
 
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")

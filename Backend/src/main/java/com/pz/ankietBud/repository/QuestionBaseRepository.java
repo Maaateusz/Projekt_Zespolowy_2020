@@ -5,10 +5,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
+import java.util.Optional;
 
 @NoRepositoryBean
 public interface QuestionBaseRepository<T extends Question> extends CrudRepository<T, Long> {
-    T findById(Integer id);
+
+    Optional<T> findById(Long id);
 
     List<T> findAll();
 }

@@ -16,7 +16,7 @@ public interface SurveyRepository extends CrudRepository<Survey, Long> {
 
     List<Survey> findAll();
 
-    Optional<Survey> findById(Long id);
+//    Optional<Survey> findById(Long id);
 
     //fetch first 10 rows only
     @Query(value = "SELECT * FROM survey ORDER BY creation_date DESC LIMIT :number", nativeQuery = true)

@@ -5,10 +5,11 @@ import com.pz.ankietBud.repository.QuestionBaseRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RatingRepository extends QuestionBaseRepository<Rating> {
     List<Rating> findAll();
 
-    Rating findById(Integer id);
+    Optional<Rating> findById(Integer id);
 }

@@ -1,7 +1,6 @@
 package com.pz.ankietBud.controller.subQuestion;
 
 
-import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Scale;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("question/scale")
@@ -41,18 +41,18 @@ public class ScaleController {
     }
 
     @GetMapping("/get/{id}")
-    public Scale getScale(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Scale scale = scaleRepository.findById(id);
+    public Optional<Scale> getScale(@PathVariable("id") Integer id) throws JsonProcessingException {
+        Optional<Scale> scale = scaleRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(scale));
         return scale;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteScale(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Scale scale = scaleRepository.findById(id);
-        scaleRepository.delete(scale);
-        log.info(shortDateObjectMapper.writeValueAsString(scale));
-        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(scale);
+        scaleRepository.findById(id).ifPresent(x -> scaleRepository.delete(x));
+//        log.info(shortDateObjectMapper.writeValueAsString(scale));
+//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(scale);
+        return "x--- Deleted Scale";
     }
 
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")

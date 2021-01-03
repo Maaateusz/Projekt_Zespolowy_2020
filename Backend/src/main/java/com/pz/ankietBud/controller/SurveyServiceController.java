@@ -7,10 +7,7 @@ import com.pz.ankietBud.model.subQuestion.Choice;
 import com.pz.ankietBud.model.subQuestion.Rating;
 import com.pz.ankietBud.model.subQuestion.Scale;
 import com.pz.ankietBud.model.subQuestion.Slider;
-import com.pz.ankietBud.repository.GuestRepository;
-import com.pz.ankietBud.repository.Guest_Survey_CreatorRepository;
-import com.pz.ankietBud.repository.SurveyRepository;
-import com.pz.ankietBud.repository.Survey_QuestionRepository;
+import com.pz.ankietBud.repository.*;
 import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
 import com.pz.ankietBud.repository.subQuestion.RatingRepository;
 import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
@@ -45,6 +42,8 @@ public class SurveyServiceController {
     @Autowired
     private SliderRepository sliderRepository;
     @Autowired
+    private QuestionRepository questionRepository;
+    @Autowired
     private Guest_Survey_CreatorRepository guest_survey_creatorRepository;
     @Autowired
     private Survey_QuestionRepository survey_questionRepository;
@@ -66,7 +65,8 @@ public class SurveyServiceController {
         guest_survey_creatorRepository.save(new Guest_Survey_Creator(surveyNew.getId(), guestNew.getId()));
         log.info(shortDateObjectMapper.writeValueAsString(guestNew));
 
-        List <Survey_Question> survey_questions = new ArrayList<>();
+        List<Survey_Question> survey_questions = new ArrayList<>();
+
         List<Choice> choices = surveyService.getChoices();
         for (Choice element : choices) {
             choiceRepository.save(element);
@@ -116,12 +116,32 @@ public class SurveyServiceController {
                 ()-> log.info("X- No Survey id: " + id.toString()));
 
         Optional<Guest_Survey_Creator> guest_survey_creator = guest_survey_creatorRepository.findById(surveyService.getSurvey().getId());
-
         guestRepository.findById(guest_survey_creator.get().getId_guest()).ifPresentOrElse(surveyService::setGuest,
                 ()-> log.info("X- No Guest id: " + guest_survey_creator.get().getId_guest().toString()));
 
+        List<Survey_Question> survey_questions  = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
+        log.info(shortDateObjectMapper.writeValueAsString(survey_questions));
 
+        List<Question> questions = new ArrayList<>();
+        for(Survey_Question survey_question : survey_questions){
+            questionRepository.findById(survey_question.getId_question()).ifPresent(
+                    questions::add);
+//            Choice choice = choiceRepository.findById(id);
+        }
+//        log.info(shortDateObjectMapper.writeValueAsString(questions));
+        List<Choice> choices = new ArrayList<>();
+        List<Slider> sliders = new ArrayList<>();
+        List<Rating> ratings = new ArrayList<>();
+        List<Scale> scales = new ArrayList<>();
+        for(Question question : questions){
+            choices.add(question);
+        }
+        surveyService.setChoices(choices);
+        surveyService.setRatings(ratings);
+        surveyService.setScales(scales);
+        surveyService.setSliders(sliders);
 
+        surveyService.setQuestions();
         log.info(shortDateObjectMapper.writeValueAsString(surveyService));
         return surveyService;
     }

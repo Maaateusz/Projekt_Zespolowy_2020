@@ -1,7 +1,6 @@
 package com.pz.ankietBud.controller.subQuestion;
 
 
-import com.pz.ankietBud.controller.SurveyController;
 import com.pz.ankietBud.model.subQuestion.Rating;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.subQuestion.RatingRepository;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("question/rating")
@@ -41,18 +41,18 @@ public class RatingController {
     }
 
     @GetMapping("/get/{id}")
-    public Rating getRating(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Rating rating = ratingRepository.findById(id);
+    public Optional<Rating> getRating(@PathVariable("id") Integer id) throws JsonProcessingException {
+        Optional<Rating> rating = ratingRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(rating));
         return rating;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Rating rating = ratingRepository.findById(id);
-        ratingRepository.delete(rating);
-        log.info(shortDateObjectMapper.writeValueAsString(rating));
-        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(rating);
+        ratingRepository.findById(id).ifPresent(x -> ratingRepository.delete(x));
+//        log.info(shortDateObjectMapper.writeValueAsString(rating));
+//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(rating);
+        return "x--- Deleted Rating";
     }
 
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")

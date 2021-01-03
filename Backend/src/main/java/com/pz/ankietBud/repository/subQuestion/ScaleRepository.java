@@ -5,10 +5,11 @@ import com.pz.ankietBud.repository.QuestionBaseRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ScaleRepository extends QuestionBaseRepository<Scale> {
     List<Scale> findAll();
 
-    Scale findById(Integer id);
+    Optional<Scale> findById(Integer id);
 }
