@@ -4,6 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "survey")
@@ -11,10 +13,14 @@ public class Survey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private Status status;
     //    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -24,6 +30,21 @@ public class Survey {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "end_date")
     private LocalDateTime endDate;
+
+    public Set<Guest> getSurveys() {
+        return guests;
+    }
+
+    public void setSurveys(Set<Guest> surveys) {
+        this.guests = surveys;
+    }
+
+    // Create guest_survey_creator table
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "guest_survey_creator",
+            joinColumns = { @JoinColumn(name = "id_survey") },
+            inverseJoinColumns = { @JoinColumn(name = "id_guest")})
+    private Set<Guest> guests = new HashSet<>();
 
     public Survey() {
     }

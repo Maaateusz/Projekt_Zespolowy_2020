@@ -5,9 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name="guest", schema = "public")
+//@Table(name="guest", schema = "public")
+@Table(name="guest")
 public class Guest {
 
     @Id
@@ -18,6 +21,17 @@ public class Guest {
 //    @NotNull
     @Column(name = "identifier")
     private String identifier;
+
+    @ManyToMany(mappedBy = "guests")
+    private Set<Survey> surveys = new HashSet<>();
+
+    public Set<Survey> getGuests() {
+        return surveys;
+    }
+
+    public void setGuests(Set<Survey> guests) {
+        this.surveys = guests;
+    }
 
     public Guest() {
     }

@@ -15,13 +15,20 @@ import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
 import com.pz.ankietBud.repository.subQuestion.RatingRepository;
 import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
 import com.pz.ankietBud.repository.subQuestion.SliderRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/surveyService")
@@ -44,6 +51,16 @@ public class SurveyServiceController {
     @Autowired
     private SliderRepository sliderRepository;
 
+    @Modifying
+    @Query(value = "INSERT INTO public.guest_survey_creator (id_survey, id_guest) VALUES (':id_survey', ':id_guest');", nativeQuery = true)
+    private void addCreator(@Param("id_survey") Long id_survey, @Param("id_guest") Integer id_guest) {
+        log.info("id: "+ id_survey +", "+ id_guest);
+    }
+
+    @Modifying
+    @Query(value = "CREATE TABLE IF NOT EXISTS asd (id_asd serial) ", nativeQuery = true)
+    private void crCreator() {    }
+
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public SurveyService createSurvey(@RequestBody SurveyService surveyService) throws JsonProcessingException {
 
@@ -54,8 +71,35 @@ public class SurveyServiceController {
         log.info(shortDateObjectMapper.writeValueAsString(surveyNew));
 
         Guest guestNew = surveyService.getGuest();
-        guestRepository.save(guestNew);
-        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
+        //powinno dodać tylko jeśli nie istnieje!
+        //guest dodawany przy odwiedzaniu strony!
+//        guestRepository.save(guestNew);
+//        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
+//
+//        //add to guest_survey_creator https://www.baeldung.com/hibernate-many-to-many https://www.baeldung.com/hibernate-one-to-many
+//        Set<Guest> projects = new HashSet<>();
+//        projects.add(guestNew);
+//        surveyNew.setSurveys(projects);
+//        log.info(surveyNew.getSurveys().toString());
+//
+//        log.info(guestNew.getGuests().toString());
+
+        surveyNew.getSurveys().add(guestNew);
+//        guestNew.getGuests().add(surveyNew);
+
+        log.info(surveyNew.getSurveys().toString());
+
+        log.info(guestNew.getGuests().toString());
+
+//        private static SessionFactory sessionFactory;
+//        Session session = null;
+//        List<Guest> employeeList = session.createQuery("FROM guest").list();
+//        for(Guest employee : employeeList) {
+////            assertNotNull(employee.getSurveys());
+////            employee.getSurveys();
+//            log.info(employee.getGuests().toString());
+////            log.info(employee.toString());
+//        }
 
         List<Choice> choices = surveyService.getChoices();
         for (Choice element : choices) {
@@ -96,7 +140,7 @@ public class SurveyServiceController {
         surveyRepository.findById(id).ifPresentOrElse(surveyService::setSurvey,
                 ()-> log.info("X- No Survey id: " + id.toString()));
 
-        //add to guest_survey_participate, guest_survey_creator
+
 
 
 
