@@ -134,7 +134,10 @@ public class SurveyServiceController {
         List<Rating> ratings = new ArrayList<>();
         List<Scale> scales = new ArrayList<>();
         for(Question question : questions){
-            choices.add(question);
+            if(question instanceof Choice) choices.add((Choice) question);
+            if(question instanceof Slider) sliders.add((Slider) question);
+            if(question instanceof Rating) ratings.add((Rating) question);
+            if(question instanceof Scale) scales.add((Scale) question);
         }
         surveyService.setChoices(choices);
         surveyService.setRatings(ratings);
