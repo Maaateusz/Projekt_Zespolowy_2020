@@ -31,12 +31,12 @@ public class Survey {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    public Set<Guest> getSurveys() {
+    public Set<Guest> getGuests() {
         return guests;
     }
 
-    public void setSurveys(Set<Guest> surveys) {
-        this.guests = surveys;
+    public void setGuests(Set<Guest> guests) {
+        this.guests = guests;
     }
 
     // Create guest_survey_creator table

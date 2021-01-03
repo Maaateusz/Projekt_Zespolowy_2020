@@ -84,12 +84,12 @@ public class SurveyServiceController {
 //
 //        log.info(guestNew.getGuests().toString());
 
-        surveyNew.getSurveys().add(guestNew);
+        surveyNew.getGuests().add(guestNew);
 //        guestNew.getGuests().add(surveyNew);
 
-        log.info(surveyNew.getSurveys().toString());
+        log.info(surveyNew.getGuests().toString());
 
-        log.info(guestNew.getGuests().toString());
+//        log.info(guestNew.getSurveys().toString());
 
 //        private static SessionFactory sessionFactory;
 //        Session session = null;
@@ -139,8 +139,17 @@ public class SurveyServiceController {
 //        surveyRepository.findById(id).ifPresentOrElse(survey -> surveyService.setSurvey(survey),
         surveyRepository.findById(id).ifPresentOrElse(surveyService::setSurvey,
                 ()-> log.info("X- No Survey id: " + id.toString()));
+        log.info(shortDateObjectMapper.writeValueAsString(surveyService.getSurvey()));
 
-
+//        Guest guest = surveyRepository.findBySurveys_Id(id).iterator().next();
+//        Guest guest = surveyRepository.findByGuests_Id(id).iterator().next();
+//        Long guest = surveyRepository.findBySurveyId(id);
+//
+//
+////        Guest guest = surveyService.getSurvey().getGuests().iterator().next();;
+//        guestRepository.findById(guest).ifPresentOrElse(surveyService::setGuest,
+//                ()-> log.info("X- No Guest id: " + id.toString()));
+//        log.info(shortDateObjectMapper.writeValueAsString(surveyService.getGuest()));
 
 
 

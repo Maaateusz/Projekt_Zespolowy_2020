@@ -1,5 +1,6 @@
 package com.pz.ankietBud.controller;
 
+import com.pz.ankietBud.MyResourceNotFoundException;
 import com.pz.ankietBud.model.Guest;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.repository.GuestRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/guest")
@@ -39,18 +41,29 @@ public class GuestController {
     }
 
     @GetMapping("/get/{id}")
-    public Guest getGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Guest guest = guestRepository.findById(id);
+    public Optional<Guest> getGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
+        Optional<Guest> guest = guestRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(guest));
         return guest;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
-        Guest guest = guestRepository.findById(id);
-        guestRepository.delete(guest);
-        log.info(shortDateObjectMapper.writeValueAsString(guest));
-        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(guest);
+//        Optional<Guest> guest = guestRepository.findById(id);
+//        guestRepository.delete(guest);
+//        log.info(shortDateObjectMapper.writeValueAsString(guest));
+//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(guest);
+
+        guestRepository.findById(id).map(guest -> {
+            guestRepository.delete(guest);
+            try {
+                return shortDateObjectMapper.writeValueAsString(guest);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            return "guest";
+        }).orElseThrow(() -> new MyResourceNotFoundException("Guest not found!"));
+        return "guest???";
     }
 
     @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")

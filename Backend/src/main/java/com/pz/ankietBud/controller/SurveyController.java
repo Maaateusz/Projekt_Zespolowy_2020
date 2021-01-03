@@ -92,7 +92,7 @@ public class SurveyController {
                 e.printStackTrace();
             }
             return "survey";
-        }).orElseThrow(() -> new MyResourceNotFoundException("Question not found!"));
+        }).orElseThrow(() -> new MyResourceNotFoundException("Survey not found!"));
         return "survey???";
     }
 

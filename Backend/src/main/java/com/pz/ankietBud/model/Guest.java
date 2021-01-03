@@ -25,12 +25,12 @@ public class Guest {
     @ManyToMany(mappedBy = "guests")
     private Set<Survey> surveys = new HashSet<>();
 
-    public Set<Survey> getGuests() {
+    public Set<Survey> getSurveys() {
         return surveys;
     }
 
-    public void setGuests(Set<Survey> guests) {
-        this.surveys = guests;
+    public void setSurveys(Set<Survey> surveys) {
+        this.surveys = surveys;
     }
 
     public Guest() {
