@@ -28,6 +28,7 @@ public interface SurveyRepository extends CrudRepository<Survey, Long> {
 //    @Query(value = "SELECT id_guest FROM guest_survey_creator WHERE id_survey=:id", nativeQuery = true)
 //    Long findBySurveyId(@Param("id") Long id);
 
+
 //    List<Guest> findByGuests_Id(Long id);
 //    List<Guest> findBySurveys_Id(Long id);
 

@@ -40,7 +40,8 @@ public class Survey {
     }
 
     // Create guest_survey_creator table
-    @ManyToMany(cascade = CascadeType.ALL)
+//    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "guest_survey_creator",
             joinColumns = { @JoinColumn(name = "id_survey") },
             inverseJoinColumns = { @JoinColumn(name = "id_guest")})

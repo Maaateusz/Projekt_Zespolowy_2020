@@ -76,7 +76,7 @@ public class SurveyServiceController {
 //        guestRepository.save(guestNew);
 //        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
 //
-//        //add to guest_survey_creator https://www.baeldung.com/hibernate-many-to-many https://www.baeldung.com/hibernate-one-to-many
+//        //add to guest_survey_creator https://www.baeldung.com/hibernate-many-to-many https://www.baeldung.com/hibernate-one-to-many https://www.baeldung.com/jpa-many-to-many
 //        Set<Guest> projects = new HashSet<>();
 //        projects.add(guestNew);
 //        surveyNew.setSurveys(projects);
@@ -136,8 +136,8 @@ public class SurveyServiceController {
     public SurveyService getSurveyService(@PathVariable("id") Long id) throws JsonProcessingException {
 
         SurveyService surveyService = new SurveyService();
-//        surveyRepository.findById(id).ifPresentOrElse(survey -> surveyService.setSurvey(survey),
-        surveyRepository.findById(id).ifPresentOrElse(surveyService::setSurvey,
+        surveyRepository.findById(id).ifPresentOrElse(survey -> surveyService.setSurvey(survey),
+//        surveyRepository.findById(id).ifPresentOrElse(surveyService::setSurvey,
                 ()-> log.info("X- No Survey id: " + id.toString()));
         log.info(shortDateObjectMapper.writeValueAsString(surveyService.getSurvey()));
 
