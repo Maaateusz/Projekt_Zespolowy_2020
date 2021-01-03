@@ -22,17 +22,6 @@ public class Guest {
     @Column(name = "identifier")
     private String identifier;
 
-    @ManyToMany(mappedBy = "guests")
-    private Set<Survey> surveys = new HashSet<>();
-
-    public Set<Survey> getSurveys() {
-        return surveys;
-    }
-
-    public void setSurveys(Set<Survey> surveys) {
-        this.surveys = surveys;
-    }
-
     public Guest() {
     }
 

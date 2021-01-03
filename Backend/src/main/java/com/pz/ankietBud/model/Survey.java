@@ -31,22 +31,6 @@ public class Survey {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    public Set<Guest> getGuests() {
-        return guests;
-    }
-
-    public void setGuests(Set<Guest> guests) {
-        this.guests = guests;
-    }
-
-    // Create guest_survey_creator table
-//    @ManyToMany(cascade = CascadeType.ALL)
-    @ManyToMany
-    @JoinTable(name = "guest_survey_creator",
-            joinColumns = { @JoinColumn(name = "id_survey") },
-            inverseJoinColumns = { @JoinColumn(name = "id_guest")})
-    private Set<Guest> guests = new HashSet<>();
-
     public Survey() {
     }
 

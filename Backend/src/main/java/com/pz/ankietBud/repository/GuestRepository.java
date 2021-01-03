@@ -14,6 +14,4 @@ public interface GuestRepository extends CrudRepository<Guest, Long> {
 
     Optional<Guest> findById(Integer id);
 
-    List<Guest> findAllBySurveys(Survey user);
-
 }

@@ -3,6 +3,7 @@ package com.pz.ankietBud.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.model.Guest;
+import com.pz.ankietBud.model.Guest_Survey_Creator;
 import com.pz.ankietBud.model.Survey;
 import com.pz.ankietBud.model.SurveyService;
 import com.pz.ankietBud.model.subQuestion.Choice;
@@ -10,6 +11,7 @@ import com.pz.ankietBud.model.subQuestion.Rating;
 import com.pz.ankietBud.model.subQuestion.Scale;
 import com.pz.ankietBud.model.subQuestion.Slider;
 import com.pz.ankietBud.repository.GuestRepository;
+import com.pz.ankietBud.repository.Guest_Survey_CreatorRepository;
 import com.pz.ankietBud.repository.SurveyRepository;
 import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
 import com.pz.ankietBud.repository.subQuestion.RatingRepository;
@@ -50,12 +52,14 @@ public class SurveyServiceController {
     private ScaleRepository scaleRepository;
     @Autowired
     private SliderRepository sliderRepository;
+    @Autowired
+    private Guest_Survey_CreatorRepository guest_survey_creatorRepository;
 
-    @Modifying
-    @Query(value = "INSERT INTO public.guest_survey_creator (id_survey, id_guest) VALUES (':id_survey', ':id_guest');", nativeQuery = true)
-    private void addCreator(@Param("id_survey") Long id_survey, @Param("id_guest") Integer id_guest) {
-        log.info("id: "+ id_survey +", "+ id_guest);
-    }
+//    @Modifying
+//    @Query(value = "INSERT INTO public.guest_survey_creator (id_survey, id_guest) VALUES (':id_survey', ':id_guest');", nativeQuery = true)
+//    private void addCreator(@Param("id_survey") Long id_survey, @Param("id_guest") Integer id_guest) {
+//        log.info("id: "+ id_survey +", "+ id_guest);
+//    }
 
     @Modifying
     @Query(value = "CREATE TABLE IF NOT EXISTS asd (id_asd serial) ", nativeQuery = true)
@@ -75,31 +79,11 @@ public class SurveyServiceController {
         //guest dodawany przy odwiedzaniu strony!
 //        guestRepository.save(guestNew);
 //        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
-//
-//        //add to guest_survey_creator https://www.baeldung.com/hibernate-many-to-many https://www.baeldung.com/hibernate-one-to-many https://www.baeldung.com/jpa-many-to-many
-//        Set<Guest> projects = new HashSet<>();
-//        projects.add(guestNew);
-//        surveyNew.setSurveys(projects);
-//        log.info(surveyNew.getSurveys().toString());
-//
-//        log.info(guestNew.getGuests().toString());
 
-        surveyNew.getGuests().add(guestNew);
-//        guestNew.getGuests().add(surveyNew);
+        Guest_Survey_Creator guest_survey_creator = new Guest_Survey_Creator(surveyNew.getId(), guestNew.getId().longValue());
+        log.info(shortDateObjectMapper.writeValueAsString(guest_survey_creator));
+        guest_survey_creatorRepository.save(guest_survey_creator);
 
-        log.info(surveyNew.getGuests().toString());
-
-//        log.info(guestNew.getSurveys().toString());
-
-//        private static SessionFactory sessionFactory;
-//        Session session = null;
-//        List<Guest> employeeList = session.createQuery("FROM guest").list();
-//        for(Guest employee : employeeList) {
-////            assertNotNull(employee.getSurveys());
-////            employee.getSurveys();
-//            log.info(employee.getGuests().toString());
-////            log.info(employee.toString());
-//        }
 
         List<Choice> choices = surveyService.getChoices();
         for (Choice element : choices) {
@@ -136,12 +120,16 @@ public class SurveyServiceController {
     public SurveyService getSurveyService(@PathVariable("id") Long id) throws JsonProcessingException {
 
         SurveyService surveyService = new SurveyService();
-        surveyRepository.findById(id).ifPresentOrElse(survey -> surveyService.setSurvey(survey),
-//        surveyRepository.findById(id).ifPresentOrElse(surveyService::setSurvey,
+        surveyRepository.findById(id).ifPresentOrElse(surveyService::setSurvey,
                 ()-> log.info("X- No Survey id: " + id.toString()));
-        log.info(shortDateObjectMapper.writeValueAsString(surveyService.getSurvey()));
 
-//        Guest guest = surveyRepository.findBySurveys_Id(id).iterator().next();
+        Optional<Guest_Survey_Creator> guest_survey_creator = guest_survey_creatorRepository.findById(surveyService.getSurvey().getId());
+
+        guestRepository.findById(guest_survey_creator.get().getId_guest().intValue()).ifPresentOrElse(surveyService::setGuest,
+                ()-> log.info("X- No Guest id: " + guest_survey_creator.get().getId_guest().toString()));
+
+
+
 //        Guest guest = surveyRepository.findByGuests_Id(id).iterator().next();
 //        Long guest = surveyRepository.findBySurveyId(id);
 //
