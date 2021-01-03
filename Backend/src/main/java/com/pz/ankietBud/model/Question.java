@@ -10,7 +10,7 @@ public abstract class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String content;
     private ArrayList<Integer> votes;
     private Integer sum;
@@ -18,7 +18,7 @@ public abstract class Question {
     public Question() {
     }
 
-    public Question(Integer id, String content, ArrayList<Integer> votes, Integer sum) {
+    public Question(Long id, String content, ArrayList<Integer> votes, Integer sum) {
         this.id = id;
         this.content = content;
         this.votes = votes;
@@ -31,11 +31,11 @@ public abstract class Question {
         this.sum = sum;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

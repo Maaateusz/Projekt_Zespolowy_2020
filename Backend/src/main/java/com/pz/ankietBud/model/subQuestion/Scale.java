@@ -29,7 +29,7 @@ public class Scale extends Question {
     public Scale() {
     }
 
-    public Scale(Integer id, String content, ArrayList<Integer> votes, Integer sum, String anchor_left, String anchor_right, String anchor_central, Integer value_min, Integer value_max) {
+    public Scale(Long id, String content, ArrayList<Integer> votes, Integer sum, String anchor_left, String anchor_right, String anchor_central, Integer value_min, Integer value_max) {
         super(id, content, votes, sum);
         this.anchor_left = anchor_left;
         this.anchor_right = anchor_right;

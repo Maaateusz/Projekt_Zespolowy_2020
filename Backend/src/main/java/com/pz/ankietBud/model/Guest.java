@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 //@Table(name="guest", schema = "public")
@@ -16,7 +14,7 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     //    @Column(name="identifier", nullable=false, length=200)
 //    @NotNull
     @Column(name = "identifier")
@@ -29,16 +27,16 @@ public class Guest {
         this.identifier = identifier;
     }
 
-    public Guest(Integer id, String identifier) {
+    public Guest(Long id, String identifier) {
         this.id = id;
         this.identifier = identifier;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

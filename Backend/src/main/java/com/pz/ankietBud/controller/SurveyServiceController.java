@@ -2,10 +2,7 @@ package com.pz.ankietBud.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
-import com.pz.ankietBud.model.Guest;
-import com.pz.ankietBud.model.Guest_Survey_Creator;
-import com.pz.ankietBud.model.Survey;
-import com.pz.ankietBud.model.SurveyService;
+import com.pz.ankietBud.model.*;
 import com.pz.ankietBud.model.subQuestion.Choice;
 import com.pz.ankietBud.model.subQuestion.Rating;
 import com.pz.ankietBud.model.subQuestion.Scale;
@@ -13,24 +10,19 @@ import com.pz.ankietBud.model.subQuestion.Slider;
 import com.pz.ankietBud.repository.GuestRepository;
 import com.pz.ankietBud.repository.Guest_Survey_CreatorRepository;
 import com.pz.ankietBud.repository.SurveyRepository;
+import com.pz.ankietBud.repository.Survey_QuestionRepository;
 import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
 import com.pz.ankietBud.repository.subQuestion.RatingRepository;
 import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
 import com.pz.ankietBud.repository.subQuestion.SliderRepository;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/surveyService")
@@ -39,9 +31,9 @@ public class SurveyServiceController {
 
     private static final Logger log = LoggerFactory.getLogger(SurveyServiceController.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
+
     @Autowired
     private SurveyRepository surveyRepository;
-
     @Autowired
     private GuestRepository guestRepository;
     @Autowired
@@ -54,16 +46,8 @@ public class SurveyServiceController {
     private SliderRepository sliderRepository;
     @Autowired
     private Guest_Survey_CreatorRepository guest_survey_creatorRepository;
-
-//    @Modifying
-//    @Query(value = "INSERT INTO public.guest_survey_creator (id_survey, id_guest) VALUES (':id_survey', ':id_guest');", nativeQuery = true)
-//    private void addCreator(@Param("id_survey") Long id_survey, @Param("id_guest") Integer id_guest) {
-//        log.info("id: "+ id_survey +", "+ id_guest);
-//    }
-
-    @Modifying
-    @Query(value = "CREATE TABLE IF NOT EXISTS asd (id_asd serial) ", nativeQuery = true)
-    private void crCreator() {    }
+    @Autowired
+    private Survey_QuestionRepository survey_questionRepository;
 
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public SurveyService createSurvey(@RequestBody SurveyService surveyService) throws JsonProcessingException {
@@ -74,40 +58,48 @@ public class SurveyServiceController {
         surveyRepository.save(surveyNew);
         log.info(shortDateObjectMapper.writeValueAsString(surveyNew));
 
-        Guest guestNew = surveyService.getGuest();
         //powinno dodać tylko jeśli nie istnieje!
         //guest dodawany przy odwiedzaniu strony!
-//        guestRepository.save(guestNew);
-//        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
+        Guest guestNew = surveyService.getGuest();
+        if(guestNew.getId() == null) guestRepository.save(guestNew);
 
-        Guest_Survey_Creator guest_survey_creator = new Guest_Survey_Creator(surveyNew.getId(), guestNew.getId().longValue());
-        log.info(shortDateObjectMapper.writeValueAsString(guest_survey_creator));
-        guest_survey_creatorRepository.save(guest_survey_creator);
+        guest_survey_creatorRepository.save(new Guest_Survey_Creator(surveyNew.getId(), guestNew.getId()));
+        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
 
-
+        List <Survey_Question> survey_questions = new ArrayList<>();
         List<Choice> choices = surveyService.getChoices();
         for (Choice element : choices) {
             choiceRepository.save(element);
+//            survey_questionRepository.save(new Survey_Question(surveyNew.getId(), element.getId()));
+            survey_questions.add(new Survey_Question(surveyNew.getId(), element.getId()));
             log.info("-Choice: " + shortDateObjectMapper.writeValueAsString(element));
         }
 
         List<Rating> ratings = surveyService.getRatings();
         for (Rating element : ratings) {
             ratingRepository.save(element);
+//            survey_questionRepository.save(new Survey_Question(surveyNew.getId(), element.getId()));
+            survey_questions.add(new Survey_Question(surveyNew.getId(), element.getId()));
             log.info("-Rating: " + shortDateObjectMapper.writeValueAsString(element));
         }
 
         List<Scale> scales = surveyService.getScales();
         for (Scale element : scales) {
             scaleRepository.save(element);
+//            survey_questionRepository.save(new Survey_Question(surveyNew.getId(), element.getId()));
+            survey_questions.add(new Survey_Question(surveyNew.getId(), element.getId()));
             log.info("-Scale: " + shortDateObjectMapper.writeValueAsString(element));
         }
 
         List<Slider> sliders = surveyService.getSliders();
         for (Slider element : sliders) {
             sliderRepository.save(element);
+//            survey_questionRepository.save(new Survey_Question(surveyNew.getId(), element.getId()));
+            survey_questions.add(new Survey_Question(surveyNew.getId(), element.getId()));
             log.info("-Slider: " + shortDateObjectMapper.writeValueAsString(element));
         }
+
+        survey_questionRepository.saveAll(survey_questions);
 
         surveyService.setQuestions();
         log.info(shortDateObjectMapper.writeValueAsString(surveyService.getQuestions()));
@@ -125,19 +117,8 @@ public class SurveyServiceController {
 
         Optional<Guest_Survey_Creator> guest_survey_creator = guest_survey_creatorRepository.findById(surveyService.getSurvey().getId());
 
-        guestRepository.findById(guest_survey_creator.get().getId_guest().intValue()).ifPresentOrElse(surveyService::setGuest,
+        guestRepository.findById(guest_survey_creator.get().getId_guest()).ifPresentOrElse(surveyService::setGuest,
                 ()-> log.info("X- No Guest id: " + guest_survey_creator.get().getId_guest().toString()));
-
-
-
-//        Guest guest = surveyRepository.findByGuests_Id(id).iterator().next();
-//        Long guest = surveyRepository.findBySurveyId(id);
-//
-//
-////        Guest guest = surveyService.getSurvey().getGuests().iterator().next();;
-//        guestRepository.findById(guest).ifPresentOrElse(surveyService::setGuest,
-//                ()-> log.info("X- No Guest id: " + id.toString()));
-//        log.info(shortDateObjectMapper.writeValueAsString(surveyService.getGuest()));
 
 
 

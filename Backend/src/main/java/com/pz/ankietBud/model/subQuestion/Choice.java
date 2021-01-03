@@ -26,7 +26,7 @@ public class Choice extends Question {
         this.type = type;
     }
 
-    public Choice(Integer id, String content, ArrayList<Integer> votes, Integer sum, ArrayList<String> answers, Type type) {
+    public Choice(Long id, String content, ArrayList<Integer> votes, Integer sum, ArrayList<String> answers, Type type) {
         super(id, content, votes, sum);
         this.answers = answers;
         this.type = type;

@@ -26,7 +26,7 @@ public class Slider extends Question {
     public Slider() {
     }
 
-    public Slider(Integer id, String content, ArrayList<Integer> votes, Integer sum, Integer value_min, Integer value_max, Integer interval) {
+    public Slider(Long id, String content, ArrayList<Integer> votes, Integer sum, Integer value_min, Integer value_max, Integer interval) {
         super(id, content, votes, sum);
         this.value_min = value_min;
         this.value_max = value_max;
