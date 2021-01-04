@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @RestController
 @RequestMapping("/surveyService")
@@ -47,12 +48,12 @@ public class SurveyServiceController {
     @Autowired
     private Guest_Survey_CreatorRepository guest_survey_creatorRepository;
     @Autowired
+    private Guest_Survey_ParticipateRepository guest_survey_participateRepository;
+    @Autowired
     private Survey_QuestionRepository survey_questionRepository;
 
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public SurveyService createSurvey(@RequestBody SurveyService surveyService, HttpServletRequest request) throws JsonProcessingException {
-
-        log.info(shortDateObjectMapper.writeValueAsString(surveyService));
+    public SurveyService createSurveyService(@RequestBody SurveyService surveyService, HttpServletRequest request) throws JsonProcessingException {
 
         Survey surveyNew = surveyService.getSurvey();
         surveyRepository.save(surveyNew);
@@ -116,9 +117,9 @@ public class SurveyServiceController {
         survey_questionRepository.saveAll(survey_questions);
 
         surveyService.setQuestions();
-        log.info(shortDateObjectMapper.writeValueAsString(surveyService.getQuestions()));
+//        log.info(shortDateObjectMapper.writeValueAsString(surveyService.getQuestions()));
 
-//        return shortDateObjectMapper.writeValueAsString(surveyService);
+        log.info(shortDateObjectMapper.writeValueAsString(surveyService));
         return surveyService;
     }
 
@@ -126,11 +127,13 @@ public class SurveyServiceController {
     public SurveyService getSurveyService(@PathVariable("id") Long id) throws JsonProcessingException {
 
         SurveyService surveyService = new SurveyService();
-        surveyRepository.findById(id).ifPresentOrElse(surveyService::setSurvey,
+        surveyRepository.findById(id).ifPresentOrElse(
+                surveyService::setSurvey,
                 ()-> log.info("X- No Survey id: " + id.toString()));
 
         Optional<Guest_Survey_Creator> guest_survey_creator = guest_survey_creatorRepository.findById(surveyService.getSurvey().getId());
-        guestRepository.findById(guest_survey_creator.get().getId_guest()).ifPresentOrElse(surveyService::setGuest,
+        guestRepository.findById(guest_survey_creator.get().getId_guest()).ifPresentOrElse(
+                surveyService::setGuest,
                 ()-> log.info("X- No Guest id: " + guest_survey_creator.get().getId_guest().toString()));
 
         List<Survey_Question> survey_questions  = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
@@ -160,6 +163,50 @@ public class SurveyServiceController {
 
         surveyService.setQuestions();
         log.info(shortDateObjectMapper.writeValueAsString(surveyService));
+        return surveyService;
+    }
+
+    @PostMapping(value = "/vote", consumes = "application/json", produces = "application/json")
+    public SurveyService voteSurveyService(@RequestBody SurveyService surveyService, HttpServletRequest request) throws JsonProcessingException {
+        AtomicBoolean isSurveyOK = new AtomicBoolean(true);
+        surveyRepository.findById(surveyService.getSurvey().getId()).ifPresentOrElse(
+                surveyService::setSurvey,
+                ()-> {
+                    log.info("X- No Survey id: " + surveyService.getSurvey().getId().toString());
+                    isSurveyOK.set(false);
+                });
+
+        if(!isSurveyOK.get()) return surveyService;
+
+        surveyService.setGuest(new Guest());
+        String userIdentifier = Guest.getUserIdentifier(request);
+        guestRepository.findByIdentifier(userIdentifier).ifPresentOrElse(
+                x -> {
+                    surveyService.getGuest().setId(x.getId());
+                    surveyService.getGuest().setIdentifier(x.getIdentifier());
+                },
+                () -> {
+                    surveyService.getGuest().setIdentifier(userIdentifier);
+                    guestRepository.save(surveyService.getGuest());
+                }
+        );
+
+        Guest_Survey_Participate guest_survey_participate = new Guest_Survey_Participate(surveyService.getSurvey().getId(), surveyService.getGuest().getId());
+        guest_survey_participateRepository.findByOtherId(surveyService.getSurvey().getId(), surveyService.getGuest().getId()).ifPresentOrElse(
+                x -> guest_survey_participate.setId(x.getId()),
+                () -> guest_survey_participateRepository.save(guest_survey_participate)
+        );
+
+
+//        List<Survey_Question> survey_questions  = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
+//        log.info(shortDateObjectMapper.writeValueAsString(survey_questions));
+
+
+
+
+
+
+
         return surveyService;
     }
 }
