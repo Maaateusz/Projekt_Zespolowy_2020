@@ -1,10 +1,7 @@
 package com.pz.ankietBud.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 
 @Entity
 //@Table(name="guest", schema = "public")
@@ -46,6 +43,12 @@ public class Guest {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    static public String getUserIdentifier(HttpServletRequest request){
+        String userAgent = request.getHeader("User-Agent").replaceAll("\\s+","");
+        String userAddr = request.getRemoteAddr();
+        return  userAddr +":"+ userAgent.length() +":"+ userAgent;
     }
 
     @Override

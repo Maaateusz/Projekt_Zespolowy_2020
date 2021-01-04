@@ -1,23 +1,10 @@
 package com.pz.ankietBud.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pz.ankietBud.MyResourceNotFoundException;
-import com.pz.ankietBud.model.Guest;
-import com.pz.ankietBud.model.Question;
 import com.pz.ankietBud.model.Survey;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
-import com.pz.ankietBud.model.SurveyService;
-import com.pz.ankietBud.model.subQuestion.Choice;
-import com.pz.ankietBud.model.subQuestion.Rating;
-import com.pz.ankietBud.model.subQuestion.Scale;
-import com.pz.ankietBud.model.subQuestion.Slider;
-import com.pz.ankietBud.repository.GuestRepository;
 import com.pz.ankietBud.repository.SurveyRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
-import com.pz.ankietBud.repository.subQuestion.RatingRepository;
-import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
-import com.pz.ankietBud.repository.subQuestion.SliderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

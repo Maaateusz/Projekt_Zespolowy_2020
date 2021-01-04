@@ -1,5 +1,6 @@
 package com.pz.ankietBud.controller;
 
+import ch.qos.logback.core.net.server.Client;
 import com.pz.ankietBud.MyResourceNotFoundException;
 import com.pz.ankietBud.model.Guest;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
@@ -10,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -24,9 +27,24 @@ public class GuestController {
     private GuestRepository guestRepository;
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
-    public Guest addGuest(@RequestBody Guest guest) throws JsonProcessingException {
+    public Guest addGuest(@RequestBody Guest guest, HttpServletRequest request) throws JsonProcessingException {
         Guest guestNew = guest;
-        guestRepository.save(guestNew);
+        String userIdentifier = Guest.getUserIdentifier(request);
+
+//        guestRepository.findByIdentifier(guestNew.getIdentifier()).ifPresentOrElse(
+        guestRepository.findByIdentifier(userIdentifier).ifPresentOrElse(
+                x -> {
+                    guestNew.setId(x.getId());
+                    guestNew.setIdentifier(x.getIdentifier());
+                    log.info("Guest already exist");
+                },
+                () -> {
+                    guestNew.setIdentifier(userIdentifier);
+                    guestRepository.save(guestNew);
+                    log.info("Adding new Guest");
+                }
+        );
+
         log.info(shortDateObjectMapper.writeValueAsString(guestNew));
         return guestNew;
     }
@@ -41,14 +59,14 @@ public class GuestController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Guest> getGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public Optional<Guest> getGuest(@PathVariable("id") Long id) throws JsonProcessingException {
         Optional<Guest> guest = guestRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(guest));
         return guest;
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteGuest(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public String deleteGuest(@PathVariable("id") Long id) throws JsonProcessingException {
 //        Optional<Guest> guest = guestRepository.findById(id);
 //        guestRepository.delete(guest);
 //        log.info(shortDateObjectMapper.writeValueAsString(guest));

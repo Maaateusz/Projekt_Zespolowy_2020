@@ -63,6 +63,15 @@ public class SurveyService {
         this.guest = guest;
     }
 
+    public SurveyService(Survey survey, List<Choice> choices, List<Rating> ratings, List<Scale> scales, List<Slider> sliders, Map<String, Integer> questions) {
+        this.survey = survey;
+        this.choices = choices;
+        this.ratings = ratings;
+        this.scales = scales;
+        this.sliders = sliders;
+        this.questions = questions;
+    }
+
     public void setQuestions() {
         questions.put(Choice.class.getSimpleName(), choices.size());
         questions.put(Rating.class.getSimpleName(), ratings.size());

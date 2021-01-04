@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class SurveyServiceController {
     private Survey_QuestionRepository survey_questionRepository;
 
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public SurveyService createSurvey(@RequestBody SurveyService surveyService) throws JsonProcessingException {
+    public SurveyService createSurvey(@RequestBody SurveyService surveyService, HttpServletRequest request) throws JsonProcessingException {
 
         log.info(shortDateObjectMapper.writeValueAsString(surveyService));
 
@@ -59,8 +60,21 @@ public class SurveyServiceController {
 
         //powinno dodać tylko jeśli nie istnieje!
         //guest dodawany przy odwiedzaniu strony!
-        Guest guestNew = surveyService.getGuest();
-        if(guestNew.getId() == null) guestRepository.save(guestNew);
+        String userIdentifier = Guest.getUserIdentifier(request);
+        Guest guestNew = new Guest();
+//        if(guestNew.getId() == null) guestRepository.save(guestNew);
+        guestRepository.findByIdentifier(userIdentifier).ifPresentOrElse(
+                x -> {
+                    guestNew.setId(x.getId());
+                    guestNew.setIdentifier(x.getIdentifier());
+                    surveyService.setGuest(guestNew);
+                },
+                () -> {
+                    guestNew.setIdentifier(userIdentifier);
+                    guestRepository.save(guestNew);
+                    surveyService.setGuest(guestNew);
+                }
+        );
 
         guest_survey_creatorRepository.save(new Guest_Survey_Creator(surveyNew.getId(), guestNew.getId()));
         log.info(shortDateObjectMapper.writeValueAsString(guestNew));

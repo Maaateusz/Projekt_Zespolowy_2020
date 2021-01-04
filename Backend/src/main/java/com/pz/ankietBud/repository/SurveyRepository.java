@@ -1,15 +1,12 @@
 package com.pz.ankietBud.repository;
 
-import com.pz.ankietBud.model.Guest;
 import com.pz.ankietBud.model.Survey;
-import org.aspectj.weaver.ast.Test;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface SurveyRepository extends CrudRepository<Survey, Long> {
