@@ -16,6 +16,14 @@ public class Survey_Question {
     @Column(name = "id_question")
     private Long id_question;
 
+    public Survey_Question() {
+    }
+
+    public Survey_Question(Long id_survey, Long id_question) {
+        this.id_survey = id_survey;
+        this.id_question = id_question;
+    }
+
     public Long getId_survey() {
         return id_survey;
     }
@@ -29,14 +37,6 @@ public class Survey_Question {
     }
 
     public void setId_question(Long id_question) {
-        this.id_question = id_question;
-    }
-
-    public Survey_Question() {
-    }
-
-    public Survey_Question(Long id_survey, Long id_question) {
-        this.id_survey = id_survey;
         this.id_question = id_question;
     }
 }

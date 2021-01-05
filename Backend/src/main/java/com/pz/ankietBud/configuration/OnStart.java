@@ -1,5 +1,6 @@
 package com.pz.ankietBud.configuration;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pz.ankietBud.model.Guest;
 import com.pz.ankietBud.model.Survey;
 import com.pz.ankietBud.model.subQuestion.Choice;
@@ -13,7 +14,6 @@ import com.pz.ankietBud.repository.subQuestion.ChoiceRepository;
 import com.pz.ankietBud.repository.subQuestion.RatingRepository;
 import com.pz.ankietBud.repository.subQuestion.ScaleRepository;
 import com.pz.ankietBud.repository.subQuestion.SliderRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class OnStart {
     private static final Logger log = LoggerFactory.getLogger(OnStart.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
 
-//    @Value("${spring.datasource.url}")
+    //    @Value("${spring.datasource.url}")
 //    private String dbUrl;
     @Autowired
     private SurveyRepository surveyRepository;

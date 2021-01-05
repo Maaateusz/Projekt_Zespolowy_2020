@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface GuestRepository extends CrudRepository<Guest, Long> {
     List<Guest> findAll();
+
     Optional<Guest> findByIdentifier(String identifier);
 }

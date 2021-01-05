@@ -1,14 +1,11 @@
 package com.pz.ankietBud.repository;
 
-import com.pz.ankietBud.model.Guest_Survey_Creator;
 import com.pz.ankietBud.model.Guest_Survey_Participate;
-import com.pz.ankietBud.model.Survey_Question;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

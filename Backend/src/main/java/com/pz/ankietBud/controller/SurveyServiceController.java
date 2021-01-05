@@ -129,18 +129,18 @@ public class SurveyServiceController {
         SurveyService surveyService = new SurveyService();
         surveyRepository.findById(id).ifPresentOrElse(
                 surveyService::setSurvey,
-                ()-> log.info("X- No Survey id: " + id.toString()));
+                () -> log.info("X- No Survey id: " + id.toString()));
 
         Optional<Guest_Survey_Creator> guest_survey_creator = guest_survey_creatorRepository.findById(surveyService.getSurvey().getId());
         guestRepository.findById(guest_survey_creator.get().getId_guest()).ifPresentOrElse(
                 surveyService::setGuest,
-                ()-> log.info("X- No Guest id: " + guest_survey_creator.get().getId_guest().toString()));
+                () -> log.info("X- No Guest id: " + guest_survey_creator.get().getId_guest().toString()));
 
-        List<Survey_Question> survey_questions  = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
+        List<Survey_Question> survey_questions = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
         log.info(shortDateObjectMapper.writeValueAsString(survey_questions));
 
         List<Question> questions = new ArrayList<>();
-        for(Survey_Question survey_question : survey_questions){
+        for (Survey_Question survey_question : survey_questions) {
             questionRepository.findById(survey_question.getId_question()).ifPresent(
                     questions::add);
 //            Choice choice = choiceRepository.findById(id);
@@ -150,11 +150,11 @@ public class SurveyServiceController {
         List<Slider> sliders = new ArrayList<>();
         List<Rating> ratings = new ArrayList<>();
         List<Scale> scales = new ArrayList<>();
-        for(Question question : questions){
-            if(question instanceof Choice) choices.add((Choice) question);
-            if(question instanceof Slider) sliders.add((Slider) question);
-            if(question instanceof Rating) ratings.add((Rating) question);
-            if(question instanceof Scale) scales.add((Scale) question);
+        for (Question question : questions) {
+            if (question instanceof Choice) choices.add((Choice) question);
+            if (question instanceof Slider) sliders.add((Slider) question);
+            if (question instanceof Rating) ratings.add((Rating) question);
+            if (question instanceof Scale) scales.add((Scale) question);
         }
         surveyService.setChoices(choices);
         surveyService.setRatings(ratings);
@@ -168,15 +168,17 @@ public class SurveyServiceController {
 
     @PostMapping(value = "/vote", consumes = "application/json", produces = "application/json")
     public SurveyService voteSurveyService(@RequestBody SurveyService surveyService, HttpServletRequest request) throws JsonProcessingException {
+
         AtomicBoolean isSurveyOK = new AtomicBoolean(true);
+
         surveyRepository.findById(surveyService.getSurvey().getId()).ifPresentOrElse(
                 surveyService::setSurvey,
-                ()-> {
+                () -> {
                     log.info("X- No Survey id: " + surveyService.getSurvey().getId().toString());
                     isSurveyOK.set(false);
                 });
 
-        if(!isSurveyOK.get()) return surveyService;
+        if (!isSurveyOK.get()) return surveyService;
 
         surveyService.setGuest(new Guest());
         String userIdentifier = Guest.getUserIdentifier(request);
@@ -200,11 +202,6 @@ public class SurveyServiceController {
 
 //        List<Survey_Question> survey_questions  = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
 //        log.info(shortDateObjectMapper.writeValueAsString(survey_questions));
-
-
-
-
-
 
 
         return surveyService;

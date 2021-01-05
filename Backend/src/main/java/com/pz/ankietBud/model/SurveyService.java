@@ -47,6 +47,15 @@ public class SurveyService {
         setQuestions();
     }
 
+    public SurveyService(Survey survey, List<Choice> choices, List<Rating> ratings, List<Scale> scales, List<Slider> sliders, Map<String, Integer> questions) {
+        this.survey = survey;
+        this.choices = choices;
+        this.ratings = ratings;
+        this.scales = scales;
+        this.sliders = sliders;
+        this.questions = questions;
+    }
+
     public Survey getSurvey() {
         return survey;
     }
@@ -61,15 +70,6 @@ public class SurveyService {
 
     public void setGuest(Guest guest) {
         this.guest = guest;
-    }
-
-    public SurveyService(Survey survey, List<Choice> choices, List<Rating> ratings, List<Scale> scales, List<Slider> sliders, Map<String, Integer> questions) {
-        this.survey = survey;
-        this.choices = choices;
-        this.ratings = ratings;
-        this.scales = scales;
-        this.sliders = sliders;
-        this.questions = questions;
     }
 
     public void setQuestions() {

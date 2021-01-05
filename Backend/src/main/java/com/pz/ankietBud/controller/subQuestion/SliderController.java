@@ -1,9 +1,9 @@
 package com.pz.ankietBud.controller.subQuestion;
 
-import com.pz.ankietBud.model.subQuestion.Slider;
-import com.pz.ankietBud.configuration.ShortDateObjectMapper;
-import com.pz.ankietBud.repository.subQuestion.SliderRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pz.ankietBud.configuration.ShortDateObjectMapper;
+import com.pz.ankietBud.model.subQuestion.Slider;
+import com.pz.ankietBud.repository.subQuestion.SliderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

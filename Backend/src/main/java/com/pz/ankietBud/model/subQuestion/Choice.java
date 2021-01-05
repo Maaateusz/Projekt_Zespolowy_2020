@@ -12,6 +12,7 @@ public class Choice extends Question {
     private ArrayList<String> answers;
     @Enumerated(EnumType.STRING)
     private Type type;
+
     public Choice(ArrayList<String> answers, Type type) {
         this.answers = answers;
         this.type = type;
