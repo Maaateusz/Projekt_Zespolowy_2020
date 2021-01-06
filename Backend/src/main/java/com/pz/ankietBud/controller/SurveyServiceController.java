@@ -15,13 +15,11 @@ import com.pz.ankietBud.repository.subQuestion.SliderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -169,19 +167,31 @@ public class SurveyServiceController {
     }
 
     @PostMapping(value = "/vote", consumes = "application/json", produces = "application/json")
-    public SurveyService voteSurveyService(@RequestBody SurveyService surveyService, HttpServletRequest request) throws JsonProcessingException {
+    public SurveyService voteSurveyService(@RequestBody Vote vote, HttpServletRequest request) throws JsonProcessingException {
 
         AtomicBoolean isSurveyOK = new AtomicBoolean(true);
 
-        surveyRepository.findById(surveyService.getSurvey().getId()).ifPresentOrElse(
-                surveyService::setSurvey,
+        surveyRepository.findById(vote.getId_survey()).ifPresentOrElse(
+                x -> {},
                 () -> {
-                    log.info("X- No Survey id: " + surveyService.getSurvey().getId().toString());
+                    log.info("X- No Survey id: " + vote.getId_survey().toString());
                     isSurveyOK.set(false);
                 });
 
         if (!isSurveyOK.get()) return null;
-        SurveyService surveyServiceFinal = getSurveyService(surveyService.getSurvey().getId());
+
+        for (int i = 0; i<vote.getId_questions().size(); i++){
+            final int answer_id = vote.getId_answers().get(i);
+            questionRepository.findById(vote.getId_questions().get(i)).ifPresentOrElse(
+                    question -> {
+                        question.getVotes().set( answer_id, question.getVotes().get(answer_id) + 1L );
+                        question.setSum(question.getSum() + 1L);
+                        questionRepository.save(question);
+                    },
+                    () -> log.info("Error in Voting!"));
+        }
+
+        SurveyService surveyServiceFinal = getSurveyService(vote.getId_survey());
 
         surveyServiceFinal.setGuest(new Guest());
         String userIdentifier = Guest.getUserIdentifier(request);
@@ -201,56 +211,6 @@ public class SurveyServiceController {
                 x -> guest_survey_participate.setId(x.getId()),
                 () -> guest_survey_participateRepository.save(guest_survey_participate)
         );
-
-//        List<Survey_Question> survey_questions  = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
-//        log.info(shortDateObjectMapper.writeValueAsString(survey_questions));
-
-
-
-
-
-
-//        Pair<Choice, Choice> choices = new Pair<Choice, Choice>(surveyService.getChoices(),surveyService.getChoices());
-        List<Choice> choices = surveyService.getChoices();
-//        for (Choice element : surveyService.getChoices()) {
-        for (Choice element : choices) {
-            Choice elementFinal = surveyServiceFinal.getChoices().get(choices.indexOf(element));
-            if(element.getId().equals(elementFinal.getId())){
-                elementFinal.getVotes().set(element.getVotes().indexOf(1), elementFinal.getVotes().get(element.getVotes().indexOf(1)) + 1);
-//                element.getVotes().indexOf(1);
-//                for (Long vote : elementFinal.getVotes()){
-//
-//                }
-//                surveyServiceFinal.getChoices().set(choices.indexOf(element), element);
-//                choiceRepository.save(element);
-            }
-        }
-
-//        Map<Choice, Choice> map = new
-//        for (Map.Entry<Choice, Choice> entry : map.entrySet()) {
-//            System.out.println(entry.getKey() + "/" + entry.getValue());
-//        }
-
-        List<Rating> ratings = surveyService.getRatings();
-        for (Rating element : ratings) {
-        }
-
-        List<Scale> scales = surveyService.getScales();
-        for (Scale element : scales) {
-        }
-
-        List<Slider> sliders = surveyService.getSliders();
-        for (Slider element : sliders) {
-            Slider elementFinal = surveyServiceFinal.getSliders().get(sliders.indexOf(element));
-            if (element.getId().equals(elementFinal.getId())) {
-                elementFinal.getVotes().set(element.getVotes().indexOf(1), elementFinal.getVotes().get(element.getVotes().indexOf(1)) + 1);
-
-            }
-        }
-
-
-
-
 
         return surveyServiceFinal;
     }
