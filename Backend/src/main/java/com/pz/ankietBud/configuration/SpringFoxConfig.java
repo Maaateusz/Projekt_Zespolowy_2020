@@ -13,7 +13,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Import(SpringDataRestConfiguration.class)
 //http://localhost:8080/swagger-ui
-//@Configuration
 public class SpringFoxConfig {
     @Bean
     public Docket api() {
