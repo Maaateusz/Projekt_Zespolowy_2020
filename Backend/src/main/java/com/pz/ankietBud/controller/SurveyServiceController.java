@@ -178,6 +178,26 @@ public class SurveyServiceController {
                     isSurveyOK.set(false);
                 });
 
+
+        String userIdentifier = Guest.getUserIdentifier(request);
+        Guest guest = new Guest();
+        guestRepository.findByIdentifier(userIdentifier).ifPresentOrElse(
+                x -> {
+                    guest.setId(x.getId());
+                    guest.setIdentifier(x.getIdentifier());
+                    guest_survey_participateRepository.findByOtherId(vote.getId_survey(), guest.getId()).ifPresent(
+                            x2 -> {
+                                // jeśli głosował to koniec
+//                                isSurveyOK.set(false);
+                                log.info("Already Voted!");
+                            });
+                },
+                () -> {
+                    guest.setIdentifier(userIdentifier);
+                    guestRepository.save(guest);
+                }
+        );
+
         if (!isSurveyOK.get()) return null;
 
         for (int i = 0; i<vote.getId_questions().size(); i++){
@@ -191,20 +211,9 @@ public class SurveyServiceController {
                     () -> log.info("Error in Voting!"));
         }
 
-        SurveyService surveyServiceFinal = getSurveyService(vote.getId_survey());
 
-        surveyServiceFinal.setGuest(new Guest());
-        String userIdentifier = Guest.getUserIdentifier(request);
-        guestRepository.findByIdentifier(userIdentifier).ifPresentOrElse(
-                x -> {
-                    surveyServiceFinal.getGuest().setId(x.getId());
-                    surveyServiceFinal.getGuest().setIdentifier(x.getIdentifier());
-                },
-                () -> {
-                    surveyServiceFinal.getGuest().setIdentifier(userIdentifier);
-                    guestRepository.save(surveyServiceFinal.getGuest());
-                }
-        );
+        SurveyService surveyServiceFinal = getSurveyService(vote.getId_survey());
+        surveyServiceFinal.setGuest(guest);
 
         Guest_Survey_Participate guest_survey_participate = new Guest_Survey_Participate(surveyServiceFinal.getSurvey().getId(), surveyServiceFinal.getGuest().getId());
         guest_survey_participateRepository.findByOtherId(surveyServiceFinal.getSurvey().getId(), surveyServiceFinal.getGuest().getId()).ifPresentOrElse(
