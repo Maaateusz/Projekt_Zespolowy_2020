@@ -1,4 +1,4 @@
-package com.pz.ankietBud;
+package com.pz.ankietBud.configuration;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface RatingRepository extends QuestionBaseRepository<Rating> {
     List<Rating> findAll();
 
-    Optional<Rating> findById(Integer id);
+    Optional<Rating> findById(Long id);
 }

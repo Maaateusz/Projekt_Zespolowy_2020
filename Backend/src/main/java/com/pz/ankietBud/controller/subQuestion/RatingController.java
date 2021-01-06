@@ -41,14 +41,14 @@ public class RatingController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Rating> getRating(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public Optional<Rating> getRating(@PathVariable("id") Long id) throws JsonProcessingException {
         Optional<Rating> rating = ratingRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(rating));
         return rating;
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteRating(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public String deleteRating(@PathVariable("id") Long id) throws JsonProcessingException {
         ratingRepository.findById(id).ifPresent(x -> ratingRepository.delete(x));
 //        log.info(shortDateObjectMapper.writeValueAsString(rating));
 //        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(rating);

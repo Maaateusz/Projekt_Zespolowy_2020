@@ -40,14 +40,14 @@ public class ChoiceController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Choice> getChoice(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public Optional<Choice> getChoice(@PathVariable("id") Long id) throws JsonProcessingException {
         Optional<Choice> choice = choiceRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(choice));
         return choice;
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteChoice(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public String deleteChoice(@PathVariable("id") Long id) throws JsonProcessingException {
         choiceRepository.findById(id).ifPresent(x -> choiceRepository.delete(x));
 //        log.info(shortDateObjectMapper.writeValueAsString(choice));
 //        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(choice);

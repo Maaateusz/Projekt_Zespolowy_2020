@@ -1,7 +1,7 @@
 package com.pz.ankietBud.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pz.ankietBud.MyResourceNotFoundException;
+import com.pz.ankietBud.configuration.MyResourceNotFoundException;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.model.Guest;
 import com.pz.ankietBud.repository.GuestRepository;

@@ -12,20 +12,20 @@ public abstract class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String content;
-    private ArrayList<Integer> votes;
-    private Integer sum;
+    private ArrayList<Long> votes;
+    private Long sum;
 
     public Question() {
     }
 
-    public Question(Long id, String content, ArrayList<Integer> votes, Integer sum) {
+    public Question(Long id, String content, ArrayList<Long> votes, Long sum) {
         this.id = id;
         this.content = content;
         this.votes = votes;
         this.sum = sum;
     }
 
-    public Question(String content, ArrayList<Integer> votes, Integer sum) {
+    public Question(String content, ArrayList<Long> votes, Long sum) {
         this.content = content;
         this.votes = votes;
         this.sum = sum;
@@ -47,19 +47,19 @@ public abstract class Question {
         this.content = content;
     }
 
-    public ArrayList<Integer> getVotes() {
+    public ArrayList<Long> getVotes() {
         return votes;
     }
 
-    public void setVotes(ArrayList<Integer> votes) {
+    public void setVotes(ArrayList<Long> votes) {
         this.votes = votes;
     }
 
-    public Integer getSum() {
+    public Long getSum() {
         return sum;
     }
 
-    public void setSum(Integer sum) {
+    public void setSum(Long sum) {
         this.sum = sum;
     }
 

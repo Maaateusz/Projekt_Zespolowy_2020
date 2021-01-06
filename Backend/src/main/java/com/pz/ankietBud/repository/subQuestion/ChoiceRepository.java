@@ -12,7 +12,7 @@ public interface ChoiceRepository extends QuestionBaseRepository<Choice> {
     List<Choice> findAll();
 
     //    List<Choice> findAll();
-    Optional<Choice> findById(Integer id);
+    Optional<Choice> findById(Long id);
 //    Question findById(Integer id);
 
 //    @Override

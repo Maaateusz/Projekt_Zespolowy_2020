@@ -40,14 +40,14 @@ public class SliderController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Slider> getSlider(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public Optional<Slider> getSlider(@PathVariable("id") Long id) throws JsonProcessingException {
         Optional<Slider> slider = sliderRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(slider));
         return slider;
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteSlider(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public String deleteSlider(@PathVariable("id") Long id) throws JsonProcessingException {
         sliderRepository.findById(id).ifPresent(x -> sliderRepository.delete(x));
 //        log.info(shortDateObjectMapper.writeValueAsString(slider));
 //        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(slider);

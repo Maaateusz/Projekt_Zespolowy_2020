@@ -16,7 +16,7 @@ public class SurveyService {
     private List<Rating> ratings;
     private List<Scale> scales;
     private List<Slider> sliders;
-    private Map<String, Integer> questions = new HashMap<>();
+    private Map<String, Integer> questions = new HashMap<String, Integer>();
 
     public SurveyService(Survey survey, Guest guest, List<Choice> choices, List<Rating> ratings, List<Scale> scales, List<Slider> sliders, Map<String, Integer> questions) {
         this.survey = survey;
@@ -118,6 +118,5 @@ public class SurveyService {
     public void setQuestions(HashMap<String, Integer> questions) {
         this.questions = questions;
     }
-
 
 }

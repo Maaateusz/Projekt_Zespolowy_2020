@@ -15,7 +15,7 @@ public class Rating extends Question {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    public Rating(Long id, String content, ArrayList<Integer> votes, Integer sum, Integer value_min, Integer value_max, Type type) {
+    public Rating(Long id, String content, ArrayList<Long> votes, Long sum, Integer value_min, Integer value_max, Type type) {
         super(id, content, votes, sum);
         this.value_min = value_min;
         this.value_max = value_max;
@@ -25,7 +25,7 @@ public class Rating extends Question {
     public Rating() {
     }
 
-    public Rating(String content, ArrayList<Integer> votes, Integer sum, Integer value_min, Integer value_max, Type type) {
+    public Rating(String content, ArrayList<Long> votes, Long sum, Integer value_min, Integer value_max, Type type) {
         super(content, votes, sum);
         this.value_min = value_min;
         this.value_max = value_max;

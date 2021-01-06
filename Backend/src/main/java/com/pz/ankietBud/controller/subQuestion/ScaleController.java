@@ -41,14 +41,14 @@ public class ScaleController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Scale> getScale(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public Optional<Scale> getScale(@PathVariable("id") Long id) throws JsonProcessingException {
         Optional<Scale> scale = scaleRepository.findById(id);
         log.info(shortDateObjectMapper.writeValueAsString(scale));
         return scale;
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteScale(@PathVariable("id") Integer id) throws JsonProcessingException {
+    public String deleteScale(@PathVariable("id") Long id) throws JsonProcessingException {
         scaleRepository.findById(id).ifPresent(x -> scaleRepository.delete(x));
 //        log.info(shortDateObjectMapper.writeValueAsString(scale));
 //        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(scale);

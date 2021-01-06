@@ -16,7 +16,7 @@ public class Slider extends Question {
     private Integer value_max;
     private Integer interval;
 
-    public Slider(String content, ArrayList<Integer> votes, Integer sum, Integer value_min, Integer value_max, Integer interval) {
+    public Slider(String content, ArrayList<Long> votes, Long sum, Integer value_min, Integer value_max, Integer interval) {
         super(content, votes, sum);
         this.value_min = value_min;
         this.value_max = value_max;
@@ -26,7 +26,7 @@ public class Slider extends Question {
     public Slider() {
     }
 
-    public Slider(Long id, String content, ArrayList<Integer> votes, Integer sum, Integer value_min, Integer value_max, Integer interval) {
+    public Slider(Long id, String content, ArrayList<Long> votes, Long sum, Integer value_min, Integer value_max, Integer interval) {
         super(id, content, votes, sum);
         this.value_min = value_min;
         this.value_max = value_max;

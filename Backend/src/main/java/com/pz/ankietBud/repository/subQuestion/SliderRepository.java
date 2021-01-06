@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface SliderRepository extends QuestionBaseRepository<Slider> {
     List<Slider> findAll();
 
-    Optional<Slider> findById(Integer id);
+    Optional<Slider> findById(Long id);
 }

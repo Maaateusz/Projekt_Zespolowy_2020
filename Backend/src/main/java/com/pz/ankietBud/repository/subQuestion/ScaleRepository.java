@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface ScaleRepository extends QuestionBaseRepository<Scale> {
     List<Scale> findAll();
 
-    Optional<Scale> findById(Integer id);
+    Optional<Scale> findById(Long id);
 }
