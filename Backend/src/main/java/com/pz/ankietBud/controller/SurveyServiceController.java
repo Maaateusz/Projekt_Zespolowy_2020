@@ -217,10 +217,12 @@ public class SurveyServiceController {
         if (!isSurveyOK.get()) return null;
 
         for (int i = 0; i < vote.getId_questions().size(); i++) {
-            final int answer_id = vote.getId_answers().get(i);
+            final List<Integer> answer_id = vote.getId_answers().get(i);
             questionRepository.findById(vote.getId_questions().get(i)).ifPresentOrElse(
                     question -> {
-                        question.getVotes().set(answer_id, question.getVotes().get(answer_id) + 1L);
+                        for(int index: answer_id){
+                            question.getVotes().set(index, question.getVotes().get(index) + 1L);
+                        }
                         question.setSum(question.getSum() + 1L);
                         questionRepository.save(question);
                     },

@@ -6,12 +6,12 @@ public class Vote {
 
     private Long id_survey;
     private List<Long> id_questions;
-    private List<Integer> id_answers;
+    private List<List<Integer>> id_answers;
 
     public Vote() {
     }
 
-    public Vote(Long id_survey, List<Long> id_questions, List<Integer> id_answer) {
+    public Vote(Long id_survey, List<Long> id_questions, List<List<Integer>> id_answer) {
         this.id_survey = id_survey;
         this.id_questions = id_questions;
         this.id_answers = id_answer;
@@ -33,11 +33,11 @@ public class Vote {
         this.id_questions = id_questions;
     }
 
-    public List<Integer> getId_answers() {
+    public List<List<Integer>> getId_answers() {
         return id_answers;
     }
 
-    public void setId_answers(List<Integer> id_answers) {
+    public void setId_answers(List<List<Integer>> id_answers) {
         this.id_answers = id_answers;
     }
 }
