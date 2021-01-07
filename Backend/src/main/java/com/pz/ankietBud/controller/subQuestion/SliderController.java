@@ -24,10 +24,9 @@ public class SliderController {
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Slider addSlider(@RequestBody Slider slider) throws JsonProcessingException {
-        Slider sliderNew = slider;
-        sliderRepository.save(sliderNew);
-        log.info(shortDateObjectMapper.writeValueAsString(sliderNew));
-        return sliderNew;
+        sliderRepository.save(slider);
+        log.info(shortDateObjectMapper.writeValueAsString(slider));
+        return slider;
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
@@ -56,9 +55,8 @@ public class SliderController {
 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Slider updateSlider(@RequestBody Slider slider) throws JsonProcessingException {
-        Slider sliderUpdated = slider;
-        sliderRepository.save(sliderUpdated);
-        log.info(shortDateObjectMapper.writeValueAsString(sliderUpdated));
-        return sliderUpdated;
+        sliderRepository.save(slider);
+        log.info(shortDateObjectMapper.writeValueAsString(slider));
+        return slider;
     }
 }

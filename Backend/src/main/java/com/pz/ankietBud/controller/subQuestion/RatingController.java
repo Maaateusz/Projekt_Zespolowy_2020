@@ -25,10 +25,9 @@ public class RatingController {
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Rating addRating(@RequestBody Rating rating) throws JsonProcessingException {
-        Rating ratingNew = rating;
-        ratingRepository.save(ratingNew);
-        log.info(shortDateObjectMapper.writeValueAsString(ratingNew));
-        return ratingNew;
+        ratingRepository.save(rating);
+        log.info(shortDateObjectMapper.writeValueAsString(rating));
+        return rating;
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
@@ -57,9 +56,8 @@ public class RatingController {
 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Rating updateRating(@RequestBody Rating rating) throws JsonProcessingException {
-        Rating ratingUpdated = rating;
-        ratingRepository.save(ratingUpdated);
-        log.info(shortDateObjectMapper.writeValueAsString(ratingUpdated));
-        return ratingUpdated;
+        ratingRepository.save(rating);
+        log.info(shortDateObjectMapper.writeValueAsString(rating));
+        return rating;
     }
 }

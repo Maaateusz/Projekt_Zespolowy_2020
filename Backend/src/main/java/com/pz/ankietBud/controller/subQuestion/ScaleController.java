@@ -25,10 +25,9 @@ public class ScaleController {
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Scale addScale(@RequestBody Scale scale) throws JsonProcessingException {
-        Scale scaleNew = scale;
-        scaleRepository.save(scaleNew);
-        log.info(shortDateObjectMapper.writeValueAsString(scaleNew));
-        return scaleNew;
+        scaleRepository.save(scale);
+        log.info(shortDateObjectMapper.writeValueAsString(scale));
+        return scale;
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
@@ -57,9 +56,8 @@ public class ScaleController {
 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Scale updateScale(@RequestBody Scale scale) throws JsonProcessingException {
-        Scale scaleUpdated = scale;
-        scaleRepository.save(scaleUpdated);
-        log.info(shortDateObjectMapper.writeValueAsString(scaleUpdated));
-        return scaleUpdated;
+        scaleRepository.save(scale);
+        log.info(shortDateObjectMapper.writeValueAsString(scale));
+        return scale;
     }
 }

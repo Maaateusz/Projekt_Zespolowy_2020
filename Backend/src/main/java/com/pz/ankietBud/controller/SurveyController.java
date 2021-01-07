@@ -1,7 +1,6 @@
 package com.pz.ankietBud.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pz.ankietBud.configuration.MyResourceNotFoundException;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.model.Survey;
 import com.pz.ankietBud.repository.SurveyRepository;
@@ -25,11 +24,10 @@ public class SurveyController {
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Survey addSurvey(@RequestBody Survey survey) throws JsonProcessingException {
-        Survey surveyNew = survey;
-        surveyRepository.save(surveyNew);
-        log.info(shortDateObjectMapper.writeValueAsString(surveyNew));
-        log.info("+ ---" + shortDateObjectMapper.writeValueAsString(surveyNew));
-        return surveyNew;
+        surveyRepository.save(survey);
+        log.info(shortDateObjectMapper.writeValueAsString(survey));
+        log.info("+ ---" + shortDateObjectMapper.writeValueAsString(survey));
+        return survey;
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
@@ -87,11 +85,10 @@ public class SurveyController {
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
 //    public ResponseEntity<Student> update(@RequestBody Student student, @PathVariable Long id) {
     public Survey updateSurvey(@RequestBody Survey survey) throws JsonProcessingException {
-        Survey surveyUpdated = survey;
-        surveyRepository.save(surveyUpdated);
-        log.info(shortDateObjectMapper.writeValueAsString(surveyUpdated));
-        log.info("= ---" + shortDateObjectMapper.writeValueAsString(surveyUpdated));
-        return surveyUpdated;
+        surveyRepository.save(survey);
+        log.info(shortDateObjectMapper.writeValueAsString(survey));
+        log.info("= ---" + shortDateObjectMapper.writeValueAsString(survey));
+        return survey;
     }
 
 }

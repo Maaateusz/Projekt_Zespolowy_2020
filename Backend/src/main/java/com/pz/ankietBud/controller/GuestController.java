@@ -1,7 +1,6 @@
 package com.pz.ankietBud.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pz.ankietBud.configuration.MyResourceNotFoundException;
 import com.pz.ankietBud.configuration.ShortDateObjectMapper;
 import com.pz.ankietBud.model.Guest;
 import com.pz.ankietBud.repository.GuestRepository;
@@ -26,25 +25,24 @@ public class GuestController {
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Guest addGuest(@RequestBody Guest guest, HttpServletRequest request) throws JsonProcessingException {
-        Guest guestNew = guest;
         String userIdentifier = Guest.getUserIdentifier(request);
 
 //        guestRepository.findByIdentifier(guestNew.getIdentifier()).ifPresentOrElse(
         guestRepository.findByIdentifier(userIdentifier).ifPresentOrElse(
                 x -> {
-                    guestNew.setId(x.getId());
-                    guestNew.setIdentifier(x.getIdentifier());
+                    guest.setId(x.getId());
+                    guest.setIdentifier(x.getIdentifier());
                     log.info("Guest already exist");
                 },
                 () -> {
-                    guestNew.setIdentifier(userIdentifier);
-                    guestRepository.save(guestNew);
+                    guest.setIdentifier(userIdentifier);
+                    guestRepository.save(guest);
                     log.info("Adding new Guest");
                 }
         );
 
-        log.info(shortDateObjectMapper.writeValueAsString(guestNew));
-        return guestNew;
+        log.info(shortDateObjectMapper.writeValueAsString(guest));
+        return guest;
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
@@ -79,9 +77,8 @@ public class GuestController {
 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Guest updateGuest(@RequestBody Guest guest) throws JsonProcessingException {
-        Guest guestUpdated = guest;
-        guestRepository.save(guestUpdated);
-        log.info(shortDateObjectMapper.writeValueAsString(guestUpdated));
-        return guestUpdated;
+        guestRepository.save(guest);
+        log.info(shortDateObjectMapper.writeValueAsString(guest));
+        return guest;
     }
 }

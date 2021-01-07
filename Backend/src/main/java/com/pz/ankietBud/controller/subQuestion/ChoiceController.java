@@ -24,10 +24,9 @@ public class ChoiceController {
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Choice addChoice(@RequestBody Choice choice) throws JsonProcessingException {
-        Choice choiceNew = choice;
-        choiceRepository.save(choiceNew);
-        log.info(shortDateObjectMapper.writeValueAsString(choiceNew));
-        return choiceNew;
+        choiceRepository.save(choice);
+        log.info(shortDateObjectMapper.writeValueAsString(choice));
+        return choice;
     }
 
     @GetMapping(value = "/getAll", produces = "application/json")
@@ -56,9 +55,8 @@ public class ChoiceController {
 
     @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Choice updateChoice(@RequestBody Choice choice) throws JsonProcessingException {
-        Choice choiceUpdated = choice;
-        choiceRepository.save(choiceUpdated);
-        log.info(shortDateObjectMapper.writeValueAsString(choiceUpdated));
-        return choiceUpdated;
+        choiceRepository.save(choice);
+        log.info(shortDateObjectMapper.writeValueAsString(choice));
+        return choice;
     }
 }

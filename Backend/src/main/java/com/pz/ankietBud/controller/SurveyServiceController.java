@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @RestController
@@ -134,10 +133,18 @@ public class SurveyServiceController {
                 surveyService::setSurvey,
                 () -> log.info("X- No Survey id: " + id.toString()));
 
-        Optional<Guest_Survey_Creator> guest_survey_creator = guest_survey_creatorRepository.findById(surveyService.getSurvey().getId());
-        guestRepository.findById(guest_survey_creator.get().getId_guest()).ifPresentOrElse(
+        Guest_Survey_Creator guest_survey_creator = new Guest_Survey_Creator();
+        guest_survey_creatorRepository.findById(surveyService.getSurvey().getId()).ifPresentOrElse(
+                x -> {
+                    guest_survey_creator.setId_guest(x.getId_guest());
+                    guest_survey_creator.setId_survey(x.getId_survey());
+                },
+                () -> {
+                }
+        );
+        guestRepository.findById(guest_survey_creator.getId_guest()).ifPresentOrElse(
                 surveyService::setGuest,
-                () -> log.info("X- No Guest id: " + guest_survey_creator.get().getId_guest().toString()));
+                () -> log.info("X- No Guest id: " + guest_survey_creator.getId_guest().toString()));
 
         List<Survey_Question> survey_questions = survey_questionRepository.findAllBySurveyId(surveyService.getSurvey().getId());
         log.info(shortDateObjectMapper.writeValueAsString(survey_questions));
@@ -179,7 +186,7 @@ public class SurveyServiceController {
         surveyRepository.findById(vote.getId_survey()).ifPresentOrElse(
                 x -> {
                     // if survey is closed <------------------------
-                    if(x.getStatus() == Survey.Status.close) isSurveyOK.set(false);
+                    if (x.getStatus() == Survey.Status.close) isSurveyOK.set(false);
                 },
                 () -> {
                     log.info("X- No Survey id: " + vote.getId_survey().toString());
@@ -209,11 +216,11 @@ public class SurveyServiceController {
 
         if (!isSurveyOK.get()) return null;
 
-        for (int i = 0; i<vote.getId_questions().size(); i++){
+        for (int i = 0; i < vote.getId_questions().size(); i++) {
             final int answer_id = vote.getId_answers().get(i);
             questionRepository.findById(vote.getId_questions().get(i)).ifPresentOrElse(
                     question -> {
-                        question.getVotes().set( answer_id, question.getVotes().get(answer_id) + 1L );
+                        question.getVotes().set(answer_id, question.getVotes().get(answer_id) + 1L);
                         question.setSum(question.getSum() + 1L);
                         questionRepository.save(question);
                     },
@@ -236,7 +243,7 @@ public class SurveyServiceController {
     public void checkSurveyStatus(Long id) {
         surveyRepository.findById(id).ifPresent(
                 x -> {
-                    if(x.getEndDate().isBefore(LocalDateTime.now())) {
+                    if (x.getEndDate().isBefore(LocalDateTime.now())) {
                         x.setStatus(Survey.Status.close);
                         surveyRepository.save(x);
                     }
