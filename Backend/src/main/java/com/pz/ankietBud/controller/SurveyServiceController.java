@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -126,6 +127,8 @@ public class SurveyServiceController {
     @GetMapping("/get/{id}")
     public SurveyService getSurveyService(@PathVariable("id") Long id) throws JsonProcessingException {
 
+        checkSurveyStatus(id);
+
         SurveyService surveyService = new SurveyService();
         surveyRepository.findById(id).ifPresentOrElse(
                 surveyService::setSurvey,
@@ -171,10 +174,16 @@ public class SurveyServiceController {
 
         AtomicBoolean isSurveyOK = new AtomicBoolean(true);
 
+        checkSurveyStatus(vote.getId_survey());
+
         surveyRepository.findById(vote.getId_survey()).ifPresentOrElse(
-                x -> {},
+                x -> {
+                    // if survey is closed <------------------------
+                    if(x.getStatus() == Survey.Status.close) isSurveyOK.set(false);
+                },
                 () -> {
                     log.info("X- No Survey id: " + vote.getId_survey().toString());
+                    // if there isn't survey with {id} <------------------------
                     isSurveyOK.set(false);
                 });
 
@@ -187,7 +196,7 @@ public class SurveyServiceController {
                     guest.setIdentifier(x.getIdentifier());
                     guest_survey_participateRepository.findByOtherId(vote.getId_survey(), guest.getId()).ifPresent(
                             x2 -> {
-                                // jeśli głosował to koniec
+                                // if user already voted <------------------------
 //                                isSurveyOK.set(false);
                                 log.info("Already Voted!");
                             });
@@ -222,5 +231,15 @@ public class SurveyServiceController {
         );
 
         return surveyServiceFinal;
+    }
+
+    public void checkSurveyStatus(Long id) {
+        surveyRepository.findById(id).ifPresent(
+                x -> {
+                    if(x.getEndDate().isBefore(LocalDateTime.now())) {
+                        x.setStatus(Survey.Status.close);
+                        surveyRepository.save(x);
+                    }
+                });
     }
 }
