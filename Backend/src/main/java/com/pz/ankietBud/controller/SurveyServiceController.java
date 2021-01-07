@@ -204,7 +204,7 @@ public class SurveyServiceController {
                     guest_survey_participateRepository.findByOtherId(vote.getId_survey(), guest.getId()).ifPresent(
                             x2 -> {
                                 // if user already voted <------------------------
-//                                isSurveyOK.set(false);
+                                isSurveyOK.set(false);
                                 log.info("Already Voted!");
                             });
                 },
