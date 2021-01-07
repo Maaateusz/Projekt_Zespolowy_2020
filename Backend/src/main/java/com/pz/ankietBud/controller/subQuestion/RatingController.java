@@ -47,15 +47,15 @@ public class RatingController {
         return rating;
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteRating(@PathVariable("id") Long id) throws JsonProcessingException {
-        ratingRepository.findById(id).ifPresent(x -> ratingRepository.delete(x));
-//        log.info(shortDateObjectMapper.writeValueAsString(rating));
-//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(rating);
-        return "x--- Deleted Rating";
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteRating(@PathVariable("id") Long id) throws JsonProcessingException {
+//        ratingRepository.findById(id).ifPresent(x -> ratingRepository.delete(x));
+////        log.info(shortDateObjectMapper.writeValueAsString(rating));
+////        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(rating);
+//        return "x--- Deleted Rating";
+//    }
 
-    @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Rating updateRating(@RequestBody Rating rating) throws JsonProcessingException {
         Rating ratingUpdated = rating;
         ratingRepository.save(ratingUpdated);

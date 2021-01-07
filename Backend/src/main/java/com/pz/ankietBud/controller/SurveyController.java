@@ -70,21 +70,21 @@ public class SurveyController {
         return survey;
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteSurvey(@PathVariable("id") Long id) throws JsonProcessingException {
-        surveyRepository.findById(id).map(survey -> {
-            surveyRepository.delete(survey);
-            try {
-                return shortDateObjectMapper.writeValueAsString(survey);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            return "survey";
-        }).orElseThrow(() -> new MyResourceNotFoundException("Survey not found!"));
-        return "survey???";
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteSurvey(@PathVariable("id") Long id) throws JsonProcessingException {
+//        surveyRepository.findById(id).map(survey -> {
+//            surveyRepository.delete(survey);
+//            try {
+//                return shortDateObjectMapper.writeValueAsString(survey);
+//            } catch (JsonProcessingException e) {
+//                e.printStackTrace();
+//            }
+//            return "survey";
+//        }).orElseThrow(() -> new MyResourceNotFoundException("Survey not found!"));
+//        return "survey???";
+//    }
 
-    @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
 //    public ResponseEntity<Student> update(@RequestBody Student student, @PathVariable Long id) {
     public Survey updateSurvey(@RequestBody Survey survey) throws JsonProcessingException {
         Survey surveyUpdated = survey;

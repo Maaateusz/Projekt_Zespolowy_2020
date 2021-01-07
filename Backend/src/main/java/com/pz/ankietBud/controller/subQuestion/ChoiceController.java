@@ -46,15 +46,15 @@ public class ChoiceController {
         return choice;
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteChoice(@PathVariable("id") Long id) throws JsonProcessingException {
-        choiceRepository.findById(id).ifPresent(x -> choiceRepository.delete(x));
-//        log.info(shortDateObjectMapper.writeValueAsString(choice));
-//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(choice);
-        return "x--- Deleted Choice";
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteChoice(@PathVariable("id") Long id) throws JsonProcessingException {
+//        choiceRepository.findById(id).ifPresent(x -> choiceRepository.delete(x));
+////        log.info(shortDateObjectMapper.writeValueAsString(choice));
+////        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(choice);
+//        return "x--- Deleted Choice";
+//    }
 
-    @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Choice updateChoice(@RequestBody Choice choice) throws JsonProcessingException {
         Choice choiceUpdated = choice;
         choiceRepository.save(choiceUpdated);

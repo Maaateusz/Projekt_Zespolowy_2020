@@ -46,15 +46,15 @@ public class SliderController {
         return slider;
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteSlider(@PathVariable("id") Long id) throws JsonProcessingException {
-        sliderRepository.findById(id).ifPresent(x -> sliderRepository.delete(x));
-//        log.info(shortDateObjectMapper.writeValueAsString(slider));
-//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(slider);
-        return "x--- Deleted Slider ";
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteSlider(@PathVariable("id") Long id) throws JsonProcessingException {
+//        sliderRepository.findById(id).ifPresent(x -> sliderRepository.delete(x));
+////        log.info(shortDateObjectMapper.writeValueAsString(slider));
+////        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(slider);
+//        return "x--- Deleted Slider ";
+//    }
 
-    @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Slider updateSlider(@RequestBody Slider slider) throws JsonProcessingException {
         Slider sliderUpdated = slider;
         sliderRepository.save(sliderUpdated);

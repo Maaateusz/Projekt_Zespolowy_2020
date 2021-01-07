@@ -47,15 +47,15 @@ public class ScaleController {
         return scale;
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteScale(@PathVariable("id") Long id) throws JsonProcessingException {
-        scaleRepository.findById(id).ifPresent(x -> scaleRepository.delete(x));
-//        log.info(shortDateObjectMapper.writeValueAsString(scale));
-//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(scale);
-        return "x--- Deleted Scale";
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteScale(@PathVariable("id") Long id) throws JsonProcessingException {
+//        scaleRepository.findById(id).ifPresent(x -> scaleRepository.delete(x));
+////        log.info(shortDateObjectMapper.writeValueAsString(scale));
+////        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(scale);
+//        return "x--- Deleted Scale";
+//    }
 
-    @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Scale updateScale(@RequestBody Scale scale) throws JsonProcessingException {
         Scale scaleUpdated = scale;
         scaleRepository.save(scaleUpdated);

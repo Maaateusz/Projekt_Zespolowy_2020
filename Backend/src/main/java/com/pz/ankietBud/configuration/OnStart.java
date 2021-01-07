@@ -33,8 +33,6 @@ public class OnStart {
     private static final Logger log = LoggerFactory.getLogger(OnStart.class);
     private final ShortDateObjectMapper shortDateObjectMapper = new ShortDateObjectMapper();
 
-    //    @Value("${spring.datasource.url}")
-//    private String dbUrl;
     @Autowired
     private SurveyRepository surveyRepository;
     @Autowired

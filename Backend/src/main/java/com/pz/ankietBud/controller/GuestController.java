@@ -63,26 +63,21 @@ public class GuestController {
         return guest;
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteGuest(@PathVariable("id") Long id) throws JsonProcessingException {
-//        Optional<Guest> guest = guestRepository.findById(id);
-//        guestRepository.delete(guest);
-//        log.info(shortDateObjectMapper.writeValueAsString(guest));
-//        return "x--- Deleted: " + shortDateObjectMapper.writeValueAsString(guest);
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteGuest(@PathVariable("id") Long id) throws JsonProcessingException {
+//        guestRepository.findById(id).map(guest -> {
+//            guestRepository.delete(guest);
+//            try {
+//                return shortDateObjectMapper.writeValueAsString(guest);
+//            } catch (JsonProcessingException e) {
+//                e.printStackTrace();
+//            }
+//            return "guest";
+//        }).orElseThrow(() -> new MyResourceNotFoundException("Guest not found!"));
+//        return "guest???";
+//    }
 
-        guestRepository.findById(id).map(guest -> {
-            guestRepository.delete(guest);
-            try {
-                return shortDateObjectMapper.writeValueAsString(guest);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            return "guest";
-        }).orElseThrow(() -> new MyResourceNotFoundException("Guest not found!"));
-        return "guest???";
-    }
-
-    @PostMapping(value = "/update", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json", produces = "application/json")
     public Guest updateGuest(@RequestBody Guest guest) throws JsonProcessingException {
         Guest guestUpdated = guest;
         guestRepository.save(guestUpdated);
