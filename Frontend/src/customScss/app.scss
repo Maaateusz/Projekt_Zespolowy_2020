@@ -5,3 +5,15 @@ $body-color: #999;
 // Then import Bootstrap an BootstrapVue SCSS files (order is important)
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
+
+.Questionnaire form {
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: auto;
+  width: 60%;
+}
+.Questionnaire form *{
+  margin: 0.5em 0em;
+}

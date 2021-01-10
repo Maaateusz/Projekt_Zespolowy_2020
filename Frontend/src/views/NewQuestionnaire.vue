@@ -1,5 +1,5 @@
 <template>
-  <div class="newQuestionnaire">
+  <div class="Questionnaire">
     <form>
       <input type="text" name="questionaryName" value="" placeholder="Nazwa ankiety..." v-model="Questionary.questionaryName"/>
       <textarea v-model="Questionary.description" placeholder="Opis ankiety"/>
@@ -31,3 +31,6 @@ export default {
   }
 };
 </script>
+<style scoped>
+
+</style>
