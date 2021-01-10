@@ -1,15 +1,13 @@
 <template>
-  <div class="home">
-    <img alt="Logo" src="../assets/logo.png" />
-    <Hello msg="Welcome" />
+  <div class="newQuestionnaire">
+    <Hello msg="Tworzenie nowej ankiety" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Hello from "@/components/Hello";
 export default {
-  name: "home",
+  name: "newQuestionnaire",
   components: {
     Hello
   }
