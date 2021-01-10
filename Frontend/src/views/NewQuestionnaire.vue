@@ -1,15 +1,33 @@
 <template>
   <div class="newQuestionnaire">
-    <Hello msg="Tworzenie nowej ankiety" />
+    <form>
+      <input type="text" name="questionaryName" value="" placeholder="Nazwa ankiety..." v-model="Questionary.questionaryName"/>
+      <textarea v-model="Questionary.description" placeholder="Opis ankiety"/>
+      <QuestionsAddingArea/>
+      <input type="date"/>
+      <input type="submit" value="Zapisz"> 
+    </form>
   </div>
 </template>
 
 <script>
-import Hello from "@/components/Hello";
+import QuestionsAddingArea from "@/components/QuestionsAddingArea";
 export default {
   name: "newQuestionnaire",
-  components: {
-    Hello
+  data(){
+    return{
+      Questionary: {
+          questionaryName: '',
+          description: '',
+          questions: [
+            {}
+          ],
+          finishDate: ''
+        }
+    }
+  },
+  components:{
+    QuestionsAddingArea
   }
 };
 </script>
