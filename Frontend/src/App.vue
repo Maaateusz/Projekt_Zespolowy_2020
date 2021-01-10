@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/newQuestionnaire">Nowa Ankieta</router-link>
+      <MyHeader/>
     </div>
     <router-view />
   </div>
@@ -31,3 +29,9 @@
   color: #42b983;
 }
 </style>
+<script>
+import MyHeader from "@/components/MyHeader";
+export default {
+  components: {MyHeader}
+}
+</script>

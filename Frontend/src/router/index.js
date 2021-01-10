@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import NewQuestionnaire from "../views/NewQuestionnaire.vue";
+import NewestQuestionnairies from "@/views/NewestQuestionnairies";
+import QuestionnairiesResults from "@/views/QuestionnairiesResults";
 
 Vue.use(VueRouter);
 
@@ -12,8 +14,19 @@ const routes = [
     component: Home
   },
   {
-    path: "/newQuestionnaire",
+    path: "/NewQuestionnaire",
+    name: "NewQuestionnaire",
     component: NewQuestionnaire
+  },
+  {
+    path: "/NewestQuestionnairies",
+    name: "NewestQuestionnairies",
+    component: NewestQuestionnairies
+  },
+  {
+    path: "/QuestionnairiesResults",
+    name: "QuestionnairiesResults",
+    component: QuestionnairiesResults
   },
   {
     path: "/about",
