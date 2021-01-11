@@ -1,11 +1,11 @@
 <template>
   <div class="Questionnaire">
-    <form>
-      <input type="text" name="questionaryName" value="" placeholder="Nazwa ankiety..." v-model="Questionary.questionaryName"/>
-      <textarea v-model="Questionary.description" placeholder="Opis ankiety"/>
+    <form >
+      <input class="form-control" type="text" name="questionaryName" value="" placeholder="Nazwa ankiety..." v-model="Questionary.questionaryName"/>
+      <textarea class="form-control" v-model="Questionary.description" placeholder="Opis ankiety"/>
       <QuestionsAddingArea/>
-      <input type="date"/>
-      <input type="submit" value="Zapisz"> 
+      <input class="form-control" type="date"/>
+      <button class="btn btn-outline-dark" type="button" >Zapisz</button>
     </form>
   </div>
 </template>
