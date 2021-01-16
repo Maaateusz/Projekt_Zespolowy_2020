@@ -52,5 +52,19 @@ export default {
 .scaleAnchor{
   flex: 1;
 }
+text{
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+  flex-direction: column;
+
+}
+input{
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+  flex-direction: column;
+  align-self: flex-start;
+}
 </style>
 

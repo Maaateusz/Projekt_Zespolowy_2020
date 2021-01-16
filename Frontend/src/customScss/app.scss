@@ -17,13 +17,15 @@ $body-color: grey;
 }
 
 .Questionnaire form *{
-  margin: 0.5em 0em;
+  //margin: 0.5em 0em;
 }
 
+.Questionnaire form text{
+
+}
 .Questionnaire form input{
-  font-size: 0.4em;
-}
 
+}
 .Questionnaire form label{
   font-size: 0.4em;
 }
