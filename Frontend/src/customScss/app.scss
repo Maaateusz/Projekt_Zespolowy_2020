@@ -6,7 +6,7 @@ $body-color: grey;
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
-.Questionnaire form {
+.Questionnaire > form {
   font-size: 2em;
   display: flex;
   flex-direction: column;
@@ -16,17 +16,26 @@ $body-color: grey;
 
 }
 
+<<<<<<< Updated upstream
 .Questionnaire form *{
   //margin: 0.5em 0em;
 }
 
 .Questionnaire form text{
 
+=======
+.Questionnaire form > input{
+  font-size: 0.4em;
+>>>>>>> Stashed changes
 }
 .Questionnaire form input{
 
+<<<<<<< Updated upstream
 }
 .Questionnaire form label{
+=======
+.Questionnaire form > label{
+>>>>>>> Stashed changes
   font-size: 0.4em;
 }
 
@@ -34,11 +43,11 @@ $body-color: grey;
   font-size: 1em;
 }
 
-.questionnaire form legend{
+.questionnaire form > legend{
   font-size: 0.4em;
 }
 
-.Questionnaire form button {
+.Questionnaire form > button {
   width: 90px;
   height: 40px;
   color: #EEEEEE;
@@ -46,7 +55,7 @@ $body-color: grey;
   align-self: flex-end;
 }
 
-.Questionnaire form button:focus {
+.Questionnaire form > button:focus {
   background-image: -webkit-gradient(
                     linear,
                     left bottom,

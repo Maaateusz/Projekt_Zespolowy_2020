@@ -1,23 +1,22 @@
 <template>
-<!-- TODO  do poprawek typy inputow, tam gdzie liczby to trzeba ustawic liczby-->
   <div>
     <b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input>
-    <b-form-input :for="`type-number`" v-model.number="valueMin" placeholder="Wartość minimalna..."></b-form-input>
-    <b-form-input :for="`type-number`" v-model.number="valueMax" placeholder="Wartość maksymalna..."></b-form-input>
-    {{ (valueMin && valueMax) != null ? valueMin : null}}
+    <b-form-input :type="`number`" v-model.number="valueMin" placeholder="Wartość minimalna..."></b-form-input>
+    <b-form-input :type="`number`" v-model.number="valueMax" placeholder="Wartość maksymalna..."></b-form-input>
+    {{ (typeof valueMax === 'number' && typeof valueMin === 'number') ? valueMin : ""}}
     <b-form-input v-model="anchorLeft" placeholder="Skrajnie lewa wartość..."></b-form-input>
-    {{ (valueMin && valueMax) != null ? (valueMin + valueMax)/2 : null }}
+    {{ (typeof valueMax === 'number' && typeof valueMin === 'number') ? (valueMin + valueMax)/2 : "" }}
     <b-form-input v-model="anchorCentral" placeholder="Centralna wartość..."></b-form-input>
-    {{(valueMin && valueMax) != null ? valueMax : null }}
+    {{ (typeof valueMax === 'number' && typeof valueMin === 'number') ? valueMax : "" }}
     <b-form-input v-model="anchorRight" placeholder="Skrajnie prawa wartość..."></b-form-input>
     <div>
-      <input class = "form-control-range" v-model="value" type="range" :min="valueMin" :max="valueMax" step="1" />
+      <div class="mt-2">Value: {{ value }}</div>
+      <input class = "form-control-range"  v-model="value" type="range" :min="valueMin" :max="valueMax" :step="(valueMax-valueMin)/4" />
       <div class="scaleAnchors">
         <p class="scaleAnchor">{{anchorLeft}}</p>
         <p class="scaleAnchor">{{anchorCentral}}</p>
         <p class="scaleAnchor">{{anchorRight}}</p>
       </div>
-      <div class="mt-2">Value: {{ value }}</div>
     </div>
   </div>
 </template>
