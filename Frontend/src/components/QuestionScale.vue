@@ -4,11 +4,11 @@
     <b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input>
     <b-form-input :for="`type-number`" v-model.number="valueMin" placeholder="Wartość minimalna..."></b-form-input>
     <b-form-input :for="`type-number`" v-model.number="valueMax" placeholder="Wartość maksymalna..."></b-form-input>
-    {{ (valueMin && valueMax) != null ? valueMin : ""}}
+    {{ (valueMin && valueMax) != null ? valueMin : null}}
     <b-form-input v-model="anchorLeft" placeholder="Skrajnie lewa wartość..."></b-form-input>
-    {{ (valueMin + valueMax)/2 }}
+    {{ (valueMin && valueMax) != null ? (valueMin + valueMax)/2 : null }}
     <b-form-input v-model="anchorCentral" placeholder="Centralna wartość..."></b-form-input>
-    {{valueMax}}
+    {{(valueMin && valueMax) != null ? valueMax : null }}
     <b-form-input v-model="anchorRight" placeholder="Skrajnie prawa wartość..."></b-form-input>
     <div>
       <input class = "form-control-range" v-model="value" type="range" :min="valueMin" :max="valueMax" step="1" />
