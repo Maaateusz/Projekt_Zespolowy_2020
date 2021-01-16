@@ -11,7 +11,7 @@
     {{valueMax}}
     <b-form-input v-model="anchorRight" placeholder="Skrajnie prawa wartość..."></b-form-input>
     <div>
-      <vue-slider v-model="value" type="range" :min="valueMin" :max="valueMax" step="1" />
+      <input class = "form-control-range" v-model="value" type="range" :min="valueMin" :max="valueMax" step="1" />
       <div class="scaleAnchors">
         <p class="scaleAnchor">{{anchorLeft}}</p>
         <p class="scaleAnchor">{{anchorCentral}}</p>
@@ -23,15 +23,13 @@
 </template>
 
 <script>
-import VueSlider from 'vue-slider-component'
+//import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/antd.css'
 
 
 export default {
   name: "QuestionScale",
-  components: {
-    VueSlider
-  },
+
   data(){
     return{
       value: 0,
