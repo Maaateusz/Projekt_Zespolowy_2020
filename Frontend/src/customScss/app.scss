@@ -15,8 +15,9 @@ $body-color: grey;
   width: 50%;
 }
 
-.Questionnaire > form > input{
-  font-size: 0.4em;
+.Questionnaire form input{
+  font-size: 0.5em;
+  font-family: Arial Bold;
 }
 
 .Questionnaire > form > label{
@@ -48,3 +49,4 @@ $body-color: grey;
                     color-stop(1, dodgerblue )
   );
 }
+
