@@ -19,9 +19,9 @@
       <div class="mt-2">Value: {{ value }}</div>
       <input class = "form-control-range"  v-model="value" type="range" :min="valueMin" :max="valueMax" :step="(valueMax-valueMin)/4" />
       <div class="scaleAnchors">
-        <p class="scaleAnchor">{{anchorLeft}}</p>
+        <p style="text-align: left" class="scaleAnchor">{{anchorLeft}}</p>
         <p class="scaleAnchor">{{anchorCentral}}</p>
-        <p class="scaleAnchor">{{anchorRight}}</p>
+        <p style="text-align: right" class="scaleAnchor">{{anchorRight}}</p>
       </div>
     </div>
   </div>

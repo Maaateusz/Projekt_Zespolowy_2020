@@ -4,8 +4,8 @@
       <input class="form-control" type="text" name="questionaryName" value="" placeholder="Nazwa ankiety..." v-model="Questionary.questionaryName"/>
       <textarea class="form-control" v-model="Questionary.description" placeholder="Opis ankiety"/>
       <QuestionsAddingArea/>
-      <input class="form-control" type="date"/>
-      <button class="btn btn-outline-dark" type="button" >Zapisz</button>
+      <input style="margin: 2%; width:96%" class="form-control" type="date"/>
+      <button style="margin-right: 2%" class="btn btn-outline-dark" type="button" >Zapisz</button>
     </form>
   </div>
 </template>

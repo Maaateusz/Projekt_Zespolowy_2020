@@ -12,15 +12,14 @@ $body-color: grey;
   flex-direction: column;
   align-items: stretch;
   margin: auto;
-  width: 40%;
-
+  width: 50%;
 }
 
-.Questionnaire form > input{
+.Questionnaire > form > input{
   font-size: 0.4em;
 }
 
-.Questionnaire form > label{
+.Questionnaire > form > label{
   font-size: 0.4em;
 }
 
@@ -28,11 +27,11 @@ $body-color: grey;
   font-size: 1em;
 }
 
-.questionnaire form > legend{
+.questionnaire > form > legend{
   font-size: 0.4em;
 }
 
-.Questionnaire form > button {
+.Questionnaire > form > button {
   width: 90px;
   height: 40px;
   color: #EEEEEE;
@@ -40,7 +39,7 @@ $body-color: grey;
   align-self: flex-end;
 }
 
-.Questionnaire form > button:focus {
+.Questionnaire > form > button:focus {
   background-image: -webkit-gradient(
                     linear,
                     left bottom,

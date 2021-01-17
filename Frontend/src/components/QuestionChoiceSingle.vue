@@ -1,12 +1,13 @@
 <template>
   <div class="questionChoiceSingle">
-    <div><b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input></div>
+    <div>
+      <b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input>
+    </div>
     <b-form-group v-slot="{ ariaDescribedby }">
       <div class="answerValue">
-      <div><b-form-radio disabled="true" v-for="answer in answers"  :key="answer" :aria-describedby="ariaDescribedby"  name="answers">
-        <input class="form-control form-rounded" type="text" v-model="answer.content" :key="index"/>
-      </b-form-radio>
-      </div>
+        <b-form-radio class="myStyleForAnswers" disabled v-for="answer in answers"  :key="answer" :aria-describedby="ariaDescribedby"  name="answers">
+          <input class=" form-control form-rounded" type="text" v-model="answer.content" :key="index" size=80% />
+        </b-form-radio>
       </div>
     </b-form-group>
     <b-button v-on:click="addNewAnswer" pill variant="success">+</b-button>
@@ -44,10 +45,11 @@ export default {
   flex-direction: column;
   display: flex;
   float: left;
-  width: auto;
+  width: 80%;
   padding: 1em;
 }
-button{
-
+.form-control > input{
+  height: 100%;
+  vertical-align: auto;
 }
 </style>

@@ -3,11 +3,12 @@
    <div><b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input></div>
     <b-form-group v-slot="{ ariaDescribedby }">
       <div class="answerValue">
-      <div><b-form-checkbox disabled="true" v-for="answer in answers"  :key="answer" :aria-describedby="ariaDescribedby"  name="answers">
-        <input class="form-control form-rounded" type="text" v-model="answer.content" :key="index"/>
-      </b-form-checkbox>
+        <div>
+          <b-form-checkbox disabled v-for="answer in answers"  :key="answer" :aria-describedby="ariaDescribedby"  name="answers">
+          <input class="form-control form-rounded" type="text" v-model="answer.content" :key="index" size=80% />
+          </b-form-checkbox>
+        </div>
       </div>
-  </div>
     </b-form-group>
   <b-button v-on:click="addNewAnswer" pill variant="success">+</b-button>
   </div>

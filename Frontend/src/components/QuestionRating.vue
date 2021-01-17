@@ -25,7 +25,7 @@
                      :icon-half="(markType=='hearts')? 'heart-half' : 'star-half' "
                      :icon-full="(markType=='hearts')? 'heart-fill' : 'star-fill' "
                      disabled
-                     :stars="valueMax-valueMin"></b-form-rating>
+                     :stars="valueMax-valueMin+1"></b-form-rating>
     </form>
     <div class="ratingAnchors">
       <p style="text-align: left" class="ratingAnchor">{{valueMin}}</p>
