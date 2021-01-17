@@ -6,7 +6,8 @@
       <b-form-input :type="`number`" v-model="valueMin" placeholder="Wartość minimalna..."></b-form-input>
       <b-form-input :type="`number`" v-model="valueMax" placeholder="Wartość maksymalna..."></b-form-input>
       </div>
-      <b-form-group label="Mark Type">
+      <b-form-group>
+        <div class="text"> Mark Type </div>
         <div class="markType">
        <div class="mark1">
          <b-form-radio checked="checked" v-model="markType" name="markTypeRadios" value="hearts">
@@ -62,6 +63,7 @@ export default {
   display: flex;
   width: auto;
   padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .ratingAnchors{
@@ -77,7 +79,8 @@ b-rating-form{
 }
 
 .markType {
+  padding: 0.5em;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 </style>
