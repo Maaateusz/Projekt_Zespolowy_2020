@@ -1,21 +1,21 @@
 <template>
   <div class="questionScale">
     <div><b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input></div>
-      <div class="scaleValue">
+    <div class="scaleValue">
         <b-form-input :type="`number`" v-model.number="valueMin" placeholder="Wartość minimalna..."></b-form-input>
         <b-form-input :type="`number`" v-model.number="valueMax" placeholder="Wartość maksymalna..."></b-form-input>
-      </div>
+        </div>
         <div class="scaleValueTxt">
           <b-form-input v-model="anchorLeft" placeholder="Skrajnie lewa wartość..."></b-form-input>
           <b-form-input v-model="anchorCentral" placeholder="Centralna wartość..."></b-form-input>
           <b-form-input v-model="anchorRight" placeholder="Skrajnie prawa wartość..."></b-form-input>
-        </div>
+          </div>
           <div class="txtValue">
             <div class="1">{{ (typeof valueMax === 'number' && typeof valueMin === 'number') ? valueMin : ""}}</div>
             <div class="1">{{ (typeof valueMax === 'number' && typeof valueMin === 'number') ? (valueMin + valueMax)/2 : "" }}</div>
             <div class="1">{{ (typeof valueMax === 'number' && typeof valueMin === 'number') ? valueMax : "" }}</div>
           </div>
-    <div>
+      <div>
       <div class="mt-2">Value: {{ value }}</div>
       <input class = "form-control-range"  v-model="value" type="range" :min="valueMin" :max="valueMax" :step="(valueMax-valueMin)/4" />
       <div class="scaleAnchors">
