@@ -1,7 +1,7 @@
 <template>
   <div class="questionSlider">
     <div><b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input></div>
-    <div class="txtValue">
+    <div class="sliderValue">
       <b-form-input :type="`number`" v-model="valueMin" placeholder="Wartość minimalna..."></b-form-input>
       <b-form-input :type="`number`" v-model="valueMax" placeholder="Wartość maksymalna..."></b-form-input>
       <b-form-input :type="`number`" v-model="interval" placeholder="Wielkość kroku..."></b-form-input>
@@ -47,7 +47,7 @@ export default {
   flex: 1;
 }
 
-.txtValue{
+.sliderValue{
   margin:auto;
   display: flex;
   width: auto;
