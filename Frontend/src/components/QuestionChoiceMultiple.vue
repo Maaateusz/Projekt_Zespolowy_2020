@@ -3,11 +3,9 @@
    <div><b-form-input v-model="content" placeholder="Treść pytania..."></b-form-input></div>
     <b-form-group v-slot="{ ariaDescribedby }">
       <div class="answerValue">
-        <div>
-          <b-form-checkbox disabled v-for="answer in answers"  :key="answer" :aria-describedby="ariaDescribedby"  name="answers">
+          <b-form-checkbox  class="check-box" disabled v-for="answer in answers"  :key="answer" :aria-describedby="ariaDescribedby"  name="answers" >
           <input class="form-control form-rounded" type="text" v-model="answer.content" :key="index" size=80% />
           </b-form-checkbox>
-        </div>
       </div>
     </b-form-group>
   <b-button v-on:click="addNewAnswer" pill variant="success">+</b-button>
@@ -44,10 +42,18 @@ export default {
 }
 .answerValue{
   flex-direction: column;
-  display: flex;
+  display : inline-block;
   float: left;
   width: auto;
   padding: 1em;
+  vertical-align:middle;
+  white-space: nowrap;
 }
-
+.check-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
 </style>
