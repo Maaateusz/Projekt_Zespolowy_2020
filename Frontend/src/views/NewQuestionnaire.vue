@@ -6,6 +6,16 @@
 <!--      <div v-for="question in Questionary.questions"  :key="answer" :aria-describedby="ariaDescribedby">-->
 
 <!--      </div>-->
+      <p>Suwak</p>
+      <QuestionSlider />
+      <p>Skala</p>
+      <QuestionScale />
+      <p>Ocena</p>
+      <QuestionRating />
+      <p>Pytanie jednokrotnego wyboru</p>
+      <QuestionChoiceSingle />
+      <p>Pytanie wielokrotnego wyboru</p>
+      <QuestionChoiceMultiple />
       <QuestionsAddingArea v-on:newQuestionToAdd="newQuestion" />
       <input style="margin: 2%; width:96%" class="form-control" type="date"/>
       <button style="margin-right: 2%" class="btn btn-outline-dark" type="button" >Zapisz</button>
@@ -15,8 +25,13 @@
 
 <script>
 import QuestionsAddingArea from "@/components/QuestionsAddingArea";
+import QuestionSlider from "@/components/QuestionSlider";
+import QuestionScale from "@/components/QuestionScale";
+import QuestionRating from "@/components/QuestionRating";
+import QuestionChoiceSingle from "@/components/QuestionChoiceSingle";
+import QuestionChoiceMultiple from "@/components/QuestionChoiceMultiple";
 export default {
-  name: "newQuestionnaire",
+  name: "NewQuestionnaire",
   data(){
     return{
       Questionary: {
@@ -45,6 +60,11 @@ export default {
     }
   },
   components:{
+    QuestionChoiceMultiple,
+    QuestionChoiceSingle,
+    QuestionRating,
+    QuestionScale,
+    QuestionSlider,
     QuestionsAddingArea
   },
   methods:{
