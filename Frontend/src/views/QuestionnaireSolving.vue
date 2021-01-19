@@ -5,7 +5,7 @@
     <div>
       5 typow pytan nowych komponentow do tego widoku
     </div>
-    button zapisu
+    <button style="margin-right: 2%" class="btn btn-outline-dark" type="button" >Zapisz</button>
 
   </div>
 </template>

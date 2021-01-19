@@ -1,11 +1,13 @@
 <template>
-  <div>
-    tresc pytania
-    <div>
-      checkboxy z odpowiedziami
-      utworzyc 3 checkboxy, w celu sprawdzenia css
+  <div class="questionAnswerChoiceMultiple">
+    <div class="checkBox">
+      <b-form-group label="Treść pytania wielokrotnego wyboru:" >
+          <b-form-checkbox value="odpowiedz">odpowiedz</b-form-checkbox>
+          <b-form-checkbox value="odpowiedz">odpowiedz</b-form-checkbox>
+          <b-form-checkbox value="odpowiedz">odpowiedz</b-form-checkbox>
+          <b-form-checkbox value="odpowiedz">odpowiedz</b-form-checkbox>
+      </b-form-group>
     </div>
-
   </div>
 </template>
 
