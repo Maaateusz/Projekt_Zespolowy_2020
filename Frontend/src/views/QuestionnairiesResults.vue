@@ -1,7 +1,7 @@
 <template>
   <div>
     <form>
-<!--      <div>-->
+      <div>
 <!--        komponent ustawien widoku-->
 <!--      </div>-->
 <!--      <div>-->
@@ -14,7 +14,10 @@
 <!--        <QuestionAnswerRating />-->
 <!--        <QuestionAnswerScale />-->
 <!--        <QuestionAnswerSlider />-->
-<!--      </div>-->
+<!--        <QuestionnairiesViewSettings />-->
+<!--        <QuestionStatistics />-->
+
+      </div>
     </form>
   </div>
 </template>
@@ -25,15 +28,19 @@
 // import QuestionAnswerRating from "@/components/QuestionAnswerRating";
 // import QuestionAnswerScale from "@/components/QuestionAnswerScale";
 // import QuestionAnswerSlider from "@/components/QuestionAnswerSlider";
+// import QuestionnairiesViewSettings from "@/components/QuestionnairiesViewSettings";
+// import QuestionStatistics from "@/components/QuestionStatistics";
 export default {
   name:"QuestionnairiesResults",
-  // components:{
+ components:{
   //   QuestionAnswerChoiceMultiple,
   //   QuestionAnswerChoiceSingle,
   //   QuestionAnswerRating,
   //   QuestionAnswerScale,
-  //   QuestionAnswerSlider
-  // }
+  //   QuestionAnswerSlider,
+  //   QuestionnairiesViewSettings
+  //   QuestionStatistics
+ }
 };
 </script>
 
