@@ -4,6 +4,6 @@
 ## AnkietBud
 
 Zespół:
---|_ Mateusz Sołoducha
---|  Agata Skrzyszewska
++--|_ Mateusz Sołoducha
++--|  Agata Skrzyszewska
   |_ Kamil Węclewski
