@@ -18,7 +18,7 @@
       <QuestionChoiceMultiple />
       <QuestionsAddingArea v-on:newQuestionToAdd="newQuestion" />
       <input style="margin: 2%; width:96%" class="form-control" type="date"/>
-      <button style="margin-right: 2%" class="btn btn-outline-dark" type="button" >Zapisz</button>
+      <button style="margin-right: 2%" class="btn btn-outline-dark" type="button" v-on:click.prevent="post">Zapisz</button>
     </form>
   </div>
 </template>
@@ -86,7 +86,16 @@ export default {
       }catch (msg){
         console.log(msg)
       }
-    }
+    },
+    // post: function (){
+    //   this.$http.post('https://jsonplaceholder.typicode.com/posts',{
+    //     title:this.Questionary.questionaryName,
+    //     body: this.Questionary.description,
+    //     userId: 1
+    //   }).then(function(data){
+    //     console.log(data);
+    //   });
+    // }
   }
 };
 </script>

@@ -11,7 +11,7 @@
         ilosc głosow
       </div>
     </div>
-    <div class="table">
+    <table class="table table-bordered">
       <div class="tableColumn">
         <div class="tableCell">Suma</div>
         <div class="tableCell">Srednia</div>
@@ -26,7 +26,7 @@
         <div class="tableCell">bedzie wyliczone</div>
         <div class="tableCell">bedzie wyliczone</div>
       </div>
-    </div>
+    </table>
 
   </div>
 </template>
