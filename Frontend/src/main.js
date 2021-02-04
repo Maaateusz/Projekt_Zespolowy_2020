@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import VueResource from 'vue-resource'
+import SwaggerUI from 'swagger-ui'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -21,3 +22,7 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
+
+SwaggerUI({
+  dom_id: ''
+})

@@ -87,15 +87,107 @@ export default {
         console.log(msg)
       }
     },
-    // post: function (){
-    //   this.$http.post('https://jsonplaceholder.typicode.com/posts',{
-    //     title:this.Questionary.questionaryName,
-    //     body: this.Questionary.description,
-    //     userId: 1
-    //   }).then(function(data){
-    //     console.log(data);
-    //   });
-    // }
+    post: function (){
+      this.$http.post('https://ankietbud2020.herokuapp.com/surveyService/vote',{
+       // id_survey: 13,
+       // id_questions: [14, 15, 16, 17, 18],
+       // id_answers: [[1], [1, 2], [3], [7], [1]]
+      //   survey:{
+      //       name:"AgataXD!!!!!1111",
+      //       description:"SurveyTest1 opis",
+      //       status:"open",
+      //       creationDate:"2021-01-07T18:31:33",
+      //       endDate:"2021-11-07T20:00:00"
+      // },
+      //   choices:[
+      //   {
+      //     content:"Choice_single_1",
+      //     votes:[
+      //       0,
+      //       0,
+      //       0
+      //     ],
+      //     sum:0,
+      //     type:"single",
+      //     answers:[
+      //       "Answer_1",
+      //       "Answer_2",
+      //       "Answer_3"
+      //     ]
+      //   },
+      //   {
+      //     content:"Choice_multiple_1",
+      //     votes:[
+      //       0,
+      //       0,
+      //       0
+      //     ],
+      //     sum:0,
+      //     type:"multiple",
+      //     answers:[
+      //       "Answer_1",
+      //       "Answer_2",
+      //       "Answer_3"
+      //     ]
+      //   }
+      // ],
+      //     ratings:[
+      //   {
+      //     content:"Rating_1",
+      //     votes:[
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0
+      //     ],
+      //     sum:0,
+      //     type:"stars",
+      //     value_max:6,
+      //     value_min:1
+      //   }
+      // ],
+      //     scales:[
+      //   {
+      //     content:"Scale_1",
+      //     votes:[
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0,
+      //       0
+      //     ],
+      //     sum:0,
+      //     anchor_central:"Central",
+      //     anchor_left:"Left",
+      //     anchor_right:"Right",
+      //     value_max:10,
+      //     value_min:1
+      //   }
+      // ],
+      //     sliders:[
+      //   {
+      //     content:"Slider_1",
+      //     votes:[
+      //       0,
+      //       0
+      //     ],
+      //     sum:0,
+      //     value_min:10,
+      //     value_max:20,
+      //     interval:10
+      //   }
+      // ]
+    }).then(function(data){
+        console.log(data);
+      });
+    }
   }
 };
 </script>
